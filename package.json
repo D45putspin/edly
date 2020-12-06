@@ -1,0 +1,26 @@
+{
+  "name": "edly",
+  "version": "1.0.0",
+  "description": "teste",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D45putspin/DCS_CD_a18492_a14087.git"
+  },
+  "author": "Tiago Moreira e Pedro Santana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D45putspin/DCS_CD_a18492_a14087/issues"
+  },
+  "homepage": "https://github.com/D45putspin/DCS_CD_a18492_a14087#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  }
+}
