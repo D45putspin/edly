@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script> 
+
+    </head>
+    <body>
+<form>
+    <input type="text" placeholder="nome" name="nome" id="nome">
+    <input type="password" name="pass" id="pass">
+    <input type="button" id="enter" value="enter">
+    <script type="text/javascript">
+
+        $('#enter').click(function () {
+            let x = pass.value;
+            let y = nome.value;
+            console.log(y, x);
+            $.ajax({
+                url: 'http://localhost:3000/user/register',
+                type: 'POST',
+                cache: false,
+                data: { nome: y, pass: x },
+                success: function (data) {
+                    alert('Success!')
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    alert('text status ' + textStatus + ', err ' + err)
+                }
+            })
+        });
+
+    </script>
+</form>
+</body>
+<script>
+    async function getUsers() {
+        let response = await fetch('http://localhost:3000/produtos');
+        let data = await response.json()
+        console.log(data);
+    }
+    getUsers().then(data => console.log(data));
+</script>
+
+</html>
