@@ -8,7 +8,7 @@ var database = new sqlite3.Database('test.db', function (err) {
     if (err) {
         console.log(err);
     } else {
-        console.log("OK");
+        console.log("OKkk");
     }
 });
 router.post('/register',async(req, res, next) => {
