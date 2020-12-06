@@ -1,7 +1,7 @@
 const express =  require('express');
 const router = express.Router();
 const sqlite3 = require('sqlite3').verbose();
-var database = new sqlite3.Database('test.db', function (err) {
+var database = new sqlite3.Database('edly.db', function (err) {
     if (err) {
         console.log(err);
     } else {

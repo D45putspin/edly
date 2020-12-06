@@ -1,55 +1,35 @@
-<html>
-    <head>
-        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script> 
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    </head>
-    <body>
-<form>
-    <div class="form-group">
-    <input type="text" placeholder="nome"  class="form-control" name="nome" id="nome">
-    </div>
-    <div class="form-group">
-    <input type="password"  placeholder="" class="form-control" name="pass" id="pass">
-    </div>
-    <div class="form-group">
-        <input type="password"  placeholder="" class="form-control" name="passcontroll" id="passcontroll">
-        </div>
-    <div class="form-group">
-    <input type="button"  class="form-control" id="enter" value="enter">
-    </div>
+<form >
+    <input type="text" placeholder="nome" name="nome" id="nome">
+    <input type="password" name="pass" id="pass">
+    <input type="button" id="enter" value="enter" >
     <script type="text/javascript">
-
-        $('#enter').click(function () {
-            let x = pass.value;
-            let xc = passcontroll.value;
-            let y = nome.value;
-            console.log(y, x);
-            if (x==xc){
-            $.ajax({
-                url: 'http://localhost:3000/user/register',
-                type: 'POST',
-                cache: false,
-                data: { nome: y, pass: x },
-                success: function (data) {
-                    alert('Success!')
-                }
-                , error: function (jqXHR, textStatus, err) {
-                    alert('text status ' + textStatus + ', err ' + err)
-                }
-            })}else{window.alert("Passwords erradas")}
-        });
-
+    
+      $('#enter').click(function(){  
+    let x=pass.value;
+    let y=nome.value;
+    console.log(y,x);
+     $.ajax({ 
+           url: 'http://localhost:3000/user/register',
+           type: 'POST',
+           cache: false, 
+           data: { nome:y , pass: x }, 
+           success: function(data){
+              alert('Success!')
+           }
+           , error: function(jqXHR, textStatus, err){
+               alert('text status '+textStatus+', err '+err)
+           }
+        })
+     });            
+    
     </script>
-</form>
-</body>
-<script>
-    async function getUsers() {
-        let response = await fetch('http://localhost:3000/produtos');
-        let data = await response.json()
-        console.log(data);
-    }
-    getUsers().then(data => console.log(data));
-</script>
-
-</html>
+    </form>
+    <script>
+      async function getUsers(){
+          let response=await fetch('http://localhost:3000/produtos');
+          let data=await response.json()
+          console.log(data);
+      }
+      getUsers().then(data=>console.log(data));
+    </script>
