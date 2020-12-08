@@ -21,14 +21,16 @@ router.post('/register', async (req, res, next) => {
     var cod_postal_ = req.body.cod_post;
     var cidade_ = req.body.cidade;
     var tipo_ = req.body.tipo;
-
+    var veiculo_ = req.body.veiculo;
+    var matricula_ = req.body.matricula;
+    
 
 
 
 
     const hash = bcrypt.hashSync(password, 10);
     console.log(nome, password, hash)
-    database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo) VALUES(?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_], function (err) {
+    database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula) VALUES(?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_], function (err) {
         if (err) {
             return console.log(err.message);
         }

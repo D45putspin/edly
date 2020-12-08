@@ -5,21 +5,59 @@
 </head>
 <form >
     <input type="text" placeholder="nome" name="nome" id="nome">
-    <input type="password" name="pass" id="pass">
+    <input type="password" placeholder="password" name="pass" id="password">
+    <input type="text" placeholder="email" name="email" id="email">
+    <input type="text" placeholder="NIF" name="nif" id="nif">
+    <input type="text" placeholder="morada" name="morada" id="morada">
+    <input type="text" placeholder="código postal" name="cod_postal" id="cod_postal">
+    <input type="text" placeholder="cidade" name="cidade" id="cidade">
+    <input type="text" placeholder="matricula" id="matricula" name="matricula" style="display:none;">
+    <input type="text"  placeholder="tipo de veiculo" id="tipo_veic" name="tipo_veic" style="display:none;">
+    <select name="tipo" id="tipo">
+      <option value="cliente">cliente</option>
+      <option value="condutor">condutor</option>
+      <option value="empresa">empresa</option>
+    </select>
+   
     <input type="button" id="enter" value="enter" >
     <script type="text/javascript">
-    
+    $("#tipo").mouseup(function() {
+    var open = $(this).data("isopen");
+    if(open) {
+      
+        if (tipo.value=="condutor"){
+          document.getElementById("matricula").style.display="block";
+        document.getElementById('tipo_veic').style.display="block";
+      }
+      else {
+          document.getElementById("matricula").style.display="none";
+        document.getElementById('tipo_veic').style.display="none";
+      }
+    }
+    $(this).data("isopen", !open);
+});
       $('#enter').click(function(){  
-    let x=pass.value;
-    let y=nome.value;
-    console.log(y,x);
+    let password_=password.value;
+    let nome_=nome.value;
+    let email_=email.value;
+    let nif_=nif.value;
+    let morada_=morada.value;
+    let cod_postal_=cod_postal.value;
+    let cidade_=cidade.value;
+    let tipo_=tipo.value;
+    let matricula_=matricula.value;
+    let tipo_veic_=tipo_veic.value;
+
+    
+
+    
      $.ajax({ 
            url: 'http://localhost:3000/user/register',
            type: 'POST',
            cache: false, 
-           data: { nome:y , pass: x }, 
+           data: { nome:nome_ , password: password_,email:email_,nif:nif_,morada:morada_,cod_post:cod_postal_,cidade:cidade_,tipo:tipo_,matricula:matricula_,veiculo:tipo_veic_}, 
            success: function(data){
-              alert('Success!')
+            window.location.href = "../edly/login.html";
            }
            , error: function(jqXHR, textStatus, err){
                alert('text status '+textStatus+', err '+err)
@@ -29,11 +67,4 @@
     
     </script>
     </form>
-    <script>
-      async function getUsers(){
-          let response=await fetch('http://localhost:3000/produtos');
-          let data=await response.json()
-          console.log(data);
-      }
-      getUsers().then(data=>console.log(data));
-    </script>
+    
