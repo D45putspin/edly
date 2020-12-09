@@ -42,7 +42,8 @@ router.post('/listar_lojas',async(req,res,next) => {
     
     var id = req.body.id;
     let sql = `SELECT * From Loja WHERE id_empresa = ?`;
-    var nomes = [ ]
+    var nomes = [ ];
+    var tipos = [ ];
     database.all(sql, [id], (err, rows) => {
       if (err) {
         
@@ -51,8 +52,9 @@ router.post('/listar_lojas',async(req,res,next) => {
       rows.forEach((row) => {
         console.log(row.Nome);
         nomes.push(row.Nome);
+        tipos.push(row.tipo);
       });
-      res.status(200).send({ message:nomes })}
+      res.status(200).send({ message:nomes, tipos:tipos })}
       else {res.status(200).send({ message:"sem nenhum registro" })}
     });
 

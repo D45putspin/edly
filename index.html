@@ -1,53 +1,65 @@
 <html>
 
 <head>
-    
 
-   
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
     <meta charset="utf-8">
-  
-<style>
-    body{  font-family: 'Amatic SC', serif;
-        
-}
-    #empresa{
-        width:100%;
-        text-align:center;
-    }
-    .float{
-    
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:140px;
-	right:140px;
-	background-color:slategray;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-}
- .float:hover{
-    background-color:rgb(89, 101, 114);
-    color:white;
-    box-shadow: 4px 4px 5px #999;
-    width:63px;
-	height:63px;
- }
-.my-float{
-	margin-top:22px;
-}
 
+    <style>
+        body {
+            font-family: 'Amatic SC', serif;
 
-</style>
+        }
+
+        #empresa {
+            width: 100%;
+            text-align: center;
+        }
+
+        .float {
+
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 140px;
+            right: 140px;
+            background-color: slategray;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 2px 2px 3px #999;
+        }
+
+        .float:hover {
+            background-color: rgb(89, 101, 114);
+            color: white;
+            box-shadow: 4px 4px 5px #999;
+            width: 63px;
+            height: 63px;
+        }
+
+        .my-float {
+            margin-top: 22px;
+        }
+        .rowslojas{
+            background-color:blue; border:1px solid black;
+        }
+    </style>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" id="username" href="#"></a>
@@ -76,18 +88,20 @@
 </section>
 <section id="empresa">
 
-    <h1 id="numerodeloja"> 0 </h1> 
+    <h1 id="numerodeloja"> 0 </h1>
     <h2> lojas associadas</h2>
 
-    <a href="#"  class="float "data-toggle="tooltip" title="adicionar lojas">
+    <a href="#" class="float " data-toggle="tooltip" title="adicionar lojas">
         <i class="fa fa-plus my-float"> </i>
-     </a>
-     
-     
+    </a>
+    <ul id="lojas">
+
+    </ul>
+
 
 </section>
 <script>
-    
+
     function verificarloja(token) {
         var json = decode(token);
         var id = json.id_user;
@@ -97,18 +111,18 @@
     }
     function getnrlojas(id) {
         var ident = id;
-        
-        
+
+
         $.ajax({
             url: 'http://localhost:3000/loja/verificar_lojas',
             type: 'POST',
             cache: false,
-            
+
 
             data: { "id": ident },
             success: function (data) {
-                
-                if (data.message!="sem lojas"){
+
+                if (data.message != "sem lojas") {
                     window.alert(data.message);
                     document.getElementById("numerodeloja").innerHTML = data.message;
                 }
@@ -120,26 +134,56 @@
             }
         })
     }
+    function getnrlojaspragetlojas(id) {
+        var ident = id;
+
+
+        $.ajax({
+            url: 'http://localhost:3000/loja/verificar_lojas',
+            type: 'POST',
+            cache: false,
+
+
+            data: { "id": ident },
+            success: function (data) {
+
+                if (data.message != "sem lojas") {
+                  return data.message;
+                }
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+    }
     function getlojas(id) {
         var ident = id;
-        
-        
+        var nrlojas=getnrlojaspragetlojas(ident)
+        console.log(nrlojas)
+
         $.ajax({
             url: 'http://localhost:3000/loja/listar_lojas',
             type: 'POST',
             cache: false,
-            
+
 
             data: { "id": ident },
             success: function (data) {
-                
-                if (data.message!="sem lojas"){
-                    var lojas=[data.message];
-                    lojas.forEach(nome => {
-                        console.log(nome);
-                    });
-                    window.alert(data.message);
+
+                if (data.message != "sem lojas") {
+                    var lojas = ""+data.message;
+                    var lojasingular = lojas.split(',');
+                    for (let i = 0; i <2; i++) {
+                        console.log("nome" + lojasingular[i]);
+                        $('#lojas').append(`<div class="rowslojas">${lojasingular[i]}</div>`)
+                    }
                     
+                        
+                    
+                    window.alert(data.message);
+
                 }
 
             }
@@ -167,7 +211,7 @@
         let json = JSON.parse(jsonPayload);
         return json;
     }
-    if (x==""){window.location.href = "../edly/login.html";}
+    if (x == "") { window.location.href = "../edly/login.html"; }
     let json = decode(x);
     let tipo = json.tipo
     let nome = json.nome;
