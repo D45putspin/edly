@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
-const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken");
+
 var database = new sqlite3.Database('edly.db', function (err) {
     if (err) {
         console.log(err);
@@ -14,8 +13,8 @@ var database = new sqlite3.Database('edly.db', function (err) {
 
 router.post('/verificar_lojas', async (req, res, next) => {
     var id = req.body.id;
-    var sql = 'SELECT * FROM Loja WHERE id_empresa = ?';
-    
+    var sql = 'SELECT COUNT(*) AS contalojas FROM Loja WHERE id_empresa = ?';
+    var z=0;
     //init login function (checks if email exists, then compare bdpassword with sent one )
     database.get(sql, [id],
         async function (err, row) {
@@ -24,20 +23,42 @@ router.post('/verificar_lojas', async (req, res, next) => {
             }
 
             if (row) {
-                //check password
-                //check if password is == bdpassword
-                console.log("aqui 1");
+                
+                console.log("encontrou loja");
+                ;
 
 
 
-                console.log("loja encontrada")
-                res.status(200).json({ message:"cc" })
+                console.log("loja encontradas->"+row.contalojas)
+                res.status(200).json({ message:row.contalojas })
             } else {
-                console.log("aqui2");
+                console.log("não encontrou loja");
+                console.log(id);
                 res.status(200).send({ message: "sem lojas" })
             }
         });
 });
+router.post('/listar_lojas',async(req,res,next) => {
+    
+    var id = req.body.id;
+    let sql = `SELECT * From Loja WHERE id_empresa = ?`;
+    var nomes = [ ]
+    database.all(sql, [id], (err, rows) => {
+      if (err) {
+        
+      }
+      if(rows){
+      rows.forEach((row) => {
+        console.log(row.Nome);
+        nomes.push(row.Nome);
+      });
+      res.status(200).send({ message:nomes })}
+      else {res.status(200).send({ message:"sem nenhum registro" })}
+    });
+
+
+
+})
 
 // login 
 
