@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
-
+const login = require('../midlleware/login');
 var database = new sqlite3.Database('edly.db', function (err) {
     if (err) {
         console.log(err);
@@ -11,7 +11,7 @@ var database = new sqlite3.Database('edly.db', function (err) {
     }
 });
 
-router.post('/verificar_lojas', async (req, res, next) => {
+router.post('/verificar_lojas',login, async (req, res, next) => {
     var id = req.body.id;
     var sql = 'SELECT COUNT(*) AS contalojas FROM Loja WHERE id_empresa = ?';
     var z=0;
@@ -38,7 +38,7 @@ router.post('/verificar_lojas', async (req, res, next) => {
             }
         });
 });
-router.post('/listar_lojas',async(req,res,next) => {
+router.post('/listar_lojas',login, async(req,res,next) => {
     
     var id = req.body.id;
     let sql = `SELECT * From Loja WHERE id_empresa = ?`;
@@ -52,7 +52,7 @@ router.post('/listar_lojas',async(req,res,next) => {
       rows.forEach((row) => {
         console.log(row.Nome);
         nomes.push(row.Nome);
-        tipos.push(row.tipo);
+        tipos.push(row.Tipo);
       });
       res.status(200).send({ message:nomes, tipos:tipos })}
       else {res.status(200).send({ message:"sem nenhum registro" })}

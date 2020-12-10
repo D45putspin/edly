@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const login = require('../midlleware/login');
 var database = new sqlite3.Database('edly.db', function (err) {
     if (err) {
         console.log(err);
@@ -60,14 +61,10 @@ router.post('/login', async (req, res, next) => {
 
                 if (checkPass) {
                     //creates a token that is assigned to user
-                    const token = jwt.sign({
-                        id_user: row.Id_user,
+                    const token =jwt.sign({ id_user: row.Id_user,
                         email: row.Email,
                         tipo: row.Tipo,
-                        nome:row.Nome
-                    }, 'palavradificil', {
-                        expiresIn: "5h"
-                    })
+                        nome:row.Nome }, 'palavradificil', { expiresIn:'5h'});
                     console.log("Y")
                     res.status(200).json({ message: token })
                 } else {
