@@ -59,6 +59,88 @@
         .rowslojas{
             background-color:blue; border:1px solid black;
         }
+        /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    font-size:30px;
+  position: fixed;
+  bottom: 50%;
+  left:25%;
+  background-color: #fefefe;
+  width: 50%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color:#3E4551;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
     </style>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -91,9 +173,32 @@
     <h1 id="numerodeloja"> 0 </h1>
     <h2> lojas associadas</h2>
 
-    <a href="#" class="float " data-toggle="tooltip" title="adicionar lojas">
+    <a href="#"  id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
         <i class="fa fa-plus my-float"> </i>
     </a>
+    
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Nova Loja</h2>
+            <span class="close">&times;</span>
+            
+          </div>
+          <div class="modal-body">
+              <form>
+            <input type=text" placeholder="Nome" id="nome_empresa" name="nome_empresa">
+            <input type=text" placeholder="Tipo de Comida" id="tipo_empresa" name="tipo_empresa">
+            <input type=text" placeholder="Morada" id="morada_empresa" name="morada_empresa">
+            <input type=text" placeholder="Código postal" id="cp_empresa" name="cp_empresa">
+            <input type="button" id="enter_empresa" value="enter">
+            </form>
+          </div>
+         
+        </div>
+      
+      </div>
     <ul id="lojas">
 
     </ul>
@@ -101,17 +206,69 @@
 
 </section>
 <script>
+    $('#enter_empresa').click(function () {
+            let nome = nome_empresa.value;
+            let tipo= tipo_empresa.value;
+            let morada=morada_empresa.value;
+            let cod_postal=cp_empresa.value;
+            var token=document.cookie;
+            var tokenrl=token.replace("token=", "");
+            let tokendecode= decode(tokenrl);
+            let id=tokendecode.id_user;
+            console.log(id, cod_postal);
+            $.ajax({
+                url: 'http://localhost:3000/loja/inserir_lojas',
+                type: 'POST',
+                cache: false,
+                data: { nome: nome, tipo: tipo,morada:morada,id:id,token:tokenrl,cod_postal:cod_postal },
+                success: function (data) {
+                    window.location.href = "?sucesso=y";
 
+                }
+                , error: function (jqXHR, textStatus, err) {
+                   
+                    console.log(err,textStatus)
+                }
+            })
+        });
+//modal/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+/**/// Get the modal
+/**/var modal = document.getElementById("myModal");
+/**/
+/**/// Get the button that opens the modal
+/**/var btn = document.getElementById("myBtn");
+/**/
+/**/// Get the <span> element that closes the modal
+/**/var span = document.getElementsByClassName("close")[0];
+/**/
+/**/// When the user clicks the button, open the modal 
+/**/btn.onclick = function() {
+/**/  modal.style.display = "block";
+/**/}
+/**/
+/**/// When the user clicks on <span> (x), close the modal
+/**/span.onclick = function() {
+/**/  modal.style.display = "none";
+/**/}
+/**/
+/**/// When the user clicks anywhere outside of the modal, close it
+/**/window.onclick = function(event) {
+/**/  if (event.target == modal) {
+/**/    modal.style.display = "none";
+/**/  }
+/**/}
+/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
     function verificarloja(token) {
         var json = decode(token);
         var id = json.id_user;
-        getnrlojas(id);
-        getlojas(id);
+        getnrlojas(id,token);
+        
 
     }
-    function getnrlojas(id) {
+    function getnrlojas(id,token) {
         var ident = id;
-
+        var tokenrl=token.replace("token=", "");
+        
 
         $.ajax({
             url: 'http://localhost:3000/loja/verificar_lojas',
@@ -119,65 +276,52 @@
             cache: false,
 
 
-            data: { "id": ident },
+            data: { "id": ident,"token":tokenrl },
             success: function (data) {
 
                 if (data.message != "sem lojas") {
                     window.alert(data.message);
                     document.getElementById("numerodeloja").innerHTML = data.message;
+                    getlojas(ident,token,data.message);
                 }
 
             }
             , error: function (jqXHR, textStatus, err) {
 
                 console.log(err, textStatus)
+                
             }
         })
     }
-    function getnrlojaspragetlojas(id) {
+  
+    
+    function getlojas(id,token,nrlojas) {
         var ident = id;
-
-
-        $.ajax({
-            url: 'http://localhost:3000/loja/verificar_lojas',
-            type: 'POST',
-            cache: false,
-
-
-            data: { "id": ident },
-            success: function (data) {
-
-                if (data.message != "sem lojas") {
-                  return data.message;
-                }
-
-            }
-            , error: function (jqXHR, textStatus, err) {
-
-                console.log(err, textStatus)
-            }
-        })
-    }
-    function getlojas(id) {
-        var ident = id;
-        var nrlojas=getnrlojaspragetlojas(ident)
-        console.log(nrlojas)
-
+        var nr=nrlojas
+       
+        var tokenrl=token.replace("token=", "");
+        
         $.ajax({
             url: 'http://localhost:3000/loja/listar_lojas',
             type: 'POST',
             cache: false,
 
 
-            data: { "id": ident },
+            data: { "id": ident,"token":tokenrl },
             success: function (data) {
 
                 if (data.message != "sem lojas") {
-                    var lojas = ""+data.message;
+                    var lojas = ""+data.nome;
                     var lojasingular = lojas.split(',');
-                    for (let i = 0; i <2; i++) {
+                    var tipos=""+data.tipo;
+                    var tiposingular=tipos.split(',');
+                    var moradas=""+data.morada;
+                    var moradasingular=moradas.split(',');
+                    var codigos_postal=""+data.cp;
+                    var cpsingular=codigos_postal.split(',');
+                    for (let i = 0; i <nr; i++) {
                         console.log("nome" + lojasingular[i]);
-                        $('#lojas').append(`<div class="rowslojas">${lojasingular[i]}</div>`)
+                        $('#lojas').append(`<div class="container p-3 my-3 bg-dark text-white"><h1>${lojasingular[i]}</h1><h3>tipo de comida : ${tiposingular[i]} , Morada :${moradasingular[i]},${cpsingular[i]}  </h3></div>`)
                     }
                     
                         
@@ -193,6 +337,7 @@
             }
         })
     }
+
 
 
     //LOGOUT/**//**//**//**//**//**//**//**//**//**//**//**//**//**/

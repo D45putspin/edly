@@ -27,7 +27,7 @@
                 success: function (data) {
                     $('#element').text(data.message);
                     document.cookie = "token = " + data.message + ";secure";
-                    //window.location.href = "../edly/index.html";
+                    window.location.href = "../edly/index.html";
 
                 }
                 , error: function (jqXHR, textStatus, err) {
