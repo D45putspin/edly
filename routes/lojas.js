@@ -95,10 +95,6 @@ router.post('/verificar_lojas', login, async (req, res, next) => {
                 if (row) {
 
                     console.log("encontrou loja");
-                    ;
-
-
-
                     console.log("loja encontradas->" + row.contalojas)
                     res.status(200).json({ message: row.contalojas })
                 } else {

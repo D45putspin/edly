@@ -68,7 +68,7 @@ router.post('/login', async (req, res, next) => {
                     console.log("Y")
                     res.status(200).json({ message: token })
                 } else {
-                    res.status(400).send({ message: "campos errados" })
+                    res.status(400).json({ message: "campos errados" })
                 }
             } else {
                 res.status(400).send({ message: "erro nao encontrou" })

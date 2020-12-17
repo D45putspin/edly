@@ -32,7 +32,11 @@
                 }
                 , error: function (jqXHR, textStatus, err) {
                    
-                    console.log(err,textStatus)
+                    console.log(jqXHR.responseText);
+                    console.log(textStatus);
+                    console.log(err);
+                
+                
                 }
             })
         });

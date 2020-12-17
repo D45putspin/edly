@@ -56,91 +56,128 @@
         .my-float {
             margin-top: 22px;
         }
-        .rowslojas{
-            background-color:blue; border:1px solid black;
+
+        .rowslojas {
+            background-color: blue;
+            border: 1px solid black;
         }
+
         /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  -webkit-animation-name: fadeIn; /* Fade in the background */
-  -webkit-animation-duration: 0.4s;
-  animation-name: fadeIn;
-  animation-duration: 0.4s
-}
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            -webkit-animation-name: fadeIn;
+            /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s
+        }
 
-/* Modal Content */
-.modal-content {
-    font-size:30px;
-  position: fixed;
-  bottom: 50%;
-  left:25%;
-  background-color: #fefefe;
-  width: 50%;
-  -webkit-animation-name: slideIn;
-  -webkit-animation-duration: 0.4s;
-  animation-name: slideIn;
-  animation-duration: 0.4s
-}
+        /* Modal Content */
+        .modal-content {
+            font-size: 30px;
+            position: fixed;
+            bottom: 50%;
+            left: 25%;
+            background-color: #fefefe;
+            width: 50%;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s
+        }
 
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-.modal-header {
-  padding: 2px 16px;
-  background-color:#3E4551;
-  color: white;
-}
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #3E4551;
+            color: white;
+        }
 
-.modal-body {padding: 2px 16px;}
+        .modal-body {
+            padding: 2px 16px;
+        }
 
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
 
-/* Add Animation */
-@-webkit-keyframes slideIn {
-  from {bottom: -300px; opacity: 0} 
-  to {bottom: 0; opacity: 1}
-}
+        /* Add Animation */
+        @-webkit-keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
 
-@keyframes slideIn {
-  from {bottom: -300px; opacity: 0}
-  to {bottom: 0; opacity: 1}
-}
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
 
-@-webkit-keyframes fadeIn {
-  from {opacity: 0} 
-  to {opacity: 1}
-}
+        @keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
 
-@keyframes fadeIn {
-  from {opacity: 0} 
-  to {opacity: 1}
-}
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
 
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
     </style>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -173,32 +210,55 @@
     <h1 id="numerodeloja"> 0 </h1>
     <h2> lojas associadas</h2>
 
-    <a href="#"  id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
+    <a href="#" id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
         <i class="fa fa-plus my-float"> </i>
     </a>
-    
+
     <div id="myModal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
-          <div class="modal-header">
-            <h2>Nova Loja</h2>
-            <span class="close">&times;</span>
-            
-          </div>
-          <div class="modal-body">
-              <form>
-            <input type=text" placeholder="Nome" id="nome_empresa" name="nome_empresa">
-            <input type=text" placeholder="Tipo de Comida" id="tipo_empresa" name="tipo_empresa">
-            <input type=text" placeholder="Morada" id="morada_empresa" name="morada_empresa">
-            <input type=text" placeholder="Código postal" id="cp_empresa" name="cp_empresa">
-            <input type="button" id="enter_empresa" value="enter">
-            </form>
-          </div>
-         
+            <div class="modal-header">
+                <h2>Nova Loja</h2>
+                <span class="close">&times;</span>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type=text" placeholder="Nome" id="nome_empresa" name="nome_empresa">
+                    <input type=text" placeholder="Tipo de Comida" id="tipo_empresa" name="tipo_empresa">
+                    <input type=text" placeholder="Morada" id="morada_empresa" name="morada_empresa">
+                    <input type=text" placeholder="Código postal" id="cp_empresa" name="cp_empresa">
+                    <input type="button" id="enter_empresa" value="enter">
+                </form>
+            </div>
+
         </div>
-      
-      </div>
+
+    </div>
+    <div id="myModal1" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Produtos</h2>
+                <span class="close1">&times;</span>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type=text" placeholder="Nome Produto" id="nome_produto" name="nome_produto">
+                    <input type=text" placeholder="Preço Produto" id="preco_produto" name="preco_produto">
+                    <input type=text" placeholder="Descrição do Produto" id="descricao_produto"
+                        name="descricao_produto">
+                    <input type="file" id="foto_produto" name="foto_produto" accept="image/png, image/jpeg">
+                    <input type="button" id="enter_empresa1" value="enter">
+                </form>
+            </div>
+
+        </div>
+
+    </div>
     <ul id="lojas">
 
     </ul>
@@ -206,32 +266,79 @@
 
 </section>
 <script>
-    $('#enter_empresa').click(function () {
-            let nome = nome_empresa.value;
-            let tipo= tipo_empresa.value;
-            let morada=morada_empresa.value;
-            let cod_postal=cp_empresa.value;
-            var token=document.cookie;
-            var tokenrl=token.replace("token=", "");
-            let tokendecode= decode(tokenrl);
-            let id=tokendecode.id_user;
-            console.log(id, cod_postal);
-            $.ajax({
-                url: 'http://localhost:3000/loja/inserir_lojas',
-                type: 'POST',
-                cache: false,
-                data: { nome: nome, tipo: tipo,morada:morada,id:id,token:tokenrl,cod_postal:cod_postal },
-                success: function (data) {
-                    window.location.href = "?sucesso=y";
+    $('#enter_empresa1').click(function () {
+        var fd = new FormData();
+        var file = $('#foto_produto')[0].files[0];
+        fd.append('logo', file);
+        fd.append('email', email);
+        fd.append('password', password);
+        fd.append('address', address);
+        fd.append('zipCode', zipCode);
+        fd.append('location', location);
+        fd.append('name', name);
+        fd.append('nipc', nipc);
+        fd.append('category', category);
+        fd.append('description', description);
 
-                }
-                , error: function (jqXHR, textStatus, err) {
-                   
-                    console.log(err,textStatus)
-                }
-            })
-        });
-//modal/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+
+
+        $.ajax({
+            url: 'http://localhost:3000/produtos/criar_produtos',
+            type: 'POST',
+            cache: false,
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                M.toast({ html: 'Registado com sucesso!' });
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+                console.log(err, textStatus);
+                M.toast({ html: 'Erro ao registar!' });
+            }
+        })
+
+
+
+
+
+
+
+
+    })
+    let params = (new URL(document.location)).searchParams;
+    let loja = params.get("loja");
+    $('#enter_empresa').click(function () {
+        let nome = nome_empresa.value;
+        let tipo = tipo_empresa.value;
+        let morada = morada_empresa.value;
+        let cod_postal = cp_empresa.value;
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+        let id = tokendecode.id_user;
+        console.log(id, cod_postal);
+        $.ajax({
+            url: 'http://localhost:3000/loja/inserir_lojas',
+            type: 'POST',
+            cache: false,
+            data: { nome: nome, tipo: tipo, morada: morada, id: id, token: tokenrl, cod_postal: cod_postal },
+            success: function (data) {
+                window.location.href = "?sucesso=y";
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+    });
+
+
+    if (loja == null) {
+//modal adicionar lojas/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 /**/// Get the modal
 /**/var modal = document.getElementById("myModal");
 /**/
@@ -242,33 +349,73 @@
 /**/var span = document.getElementsByClassName("close")[0];
 /**/
 /**/// When the user clicks the button, open the modal 
-/**/btn.onclick = function() {
+/**/btn.onclick = function () {
 /**/  modal.style.display = "block";
-/**/}
+            /**/
+        }
 /**/
 /**/// When the user clicks on <span> (x), close the modal
-/**/span.onclick = function() {
+/**/span.onclick = function () {
 /**/  modal.style.display = "none";
-/**/}
+            /**/
+        }
 /**/
 /**/// When the user clicks anywhere outside of the modal, close it
-/**/window.onclick = function(event) {
+/**/window.onclick = function (event) {
 /**/  if (event.target == modal) {
 /**/    modal.style.display = "none";
-/**/  }
-/**/}
-/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+                /**/
+            }
+            /**/
+        }
+        /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+    }
+    else {
+//modal editar lojas/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+/**/// Get the modal
+/**/var modal = document.getElementById("myModal1");
+/**/
+/**/// Get the button that opens the modal
+/**/var btn = document.getElementById("myBtn");
+/**/
+/**/// Get the <span> element that closes the modal
+/**/var span = document.getElementsByClassName("close1")[0];
+/**/
+/**/// When the user clicks the button, open the modal 
+/**/btn.onclick = function () {
+/**/  modal.style.display = "block";
+            /**/
+        }
+/**/
+/**/// When the user clicks on <span> (x), close the modal
+/**/span.onclick = function () {
+/**/  modal.style.display = "none";
+            /**/
+        }
+/**/
+/**/// When the user clicks anywhere outside of the modal, close it
+/**/window.onclick = function (event) {
+/**/  if (event.target == modal) {
+/**/    modal.style.display = "none";
+                /**/
+            }
+            /**/
+        }
+        /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+
+
+    }
     function verificarloja(token) {
         var json = decode(token);
         var id = json.id_user;
-        getnrlojas(id,token);
-        
+        getnrlojas(id, token);
+
 
     }
-    function getnrlojas(id,token) {
+    function getnrlojas(id, token) {
         var ident = id;
-        var tokenrl=token.replace("token=", "");
-        
+        var tokenrl = token.replace("token=", "");
+
 
         $.ajax({
             url: 'http://localhost:3000/loja/verificar_lojas',
@@ -276,57 +423,70 @@
             cache: false,
 
 
-            data: { "id": ident,"token":tokenrl },
+            data: { "id": ident, "token": tokenrl },
             success: function (data) {
 
                 if (data.message != "sem lojas") {
-                    window.alert(data.message);
+
                     document.getElementById("numerodeloja").innerHTML = data.message;
-                    getlojas(ident,token,data.message);
+                    getlojas(ident, token, data.message);
                 }
 
             }
             , error: function (jqXHR, textStatus, err) {
 
                 console.log(err, textStatus)
-                
+
             }
         })
     }
-  
-    
-    function getlojas(id,token,nrlojas) {
+
+
+    function getlojas(id, token, nrlojas) {
         var ident = id;
-        var nr=nrlojas
-       
-        var tokenrl=token.replace("token=", "");
-        
+        var nr = nrlojas
+        let params = (new URL(document.location)).searchParams;
+        let loja = params.get("loja");
+        var tokenrl = token.replace("token=", "");
+        console.log(loja);
+
         $.ajax({
             url: 'http://localhost:3000/loja/listar_lojas',
             type: 'POST',
             cache: false,
 
 
-            data: { "id": ident,"token":tokenrl },
+            data: { "id": ident, "token": tokenrl },
             success: function (data) {
 
                 if (data.message != "sem lojas") {
-                    var lojas = ""+data.nome;
+                    var lojas = "" + data.nome;
                     var lojasingular = lojas.split(',');
-                    var tipos=""+data.tipo;
-                    var tiposingular=tipos.split(',');
-                    var moradas=""+data.morada;
-                    var moradasingular=moradas.split(',');
-                    var codigos_postal=""+data.cp;
-                    var cpsingular=codigos_postal.split(',');
-                    for (let i = 0; i <nr; i++) {
-                        console.log("nome" + lojasingular[i]);
-                        $('#lojas').append(`<div class="container p-3 my-3 bg-dark text-white"><h1>${lojasingular[i]}</h1><h3>tipo de comida : ${tiposingular[i]} , Morada :${moradasingular[i]},${cpsingular[i]}  </h3></div>`)
+                    var tipos = "" + data.tipo;
+                    var tiposingular = tipos.split(',');
+                    var moradas = "" + data.morada;
+                    var moradasingular = moradas.split(',');
+                    var codigos_postal = "" + data.cp;
+                    var cpsingular = codigos_postal.split(',');
+
+                    if (loja != null) {
+                        console.log("nome" + lojasingular[loja]);
+                        $('#lojas').append(`<a ><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[loja - 1]}</h1><h3>tipo de comida : ${tiposingular[loja - 1]} , Morada :${moradasingular[loja - 1]},${cpsingular[loja - 1]}  </h3></div><a>`)
+
                     }
-                    
-                        
-                    
-                    window.alert(data.message);
+                    else {
+                        for (let i = 0; i < nr; i++) {
+                            console.log("nome" + lojasingular[i]);
+                            $('#lojas').append(`<a href="?loja=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[i]}</h1><h3>tipo de comida : ${tiposingular[i]} , Morada :${moradasingular[i]},${cpsingular[i]}  </h3></div><a>`)
+                        }
+                    }
+
+
+
+
+
+
+
 
                 }
 
@@ -336,6 +496,8 @@
                 console.log(err, textStatus)
             }
         })
+
+
     }
 
 
