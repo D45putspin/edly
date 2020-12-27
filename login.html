@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <meta charset="utf-8">
+</head>
+
+<body onload>
+    <form style="display:block">
+        <input type="text" placeholder="email" name="email" id="email">
+        <input type="password" name="password" id="password">
+        <input type="button" id="enter" value="enter">
+        <a id="element"> </a>
+        
+    </form>
+    <script type="text/javascript">
+     
+        $('#enter').click(function () {
+            let x = password.value;
+            let y = email.value;
+            console.log(y, x);
+            $.ajax({
+                url: 'http://localhost:3000/user/login',
+                type: 'POST',
+                cache: false,
+                data: { email: y, password: x },
+                success: function (data) {
+                    $('#element').text(data.message);
+                    document.cookie = "token = " + data.message + ";secure";
+                    window.location.href = "../edly/index.html";
+
+                }
+                , error: function (jqXHR, textStatus, err) {
+                   
+                    console.log(jqXHR.responseText);
+                    console.log(textStatus);
+                    console.log(err);
+                
+                
+                }
+            })
+        });
+
+    </script>
+    
+</body>
