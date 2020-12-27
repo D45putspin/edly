@@ -13,5 +13,6 @@ app.use(cors());
 app.use('/produtos',rotaProdutos);
 app.use('/user',rotaUtilizadores);
 app.use('/loja',rotaLojas);
+app.use(express.static('uploads'));
 
 module.exports = app;

@@ -262,41 +262,50 @@
     <ul id="lojas">
 
     </ul>
+    <ul id="produtos">
+
+    </ul>
 
 
 </section>
 <script>
+    let params = (new URL(document.location)).searchParams;
+    let loja = params.get("loja");
+    
     $('#enter_empresa1').click(function () {
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+        var nome_prod=document.getElementById('nome_produto').value;
+        var preco_prod=document.getElementById('preco_produto').value;
+        var descricao_produto=document.getElementById('descricao_produto').value;
         var fd = new FormData();
         var file = $('#foto_produto')[0].files[0];
-        fd.append('logo', file);
-        fd.append('email', email);
-        fd.append('password', password);
-        fd.append('address', address);
-        fd.append('zipCode', zipCode);
-        fd.append('location', location);
-        fd.append('name', name);
-        fd.append('nipc', nipc);
-        fd.append('category', category);
-        fd.append('description', description);
+        fd.append('produto_imagem', file);
+        fd.append('nome_produto', nome_prod);
+        fd.append('tipo', descricao_produto);
+        fd.append('id', loja);
+        fd.append('id_empresa',tokendecode.id_user)
+        fd.append('preco', preco_prod);
 
 
 
         $.ajax({
-            url: 'http://localhost:3000/produtos/criar_produtos',
+            url: 'http://localhost:3000/produtos/criar-produtos',
             type: 'POST',
             cache: false,
             data: fd,
+            headers:{"token":tokenrl},
             contentType: false,
             processData: false,
             success: function (data) {
                 console.log(data);
-                M.toast({ html: 'Registado com sucesso!' });
+              
 
             }
             , error: function (jqXHR, textStatus, err) {
                 console.log(err, textStatus);
-                M.toast({ html: 'Erro ao registar!' });
+               
             }
         })
 
@@ -308,8 +317,7 @@
 
 
     })
-    let params = (new URL(document.location)).searchParams;
-    let loja = params.get("loja");
+    
     $('#enter_empresa').click(function () {
         let nome = nome_empresa.value;
         let tipo = tipo_empresa.value;
@@ -319,19 +327,20 @@
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
         let id = tokendecode.id_user;
-        console.log(id, cod_postal);
+        
         $.ajax({
             url: 'http://localhost:3000/loja/inserir_lojas',
             type: 'POST',
             cache: false,
-            data: { nome: nome, tipo: tipo, morada: morada, id: id, token: tokenrl, cod_postal: cod_postal },
+            data: { nome: nome, tipo: tipo, morada: morada,token:tokenrl, id: id, cod_postal: cod_postal },
+            headers:{"token":tokenrl},
             success: function (data) {
                 window.location.href = "?sucesso=y";
 
             }
             , error: function (jqXHR, textStatus, err) {
-
-                console.log(err, textStatus)
+                
+                console.log(err, textStatus);
             }
         })
     });
@@ -415,30 +424,32 @@
     function getnrlojas(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
-
+        
 
         $.ajax({
-            url: 'http://localhost:3000/loja/verificar_lojas',
-            type: 'POST',
+            url: 'http://localhost:3000/loja/verificar_lojas/id='+ident,
+            type: 'GET',
             cache: false,
+            headers: {"token": tokenrl},
+            
 
-
-            data: { "id": ident, "token": tokenrl },
+            
             success: function (data) {
-
+                
                 if (data.message != "sem lojas") {
-
                     document.getElementById("numerodeloja").innerHTML = data.message;
                     getlojas(ident, token, data.message);
                 }
 
             }
             , error: function (jqXHR, textStatus, err) {
-
+               
                 console.log(err, textStatus)
 
             }
+
         })
+        
     }
 
 
@@ -448,15 +459,15 @@
         let params = (new URL(document.location)).searchParams;
         let loja = params.get("loja");
         var tokenrl = token.replace("token=", "");
-        console.log(loja);
+       
 
         $.ajax({
-            url: 'http://localhost:3000/loja/listar_lojas',
-            type: 'POST',
+            url: 'http://localhost:3000/loja/listar_lojas/id='+ident,
+            type: 'GET',
             cache: false,
+            headers: {"token": tokenrl},
 
-
-            data: { "id": ident, "token": tokenrl },
+           
             success: function (data) {
 
                 if (data.message != "sem lojas") {
@@ -472,11 +483,11 @@
                     if (loja != null) {
                         console.log("nome" + lojasingular[loja]);
                         $('#lojas').append(`<a ><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[loja - 1]}</h1><h3>tipo de comida : ${tiposingular[loja - 1]} , Morada :${moradasingular[loja - 1]},${cpsingular[loja - 1]}  </h3></div><a>`)
-
+                        chamarprodutos(id,token);
                     }
                     else {
                         for (let i = 0; i < nr; i++) {
-                            console.log("nome" + lojasingular[i]);
+                          
                             $('#lojas').append(`<a href="?loja=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[i]}</h1><h3>tipo de comida : ${tiposingular[i]} , Morada :${moradasingular[i]},${cpsingular[i]}  </h3></div><a>`)
                         }
                     }
@@ -501,7 +512,54 @@
     }
 
 
+function chamarprodutos(id,token){
+    var ident = id;
+    var tokenrl = token.replace("token=", "");
+    let params = (new URL(document.location)).searchParams;
+    let loja = params.get("loja");
+    
 
+        $.ajax({
+            url: 'http://localhost:3000/produtos/get-products/id='+loja,
+            type: 'GET',
+            cache: false,
+            headers: {"token": tokenrl},
+
+           
+            success: function (data) {
+
+  
+                    var nomes=data.nome;
+                    var imagem=data.url;
+                    
+                    var descri=data.descricao;
+                    var preco=data.preco;
+                        for (let i = 0; i < nomes.length; i++) {
+                          console.log(imagem[i]);
+                          
+                            $('#produtos').append(`<a href="?produto=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${nomes[i]}</h1><img src="http://localhost:3000/${imagem[i]}"> alt="Italian Trulli"> <h3> , descrição :${descri[i]},preço${preco[i]}  </h3></div><a>`)
+                        }
+                    
+
+
+
+
+
+
+
+
+                
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+
+
+    
+}
     //LOGOUT/**//**//**//**//**//**//**//**//**//**//**//**//**//**/
     $('#logout').click(function () {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";

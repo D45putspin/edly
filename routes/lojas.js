@@ -1,22 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const querystring = require('querystring');
 const sqlite3 = require('sqlite3').verbose();
 const login = require('../midlleware/login');
 const jwt = require('jsonwebtoken');
-var database = new sqlite3.Database('edly.db', function (err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("OK");
-    }
-});
 
-router.post('/verificar_lojas', login, async (req, res, next) => {
-    var token = req.body.token;
+
+router.get('/verificar_lojas/:id', login, async (req, res, next) => {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("");
+        }
+    });
+
+    var token = req.headers.token;
     const decode = jwt.verify(token, "palavradificil");
+    console.log(decode.tipo);
     if (decode.tipo == "empresa") {
-        var id = req.body.id;
+        var idrl = req.params.id;
+        var id = idrl.replace("id=", "");
         var sql = 'SELECT COUNT(*) AS contalojas FROM Loja WHERE id_empresa = ?';
         var z = 0;
         //init login function (checks if email exists, then compare bdpassword with sent one )
@@ -29,27 +34,36 @@ router.post('/verificar_lojas', login, async (req, res, next) => {
                 if (row) {
 
                     console.log("encontrou loja");
-                    ;
-
-
-
                     console.log("loja encontradas->" + row.contalojas)
-                    res.status(200).json({ message: row.contalojas })
+                    res.status(200).json({ message: row.contalojas }/*ok cod200*/)
                 } else {
                     console.log("não encontrou loja");
-                    console.log(id);
-                    res.status(200).send({ message: "sem lojas" })
+
+                    res.status(204).send({ message: "sem lojas" }/*no content cod204*/)
                 }
             });
     }
-    else { res.status(200).send({ message: "erro de user" }) }
+    else { res.status(401).send({ message: "erro de user" }) /*unauthorized cod401*/ }
+    database.close();
 });
-router.post('/listar_lojas', login, async (req, res, next) => {
-    var token = req.body.token;
-    const decode = jwt.verify(token, "palavradificil");
+router.get('/listar_lojas/:id', login, async (req, res, next) => {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("");
+        }
+    });
 
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    
     if (decode.tipo == "empresa") {
-        var id = req.body.id;
+
+
+        var idrl = req.params.id;
+        var id= idrl.replace("id=", "");
+        console.log(idrl);
         let sql = `SELECT * From Loja WHERE id_empresa = ?`;
         var nomes = [];
         var tipos = [];
@@ -61,9 +75,9 @@ router.post('/listar_lojas', login, async (req, res, next) => {
             }
             if (rows) {
                 rows.forEach((row) => {
-                    console.log(row.Nome);
+
                     nomes.push(row.Nome);
-                    console.log(row.Tipo);
+
                     tipos.push(row.Tipo);
                     moradas.push(row.Morada);
                     cod_posts.push(row.Cod_postal);
@@ -74,39 +88,20 @@ router.post('/listar_lojas', login, async (req, res, next) => {
         });
     }
     else { res.status(200).send({ message: "erro de user" }) }
-
+database.close();
 
 })
 
-router.post('/verificar_lojas', login, async (req, res, next) => {
-    var token = req.body.token;
-    const decode = jwt.verify(token, "palavradificil");
-    if (decode.tipo == "empresa") {
-        var id = req.body.id;
-        var sql = 'SELECT COUNT(*) AS contalojas FROM Loja WHERE id_empresa = ?';
-        var z = 0;
-        //init login function (checks if email exists, then compare bdpassword with sent one )
-        database.get(sql, [id],
-            async function (err, row) {
-                if (err) {
-                    res.status(500).send({ message: "erro 500" })
-                }
 
-                if (row) {
-
-                    console.log("encontrou loja");
-                    console.log("loja encontradas->" + row.contalojas)
-                    res.status(200).json({ message: row.contalojas })
-                } else {
-                    console.log("não encontrou loja");
-                    console.log(id);
-                    res.status(200).send({ message: "sem lojas" })
-                }
-            });
-    }
-    else { res.status(200).send({ message: "erro de user" }) }
-});
 router.post('/inserir_lojas', login, async (req, res, next) => {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("");
+        }
+    });
+
     var token = req.body.token;
     const decode = jwt.verify(token, "palavradificil");
     if (decode.tipo == "empresa") {
@@ -120,7 +115,7 @@ router.post('/inserir_lojas', login, async (req, res, next) => {
                 if (err) {
                     return console.log(err.message);
                 }
-                // get the last insert id
+              
 
             });
 
@@ -129,7 +124,7 @@ router.post('/inserir_lojas', login, async (req, res, next) => {
         else { return res.status(200).send({ messagem: 'não pode associar outras empresas que não a sua ' }) }
     }
     else { return res.status(200).send({ messagem: 'para aceder a esta funcionalidade é necessário ser empresa' }) }
-
+    database.close();
 });
 
 module.exports = router;

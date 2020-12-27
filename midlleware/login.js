@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 module.exports = (req,res,next)=>{
  
     try{
-        const decode = jwt.verify(req.body.token,"palavradificil");
+       
+            const decode = jwt.verify(req.headers.token,"palavradificil");
+    
         req.usuario=decode;
         next();
     }catch(error){
