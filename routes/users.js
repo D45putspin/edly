@@ -24,14 +24,18 @@ router.post('/register', async (req, res, next) => {
     var tipo_ = req.body.tipo;
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
-    
+    if (tipo_ == "condutor" || tipo_ == "empresa") {
+        var status = "pending";
+    } else {
+        var status = "acepted"
+    }
 
 
 
 
     const hash = bcrypt.hashSync(password, 10);
     console.log(nome, password, hash)
-    database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula) VALUES(?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_], function (err) {
+    database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula,aproval) VALUES(?,?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_, status], function (err) {
         if (err) {
             return console.log(err.message);
         }
@@ -61,17 +65,25 @@ router.post('/login', async (req, res, next) => {
 
                 if (checkPass) {
                     //creates a token that is assigned to user
-                    const token =jwt.sign({ id_user: row.Id_user,
-                        email: row.Email,
-                        tipo: row.Tipo,
-                        nome:row.Nome }, 'palavradificil', { expiresIn:'5h'});
-                    console.log("Y")
-                    res.status(200).json({ message: token })
+                    if (row.aproval != "pending") {
+                        const token = jwt.sign({
+                            id_user: row.Id_user,
+                            email: row.Email,
+                            tipo: row.Tipo,
+                            nome: row.Nome
+                        }, 'palavradificil', { expiresIn: '5h' });
+                        console.log("Y");
+                        res.status(200).json({ message: token });
+                    }
+                    else{
+                        res.status(403).json({ message: "need_activation"});
+                   
+                    }
                 } else {
-                    res.status(400).json({ message: "campos errados" })
+                    res.status(403).json({ message: "wrong_fields" });
                 }
             } else {
-                res.status(400).send({ message: "erro nao encontrou" })
+                res.status(400).send({ message: "not_found" });
             }
         }
     )

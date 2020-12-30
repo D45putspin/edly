@@ -3,6 +3,7 @@
 <head>
     <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
     <meta charset="utf-8">
+    <script src="notify.min.js"></script>
 </head>
 
 <body onload>
@@ -30,17 +31,34 @@
                     window.location.href = "../edly/index.html";
 
                 }
-                , error: function (jqXHR, textStatus, err) {
-                   
-                    console.log(jqXHR.responseText);
+                , error: function ( jqXHR, textStatus, err) {
+                    var error= jQuery.parseJSON(jqXHR.responseText);
+                    console.log(error.message);
                     console.log(textStatus);
                     console.log(err);
+                    notiferror(error.message);
+                 
+                   
                 
                 
                 }
             })
         });
+             function notiferror(error){
+                switch (error){
+                        case "need_activation":
+                            $.notify("espere um administrador aceitar a sua conta","error");
+                            break;
+                        case "wrong_fields":
+                            $.notify("campos errados!","error");
+                            break;
+                        case "not_found":
+                            $.notify("conta não encontrada, verifique se o email está correto!","error")
+                    }
+             }
 
+
+       
     </script>
     
 </body>

@@ -202,13 +202,57 @@
 <section id="cliente">
     <h1> cliente!!!</h1>
 </section>
+
+
+
+
+
+
+
+<!-- Currently working section  start date- 30/12/2020 
+    what to do: -panel to deny or accept enterprises/workers account creation.
+                -create another admin accounts
+                -delete  already acepted enterprises
+                
+
+
+
+
+-->
 <section id="administrador">
     <h1> administrador!!!</h1>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- almost done !!!!! 30/12/2020 
+    empresas - enterprises
+    can add lojas - stores 
+    stores can add produtos-products
+
+
+    falta imagem da store e da empresa se for necessário
+    produtos ja com foto a funcionar, codigo em : linha 10/19 produtos.js; 
+
+
+-->
 <section id="empresa">
 
-    <h1 id="numerodeloja"> 0 </h1>
-    <h2> lojas associadas</h2>
+    
 
     <a href="#" id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
         <i class="fa fa-plus my-float"> </i>
@@ -260,6 +304,10 @@
 
     </div>
     <ul id="lojas">
+    <div id="DispNrLojas">
+    <h1 id="numerodeloja"> 0 </h1>
+    <h2> lojas associadas</h2>
+    </div>     
 
     </ul>
     <ul id="produtos">
@@ -279,6 +327,7 @@
         var nome_prod=document.getElementById('nome_produto').value;
         var preco_prod=document.getElementById('preco_produto').value;
         var descricao_produto=document.getElementById('descricao_produto').value;
+        //appends image (and the other data) to fd so you can send it on data to database 
         var fd = new FormData();
         var file = $('#foto_produto')[0].files[0];
         fd.append('produto_imagem', file);
@@ -479,8 +528,8 @@
                     var moradasingular = moradas.split(',');
                     var codigos_postal = "" + data.cp;
                     var cpsingular = codigos_postal.split(',');
-
-                    if (loja != null) {
+                   //verify if header isnt null
+                    if (loja != null && loja!= "") {
                         console.log("nome" + lojasingular[loja]);
                         $('#lojas').append(`<a ><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[loja - 1]}</h1><h3>tipo de comida : ${tiposingular[loja - 1]} , Morada :${moradasingular[loja - 1]},${cpsingular[loja - 1]}  </h3></div><a>`)
                         chamarprodutos(id,token);
@@ -536,7 +585,7 @@ function chamarprodutos(id,token){
                     var preco=data.preco;
                         for (let i = 0; i < nomes.length; i++) {
                           console.log(imagem[i]);
-                          
+                            $('#DispNrLojas').css("visibility","hidden");
                             $('#produtos').append(`<a href="?produto=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${nomes[i]}</h1><img src="http://localhost:3000/${imagem[i]}"> alt="Italian Trulli"> <h3> , descrição :${descri[i]},preço${preco[i]}  </h3></div><a>`)
                         }
                     
