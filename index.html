@@ -317,6 +317,7 @@
 
 </section>
 <script>
+    const urlattime="localhost:3000";
     let params = (new URL(document.location)).searchParams;
     let loja = params.get("loja");
     
@@ -340,7 +341,7 @@
 
 
         $.ajax({
-            url: 'http://localhost:3000/produtos/criar-produtos',
+            url: 'http://'+urlattime+'/produtos/criar-produtos',
             type: 'POST',
             cache: false,
             data: fd,
@@ -378,7 +379,7 @@
         let id = tokendecode.id_user;
         
         $.ajax({
-            url: 'http://localhost:3000/loja/inserir_lojas',
+            url: 'http://'+urlattime+'/loja/inserir_lojas',
             type: 'POST',
             cache: false,
             data: { nome: nome, tipo: tipo, morada: morada,token:tokenrl, id: id, cod_postal: cod_postal },
@@ -476,7 +477,7 @@
         
 
         $.ajax({
-            url: 'http://localhost:3000/loja/verificar_lojas/id='+ident,
+            url: 'http://'+urlattime+'/loja/verificar_lojas/id='+ident,
             type: 'GET',
             cache: false,
             headers: {"token": tokenrl},
@@ -511,7 +512,7 @@
        
 
         $.ajax({
-            url: 'http://localhost:3000/loja/listar_lojas/id='+ident,
+            url: 'http://'+urlattime+'/loja/listar_lojas/id='+ident,
             type: 'GET',
             cache: false,
             headers: {"token": tokenrl},
@@ -569,7 +570,7 @@ function chamarprodutos(id,token){
     
 
         $.ajax({
-            url: 'http://localhost:3000/produtos/get-products/id='+loja,
+            url: 'http://'+urlattime+'/produtos/get-products/id='+loja,
             type: 'GET',
             cache: false,
             headers: {"token": tokenrl},
