@@ -5,6 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const login = require('../midlleware/login');
+const multer=require('multer');
 var database = new sqlite3.Database('edly.db', function (err) {
     if (err) {
         console.log(err);
@@ -12,7 +13,17 @@ var database = new sqlite3.Database('edly.db', function (err) {
         console.log("OK");
     }
 });
-router.post('/register', async (req, res, next) => {
+const storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null,'./uploads_empresa/');
+    },
+    filename: function(req,file,cb){
+        cb(null,file.originalname);
+    }
+    })
+    const uploads=multer({storage :storage});
+    const bodyParser = require ('body-parser');
+router.post('/register',  uploads.single('produto_imagem'), async (req, res, next) => {
     //request body  assign
     var nome = req.body.nome;
     var password = req.body.password;
@@ -24,6 +35,7 @@ router.post('/register', async (req, res, next) => {
     var tipo_ = req.body.tipo;
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
+    var image_=req.file.filename;
     if (tipo_ == "condutor" || tipo_ == "empresa") {
         var status = "pending";
     } else {

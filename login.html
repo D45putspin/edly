@@ -1,22 +1,56 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="pt_pt">
 <head>
-    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-    <meta charset="utf-8">
-    <script src="notify.min.js"></script>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" href="login.css">
+<!-- Compiled and minified CSS -->
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body onload>
-    <form style="display:block">
-        <input type="text" placeholder="email" name="email" id="email">
-        <input type="password" name="password" id="password">
-        <input type="button" id="enter" value="enter">
-        <a id="element"> </a>
-        
-    </form>
+<body>
+  <main>
+    <a href="../index.html">
+    <img class="responsive-img" src="imagens/logo.png">
+    </a>
+    <h4>Login</h4>
+    <div class="padding">
+        <div class="row">
+            <div class="input-field col s4">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <input id="password" type="password" class="validate">
+              <label for="password">Palavra-passe</label>
+            </div>
+    </div>
+    <div>
+    <a id="enter" class="waves-effect waves-light btn-small #ffffff white login">Login</a>
+ 
+    </div>
+    <p id="message" ></p>
+    <div>
+    <a id="registar" href="register.html" class="waves-effect waves-light btn-small #ffffff white">Ainda nao tem conta?</a>
+    </div>
+  </main>
+<script> M.AutoInit();</script>
+
+
+
+    
     <script type="text/javascript">
      
         $('#enter').click(function () {
+            
             let x = password.value;
             let y = email.value;
             console.log(y, x);
@@ -28,7 +62,7 @@
                 success: function (data) {
                     $('#element').text(data.message);
                     document.cookie = "token = " + data.message + ";secure";
-                    window.location.href = "../edly/index.html";
+                    window.location.href = "index.html";
 
                 }
                 , error: function ( jqXHR, textStatus, err) {
@@ -47,13 +81,13 @@
              function notiferror(error){
                 switch (error){
                         case "need_activation":
-                            $.notify("espere um administrador aceitar a sua conta","error");
+                           document.getElementById("message").innerHTML="A sua conta aguarda aprovação de um Administrador";
                             break;
                         case "wrong_fields":
-                            $.notify("campos errados!","error");
+                        document.getElementById("message").innerHTML="Password errada";
                             break;
                         case "not_found":
-                            $.notify("conta não encontrada, verifique se o email está correto!","error")
+                        document.getElementById("message").innerHTML="Não Foi encontrada nenhuma conta associada a esse Email";
                     }
              }
 
@@ -62,3 +96,4 @@
     </script>
     
 </body>
+</html>
