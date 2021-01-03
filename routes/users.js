@@ -22,24 +22,27 @@ const storage = multer.diskStorage({
     }
     })
     const uploads=multer({storage :storage});
-    const bodyParser = require ('body-parser');
-router.post('/register',  uploads.single('produto_imagem'), async (req, res, next) => {
+ 
+router.post('/register',  uploads.single('img_empresa'), async (req, res, next) => {
     //request body  assign
-    var nome = req.body.nome;
+    console.log(req.file);
+    var nome = req.body.nome_empresa;
     var password = req.body.password;
     var email_ = req.body.email;
     var nif_ = req.body.nif;
     var morada_ = req.body.morada;
-    var cod_postal_ = req.body.cod_post;
-    var cidade_ = req.body.cidade;
+    var cod_postal_ = req.body.cod_postal;
+    var cidade_ = req.body.cidade_;
     var tipo_ = req.body.tipo;
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
-    var image_=req.file.filename;
+ 
     if (tipo_ == "condutor" || tipo_ == "empresa") {
         var status = "pending";
+        if (tipo_=="empresa"){   var image_= req.file.filename;}
     } else {
         var status = "acepted"
+        var image_=""
     }
 
 
@@ -47,7 +50,7 @@ router.post('/register',  uploads.single('produto_imagem'), async (req, res, nex
 
     const hash = bcrypt.hashSync(password, 10);
     console.log(nome, password, hash)
-    database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula,aproval) VALUES(?,?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_, status], function (err) {
+    database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula,aproval,foto_empresa) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_, status, image_], function (err) {
         if (err) {
             return console.log(err.message);
         }

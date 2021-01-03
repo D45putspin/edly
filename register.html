@@ -256,7 +256,7 @@
           <div class="file-field input-field">
             <div class="waves-effect waves-light btn-small #212121 grey darken-4">
               <span>Foto</span>
-              <input type="file" id="img_empresa">
+              <input type="file" name="img_empresa" id="img_empresa">
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text" placeholder="escolha uma foto ">
@@ -573,25 +573,26 @@ document.getElementById("message_empresa").style.color = color;
 password = document.getElementById("password_empresa").value;
 password1 = document.getElementById("password1_empresa").value;
 if (password == password1) {
-  let password_ = password_condutor.value
-  let email_ = email_condutor.value;
-  let nome_ = nome_condutor.value;
-  let nif_ = nif_condutor.value;
-  let morada_ = morada_condutor.value;
-  let cod_postal_ = codigopostal_condutor.value;
-  let cidade_ = cidade_condutor.value;
+  let password_ = password_empresa.value
+  let email_ = email_empresa.value;
+  let nome_ = nome_empresa.value;
+  let nif_ = nif_empresa.value;
+  let morada_ = morada_empresa.value;
+  let cod_postal_ = codigopostal_empresa.value;
+  let cidade_ = cidade_empresa.value;
   let tipo_ = "empresa";
   var fd = new FormData();
   var file = $('#img_empresa')[0].files[0];
-  fd.append('image_enterprise', file);
+  fd.append('img_empresa', file);
   fd.append('nome_empresa', nome_);
+  fd.append('email',email_);
   fd.append('tipo', tipo_);
   fd.append('password', password_);
   fd.append('nif', nif_)
   fd.append('morada', morada_);
   fd.append('cod_postal',cod_postal_);
-  fd.append('cidade_');
-  
+  fd.append('cidade_',cidade_);
+  console.log (fd.get(file));
  
 
 
@@ -603,7 +604,8 @@ if (password == password1) {
     type: 'POST',
     cache: false,
     data: fd,
-
+    contentType: false,
+            processData: false,
     success: function (data) {
       window.location.href = "../edly/login.html";
     }
