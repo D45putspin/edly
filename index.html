@@ -3,27 +3,134 @@
 <head>
 
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>EDLY</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <style>
-        body {
-            font-family: 'Amatic SC', serif;
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        footer {
+
+            font-family: 'Nunito', sans-serif;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #0e1113;
+            color: white;
+            text-align: center;
+        }
+
+        .nav-extended {
+            background-color: #0e1113;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-wrapper {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 35%;
+            height: 35%;
+        }
+
+        .logob {
+            text-align: center;
+        }
+
+        .logob img {
+            width: 15%;
+            height: 15%;
+        }
+
+        hr {
+            width: 25%;
+        }
+
+        #textoqs {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 45px;
+            color: #2E2E2E;
+            padding-right: 10%;
+            padding-left: 10%;
+        }
+
+        #contactetitulo {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 65px;
+            color: #0e1113;
+            font-weight: bold;
+            padding-left: 17%;
+        }
+
+        #contactetexto {
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 22px;
+            color: #2E2E2E;
+            padding-left: 13.5%;
+
+        }
+
+        .padding {
+            padding-left: 13.5%;
+        }
+
+        .col .row {
+            margin-right: -0rem !important;
+        }
+
+        #mensagem {
+            padding-bottom: 15%;
+        }
+
+
+        .navlr {
+            position: absolute;
+            display: inline-block;
+            left: 50px;
+            top: 50px;
+        }
+
+        .lr {
+            font-family: 'Ubuntu', sans-serif;
+            color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        #lr {
+            font-family: 'Ubuntu', sans-serif;
+            color: #2E2E2E;
+            font-weight: bold !important;
+        }
+
+        .btn,
+        .btn-large,
+        .btn-small,
+        .btn-flat {
+            text-transform: none !important;
         }
 
         #empresa {
@@ -133,6 +240,12 @@
             background-color: #5cb85c;
             color: white;
         }
+        .card-image{
+    height: 400px; /* Your height here */
+    overflow: hidden;
+    
+}
+.card{ height: 500px;}
 
         /* Add Animation */
         @-webkit-keyframes slideIn {
@@ -179,19 +292,57 @@
             }
         }
     </style>
+
+
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" id="username" href="#"></a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+<!--<header>
+    Navegation bar
+    <nav class="nav-extended">
+        <div class="navlr">
+            <ul>
+                <a class="lr" type="button" id="logout" value="logout">logout</a>
+                <a class="lr" id="username" href="#"></a>
+            </ul>
+        </div>
+        <div class="nav-wrapper">
+            <img class="responsive-img" src="imagens/logo.png">
+        </div>
 
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-item nav-link  " type="button" id="logout" value="logout">logout</a>
-            </li>
-        </ul>
+        <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+                <li class="tab"><a href="#encontrar">Encontrar</a></li>
+                <li class="tab"><a href="#quemsomos">Quem Somos?</a></li>
+                <li class="tab"><a href="#contacte">Contacte-nos</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>-->
 
-    </div>
-</nav>
+<header>
+    <!-- Navegation bar-->
+    <nav class="nav-extended">
+        <div class="navlr">
+            <ul>
+                <li><a class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style="color:black;"
+                        id="username" href="#"></a></li>
+                <li> <a class="lr" type="button" id="logout" value="logout">logout</a></li>
+
+
+            </ul>
+        </div>
+        <div class="nav-wrapper">
+            <img class="responsive-img" src="imagens/logo.png">
+        </div>
+
+        <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+                <li class="tab"><a href="#encontrar">Encontrar</a></li>
+                <li class="tab"><a href="#quemsomos">Quem Somos?</a></li>
+                <li class="tab"><a href="#contacte">Contacte-nos</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
 
 
@@ -252,7 +403,7 @@
 -->
 <section id="empresa">
 
-    
+
 
     <a href="#" id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
         <i class="fa fa-plus my-float"> </i>
@@ -304,30 +455,34 @@
 
     </div>
     <ul id="lojas">
-    <div id="DispNrLojas">
-    <h1 id="numerodeloja"> 0 </h1>
-    <h2> lojas associadas</h2>
-    </div>     
+        <div id="DispNrLojas">
+            <h1 id="numerodeloja"> 0 </h1>
+            <h2> lojas associadas</h2>
+        </div>
+        <div class="row " id="row">
 
+        </div>
     </ul>
     <ul id="produtos">
+        <div class="row " id="rowprodutos">
 
+        </div>
     </ul>
 
 
 </section>
 <script>
-    const urlattime="localhost:3000";
+    const urlattime = "localhost:3000";
     let params = (new URL(document.location)).searchParams;
     let loja = params.get("loja");
-    
+
     $('#enter_empresa1').click(function () {
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
-        var nome_prod=document.getElementById('nome_produto').value;
-        var preco_prod=document.getElementById('preco_produto').value;
-        var descricao_produto=document.getElementById('descricao_produto').value;
+        var nome_prod = document.getElementById('nome_produto').value;
+        var preco_prod = document.getElementById('preco_produto').value;
+        var descricao_produto = document.getElementById('descricao_produto').value;
         //appends image (and the other data) to fd so you can send it on data to database 
         var fd = new FormData();
         var file = $('#foto_produto')[0].files[0];
@@ -335,27 +490,27 @@
         fd.append('nome_produto', nome_prod);
         fd.append('tipo', descricao_produto);
         fd.append('id', loja);
-        fd.append('id_empresa',tokendecode.id_user)
+        fd.append('id_empresa', tokendecode.id_user)
         fd.append('preco', preco_prod);
 
 
 
         $.ajax({
-            url: 'http://'+urlattime+'/produtos/criar-produtos',
+            url: 'http://' + urlattime + '/produtos/criar-produtos',
             type: 'POST',
             cache: false,
             data: fd,
-            headers:{"token":tokenrl},
+            headers: { "token": tokenrl },
             contentType: false,
             processData: false,
             success: function (data) {
                 console.log(data);
-              
+
 
             }
             , error: function (jqXHR, textStatus, err) {
                 console.log(err, textStatus);
-               
+
             }
         })
 
@@ -367,7 +522,7 @@
 
 
     })
-    
+
     $('#enter_empresa').click(function () {
         let nome = nome_empresa.value;
         let tipo = tipo_empresa.value;
@@ -377,19 +532,19 @@
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
         let id = tokendecode.id_user;
-        
+
         $.ajax({
-            url: 'http://'+urlattime+'/loja/inserir_lojas',
+            url: 'http://' + urlattime + '/loja/inserir_lojas',
             type: 'POST',
             cache: false,
-            data: { nome: nome, tipo: tipo, morada: morada,token:tokenrl, id: id, cod_postal: cod_postal },
-            headers:{"token":tokenrl},
+            data: { nome: nome, tipo: tipo, morada: morada, token: tokenrl, id: id, cod_postal: cod_postal },
+            headers: { "token": tokenrl },
             success: function (data) {
                 window.location.href = "?sucesso=y";
 
             }
             , error: function (jqXHR, textStatus, err) {
-                
+
                 console.log(err, textStatus);
             }
         })
@@ -474,18 +629,18 @@
     function getnrlojas(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
-        
+
 
         $.ajax({
-            url: 'http://'+urlattime+'/loja/verificar_lojas/id='+ident,
+            url: 'http://' + urlattime + '/loja/verificar_lojas/id=' + ident,
             type: 'GET',
             cache: false,
-            headers: {"token": tokenrl},
-            
+            headers: { "token": tokenrl },
 
-            
+
+
             success: function (data) {
-                
+
                 if (data.message != "sem lojas") {
                     document.getElementById("numerodeloja").innerHTML = data.message;
                     getlojas(ident, token, data.message);
@@ -493,13 +648,13 @@
 
             }
             , error: function (jqXHR, textStatus, err) {
-               
+
                 console.log(err, textStatus)
 
             }
 
         })
-        
+
     }
 
 
@@ -509,15 +664,15 @@
         let params = (new URL(document.location)).searchParams;
         let loja = params.get("loja");
         var tokenrl = token.replace("token=", "");
-       
+
 
         $.ajax({
-            url: 'http://'+urlattime+'/loja/listar_lojas/id='+ident,
+            url: 'http://' + urlattime + '/loja/listar_lojas/id=' + ident,
             type: 'GET',
             cache: false,
-            headers: {"token": tokenrl},
+            headers: { "token": tokenrl },
 
-           
+
             success: function (data) {
 
                 if (data.message != "sem lojas") {
@@ -529,16 +684,26 @@
                     var moradasingular = moradas.split(',');
                     var codigos_postal = "" + data.cp;
                     var cpsingular = codigos_postal.split(',');
-                   //verify if header isnt null
-                    if (loja != null && loja!= "") {
+                    //verify if header isnt null
+                    if (loja != null && loja != "") {
                         console.log("nome" + lojasingular[loja]);
-                        $('#lojas').append(`<a ><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[loja - 1]}</h1><h3>tipo de comida : ${tiposingular[loja - 1]} , Morada :${moradasingular[loja - 1]},${cpsingular[loja - 1]}  </h3></div><a>`)
-                        chamarprodutos(id,token);
+                        $('#lojas').append(`<h1 style="font-size:70px;">${lojasingular[loja - 1]}</h1>`)
+                        chamarprodutos(id, token);
                     }
                     else {
                         for (let i = 0; i < nr; i++) {
-                          
-                            $('#lojas').append(`<a href="?loja=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[i]}</h1><h3>tipo de comida : ${tiposingular[i]} , Morada :${moradasingular[i]},${cpsingular[i]}  </h3></div><a>`)
+
+                            $('#row').append(`<a style="color:white;font-style: normal;"href="?loja=${i + 1}">
+                                
+                                <div class="col s2 ">
+                                <div class="card grey darken-4 center-align">
+                                  <div class="card-content white-text">
+                                      <span class="card-title" style="font-size:40px;"><h3> ${lojasingular[i]}<h1></span>
+                                 </div>
+                                 <p style="margin-top:0px;">tipo de comida : ${tiposingular[i]} <br> Morada :${moradasingular[i]}\n <br>${cpsingular[i]}  <p/>
+                                </div>
+                                </div>
+                               <a>`)
                         }
                     }
 
@@ -562,34 +727,47 @@
     }
 
 
-function chamarprodutos(id,token){
-    var ident = id;
-    var tokenrl = token.replace("token=", "");
-    let params = (new URL(document.location)).searchParams;
-    let loja = params.get("loja");
-    
+    function chamarprodutos(id, token) {
+        var ident = id;
+        var tokenrl = token.replace("token=", "");
+        let params = (new URL(document.location)).searchParams;
+        let loja = params.get("loja");
+
 
         $.ajax({
-            url: 'http://'+urlattime+'/produtos/get-products/id='+loja,
+            url: 'http://' + urlattime + '/produtos/get-products/id=' + loja,
             type: 'GET',
             cache: false,
-            headers: {"token": tokenrl},
+            headers: { "token": tokenrl },
 
-           
+
             success: function (data) {
 
-  
-                    var nomes=data.nome;
-                    var imagem=data.url;
-                    
-                    var descri=data.descricao;
-                    var preco=data.preco;
-                        for (let i = 0; i < nomes.length; i++) {
-                          console.log(imagem[i]);
-                            $('#DispNrLojas').css("visibility","hidden");
-                            $('#produtos').append(`<a href="?produto=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${nomes[i]}</h1><img src="http://localhost:3000/${imagem[i]}"> alt="Italian Trulli"> <h3> , descrição :${descri[i]},preço${preco[i]}  </h3></div><a>`)
-                        }
-                    
+
+                var nomes = data.nome;
+                var imagem = data.url;
+
+                var descri = data.descricao;
+                var preco = data.preco;
+                for (let i = 0; i < nomes.length; i++) {
+                    console.log(imagem[i]);
+                    $('#DispNrLojas').css("visibility", "hidden");
+                    $('#rowprodutos').append(`
+                    <a href="?produto=${i + 1}">
+                       
+    <div class="col s2">
+      <div class="card">
+        <div class="card-image">
+            <img style="height:100%";" src="http://`+urlattime+`/${imagem[i]}">
+            <span class="card-title">${nomes[i]}</span>
+         
+        </div><div class="card-content">
+                                  descrição :${descri[i]},preço${preco[i]}  </h3>
+                              </div>
+                            </div>
+                        </div>
+                    <a>`)
+                }
 
 
 
@@ -598,7 +776,8 @@ function chamarprodutos(id,token){
 
 
 
-                
+
+
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -608,8 +787,8 @@ function chamarprodutos(id,token){
         })
 
 
-    
-}
+
+    }
     //LOGOUT/**//**//**//**//**//**//**//**//**//**//**//**//**//**/
     $('#logout').click(function () {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -689,5 +868,6 @@ function chamarprodutos(id,token){
 
 
 </script>
+<script> M.AutoInit();</script>
 
 </html>

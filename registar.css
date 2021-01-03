@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+html, body{
+    height: 100%;
+  }
+  
+  body{
+    margin: 0;
+  }
+
+  .container {
+    position: absolute;
+    left: 0;
+    width: 40% !important;
+    height: 100%;
+    background-color: #0e1113;
+  }
+
+  img{
+    position: absolute;
+    left: 200px;
+    top: 275px;
+  }
+
+  .padding {
+    padding-top: 5%;
+    padding-left: 55%;
+    padding-right: 15%;
+  }
+
+  .col .row{
+  margin-left: -0rem !important;
+  }
+
+.inputs{
+    padding-right: 30%;
+    padding-top: 5%;
+}
+
+ .escolha {
+   padding-top: 10%;
+    padding-left: 50%;
+    width: 100% !important;
+
+  }
+
+  #esquerda {
+    float: left;
+    left: 250px !important;
+    width: 50%;
+    overflow: hidden;
+  }
+  
+  #direita {
+    overflow: hidden;
+  }
+
+    #regsitar{
+        font-family: 'Ubuntu', sans-serif;
+        color:#f8f8f8;
+        font-weight: bold !important;
+    }
+
+    #logintexto {
+        width: 620px;
+    }
+
+  #login {
+    margin-top: 35%;
+    font-family: 'Ubuntu', sans-serif;
+    color:#f8f8f8;
+    font-weight: bold !important;
+  }
+  .coincidense{color:#d95341;margin-top:-5px;font-size:15px;position:absolute;visibility:hidden;}
+  .coincidense_cond{color:#d95341;margin-top:-5px;font-size:15px;position:absolute;visibility:hidden;}
+  .coincidense_empresa{color:#d95341;margin-top:-5px;font-size:15px;position:absolute;visibility:hidden;}
+  .message{margin-top:-5px;font-size:15px;position:absolute;}
+  .message_cond{margin-top:-5px;font-size:15px;position:absolute;}
+  .message_empresa{margin-top:-5px;font-size:15px;position:absolute;}
+  .btn, .btn-large, .btn-small, .btn-flat {
+    text-transform: none !important;
+}
+.tabs .tab a{
+  color:#0e1113 !important;
+} /*Black color to the text*/
+
+.tabs .tab a:hover {
+  background-color:white !important;
+  color:#0e1113 !important;
+} /*Text color on hover*/
+
+.tabs .tab a.active {
+  background-color: white !important;
+  color:#0e1113 !important;
+} /*Background and text color when a tab is active*/
+
+.tabs .indicator {
+  background-color:#0e1113 !important;
+} 
