@@ -40,7 +40,11 @@ router.post('/criar-produtos',login,  uploads.single('produto_imagem'), async (r
         }
         // get the last insert id
 
-    });return res.status(201).send({ messagem: 'Criado Produto' })
+    });
+    database.close();
+    return res.status(201).send({ messagem: 'Criado Produto' })
+
+
 });
 router.get('/get-products/:id_loja',login,async (req, res, next) => {
     //set variables
@@ -74,8 +78,10 @@ router.get('/get-products/:id_loja',login,async (req, res, next) => {
             console.log(urls+","+nomes+","+descricoes+","+precos)
             res.status(200).send({ nome: nomes, url:urls,descricao:descricoes,preco:precos})
         }
-        else { res.status(200).send({ message: "sem nenhum registro" }) }
+        else { res.status(400).send({ message: "sem nenhum registo" }) }
     });
+    database.close();
+    return
 });
 
 

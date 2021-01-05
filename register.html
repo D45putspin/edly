@@ -33,12 +33,13 @@
           </ul>
         </div>
       </div>
+      <form>
       <div class="inputs">
         <div id="cliente" class="col s12">
           <div id="esquerda">
             <div class="row">
               <div class="input-field col s10">
-                <input id="nome" type="text" class="validate">
+                <input id="nome"  type="text" class="validate">
                 <label for="nome">Nome</label>
               </div>
             </div>
@@ -67,13 +68,13 @@
 
             <div class="row">
               <div class="input-field col s10">
-                <input id="nif" type="text" class="validate">
+                <input id="nif" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}" title="Insira um NIF valido.">
                 <label for="nif">NIF</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s10">
-                <input id="codigopostal" type="text" class="validate">
+                <input id="codigopostal" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX"  placeholder="XXXX-XXX">
                 <label for="codigopostal">Codigo-Postal</label>
 
               </div>
@@ -93,15 +94,15 @@
             </div>
           </div>
           <div id="registar">
-            <a class="waves-effect waves-light btn-small #212121 grey darken-4" id="entercliente">Registar</a>
+            <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="entercliente" type="submit">Registar</button>
           </div>
-
+          
         </div>
+      </form>
 
 
 
-
-
+      <form>
         <div id="condutor" class="col s12">
 
           <div id="esquerda">
@@ -143,13 +144,13 @@
 
             <div class="row">
               <div class="input-field col s10">
-                <input id="nif_condutor" type="text" class="validate">
+                <input id="nif_condutor" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}" title="Insira um NIF valido.">
                 <label for="nif_condutor">NIF</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s10">
-                <input id="codigopostal_condutor" type="text" class="validate">
+                <input id="codigopostal_condutor" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX"  placeholder="XXXX-XXX">
                 <label for="codigopostal_condutor">Codigo-Postal</label>
 
               </div>
@@ -175,9 +176,10 @@
             </div>
           </div>
           <div id="registar">
-            <a class="waves-effect waves-light btn-small #212121 grey darken-4" id="entercondutor">Registar</a>
+            <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="entercondutor" type="submit">Registar</button>
           </div>
         </div>
+      </form>
 
 
 
@@ -190,8 +192,7 @@
 
 
 
-
-
+        <form>
         <div id="empresa" class="col s12">
           <div id="esquerda">
             <div class="row">
@@ -227,13 +228,13 @@
 
             <div class="row">
               <div class="input-field col s10">
-                <input id="nif_empresa" type="text" class="validate">
+                <input id="nif_empresa" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}" title="Insira um NIF valido.">
                 <label for="nif_empresa">NIF</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s10">
-                <input id="codigopostal_empresa" type="text" class="validate">
+                <input id="codigopostal_empresa" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX"  placeholder="XXXX-XXX">
                 <label for="codigopostal_empresa">Codigo-Postal</label>
 
               </div>
@@ -263,10 +264,11 @@
             </div>
           </div>
           <div id="registar">
-            <a class="waves-effect waves-light btn-small #212121 grey darken-4" id="enterempresa">Registar</a>
+            <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="enterempresa" type="submit">Registar</button>
           </div>
 
         </div>
+        </form>
 
       </div>
     </div>
@@ -491,6 +493,7 @@ document.getElementById("message_empresa").style.color = color;
     password1 = document.getElementById("password1").value;
     if (password == password1) {
       let password_ = password;
+      let password1_ = password1;
       let nome_ = nome.value;
       let email_ = email.value;
       let nif_ = nif.value;
@@ -503,13 +506,12 @@ document.getElementById("message_empresa").style.color = color;
 
 
 
-
       $.ajax({
         url: 'http://localhost:3000/user/register',
         type: 'POST',
         cache: false,
         //data: { nome:nome_ , password: password_,email:email_,nif:nif_,morada:morada_,cod_post:cod_postal_,cidade:cidade_,tipo:tipo_,matricula:matricula_,veiculo:tipo_veic_}, 
-        data: { nome: nome_, password: password_, email: email_, nif: nif_, morada: morada_, cod_post: cod_postal_, cidade: cidade_, tipo: tipo_ },
+        data: { nome: nome_, password: password_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_ },
         success: function (data) {
           window.location.href = "../edly/login.html";
         }
@@ -531,6 +533,7 @@ document.getElementById("message_empresa").style.color = color;
     password1 = document.getElementById("password1_condutor").value;
     if (password == password1) {
       let password_ = password_condutor.value
+      let password1_ = password1_condutor.value
       let email_ = email_condutor.value;
       let nome_ = nome_condutor.value;
       let nif_ = nif_condutor.value;
@@ -548,7 +551,7 @@ document.getElementById("message_empresa").style.color = color;
         url: 'http://localhost:3000/user/register',
         type: 'POST',
         cache: false,
-        data: { nome: nome_, password: password_, email: email_, nif: nif_, morada: morada_, cod_post: cod_postal_, cidade: cidade_, tipo: tipo_, matricula: matricula_, veiculo: tipo_veic_ },
+        data: { nome: nome_, password: password_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_, matricula: matricula_, veiculo: tipo_veic_ },
 
         success: function (data) {
           window.location.href = "../edly/login.html";
@@ -574,6 +577,7 @@ password = document.getElementById("password_empresa").value;
 password1 = document.getElementById("password1_empresa").value;
 if (password == password1) {
   let password_ = password_empresa.value
+  let password1_ = password1_empresa.value
   let email_ = email_empresa.value;
   let nome_ = nome_empresa.value;
   let nif_ = nif_empresa.value;
@@ -584,10 +588,11 @@ if (password == password1) {
   var fd = new FormData();
   var file = $('#img_empresa')[0].files[0];
   fd.append('img_empresa', file);
-  fd.append('nome_empresa', nome_);
+  fd.append('nome', nome_);
   fd.append('email',email_);
   fd.append('tipo', tipo_);
   fd.append('password', password_);
+  fd.append('password1', password1_);
   fd.append('nif', nif_)
   fd.append('morada', morada_);
   fd.append('cod_postal',cod_postal_);

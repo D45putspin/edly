@@ -118,13 +118,13 @@ router.post('/inserir_lojas', login, async (req, res, next) => {
               
 
             });
-
+            database.close();
             return res.status(200).send({ messagem: 'funcionou' })
         }
-        else { return res.status(200).send({ messagem: 'não pode associar outras empresas que não a sua ' }) }
+        else { return res.status(400).send({ messagem: 'não pode associar outras empresas que não a sua ' }) }
     }
-    else { return res.status(200).send({ messagem: 'para aceder a esta funcionalidade é necessário ser empresa' }) }
-    database.close();
+    else { return res.status(400).send({ messagem: 'para aceder a esta funcionalidade é necessário ser empresa' }) }
+
 });
 
 module.exports = router;

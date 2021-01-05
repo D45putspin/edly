@@ -26,8 +26,9 @@ const storage = multer.diskStorage({
 router.post('/register',  uploads.single('img_empresa'), async (req, res, next) => {
     //request body  assign
     console.log(req.file);
-    var nome = req.body.nome_empresa;
+    var nome = req.body.nome;
     var password = req.body.password;
+    var password1 = req.body.password1;
     var email_ = req.body.email;
     var nif_ = req.body.nif;
     var morada_ = req.body.morada;
@@ -37,6 +38,8 @@ router.post('/register',  uploads.single('img_empresa'), async (req, res, next) 
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
  
+    // check type of user for admin can permission entrance
+    
     if (tipo_ == "condutor" || tipo_ == "empresa") {
         var status = "pending";
         if (tipo_=="empresa"){   var image_= req.file.filename;}
@@ -45,7 +48,50 @@ router.post('/register',  uploads.single('img_empresa'), async (req, res, next) 
         var image_=""
     }
 
+    // check if user is valid
+    if(tipo_ == "condutor" || "empresa" || "cliente" ){
 
+    }else{
+        return res.status(400).send({ messagem: 'O user nao é valido' })
+    }
+
+    // check if any field is not empty
+
+    if(nome || password || email_ || nif_ || morada_ || cod_postal_ || cidade_ || tipo_ || veiculo_ || matricula_ ) {
+
+    }else {
+        return res.status(400).send({ messagem: 'Erro de campos' })
+    }  
+
+    // check if both passwords are the same 
+
+    if( password == password1 ){
+
+    } else {
+        return res.status(400).send({ messagem: 'Passwords nao coincidem' })
+    }
+
+    // check if nick have 9 numbers
+    if(nif_.length == 9) {
+
+    } else {
+        return res.status(400).send({ messagem: 'O nif nao contem 9 numeros' })
+    }
+
+    // check if first number of nif is valid and the rest too
+    if(nif_.match ("[1,2,5]{1}[0-9]{8}")){
+
+    }else {
+        return res.status(400).send({ messagem: 'Nif incorreto' }) 
+    }
+
+    // check if postal code is valid
+    if(cod_postal_.match ("[0-9]{4}[-]{1}[0-9]{3}")){
+    }else {
+        return res.status(400).send({ messagem: 'Codigo postal incorreto' })
+    }
+
+    
 
 
     const hash = bcrypt.hashSync(password, 10);
@@ -57,15 +103,15 @@ router.post('/register',  uploads.single('img_empresa'), async (req, res, next) 
         // get the last insert id
 
     });
-
-    return res.status(200).send({ messagem: 'funcionou' })
+    database.close();
+    return res.status(201).send({ messagem: 'Criado com sucesso' })
 });
 // login 
 router.post('/login', async (req, res, next) => {
     //set variables
     var email_ = req.body.email;
     var password = req.body.password;
-    var sql = 'SELECT * FROM Users WHERE email = ?';
+    var sql = 'SELECT * FROM Users WHERE Email = ?';
     //init login function (checks if email exists, then compare bdpassword with sent one )
     database.get(sql, [email_],
         async function (err, row) {
@@ -102,5 +148,6 @@ router.post('/login', async (req, res, next) => {
             }
         }
     )
+    database.close();
 });
 module.exports = router;
