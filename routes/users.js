@@ -6,13 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const login = require('../midlleware/login');
 const multer=require('multer');
-var database = new sqlite3.Database('edly.db', function (err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("OK");
-    }
-});
+
 const storage = multer.diskStorage({
     destination: function(req,file,cb){
         cb(null,'./uploads_empresa/');
@@ -25,6 +19,13 @@ const storage = multer.diskStorage({
  
 router.post('/register',  uploads.single('img_empresa'), async (req, res, next) => {
     //request body  assign
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
     console.log(req.file);
     var nome = req.body.nome;
     var password = req.body.password;
@@ -42,7 +43,7 @@ router.post('/register',  uploads.single('img_empresa'), async (req, res, next) 
     
     if (tipo_ == "condutor" || tipo_ == "empresa") {
         var status = "pending";
-        if (tipo_=="empresa"){   var image_= req.file.filename;}
+        if (tipo_=="empresa"){   var image_= req.file.filename;}else{var image_=""}
     } else {
         var status = "acepted"
         var image_=""
@@ -108,6 +109,13 @@ router.post('/register',  uploads.single('img_empresa'), async (req, res, next) 
 });
 // login 
 router.post('/login', async (req, res, next) => {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
     //set variables
     var email_ = req.body.email;
     var password = req.body.password;

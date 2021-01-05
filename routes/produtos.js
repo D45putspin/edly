@@ -18,15 +18,16 @@ filename: function(req,file,cb){
 const uploads=multer({storage :storage});
 const bodyParser = require ('body-parser');
 
-var database = new sqlite3.Database('edly.db', function (err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("OK");
-    }
-});
+
 router.post('/criar-produtos',login,  uploads.single('produto_imagem'), async (req, res, next) => {
     //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
     console.log(req.file);
     var nome_produto_ = req.body.nome_produto;
     var id_empresa_ = req.body.id_empresa;
@@ -48,7 +49,13 @@ router.post('/criar-produtos',login,  uploads.single('produto_imagem'), async (r
 });
 router.get('/get-products/:id_loja',login,async (req, res, next) => {
     //set variables
-    
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
     let sql = `SELECT * FROM Produto WHERE id_empresa = ? AND id_loja = ?`;
   
    const decode = jwt.verify(req.headers.token,"palavradificil");
