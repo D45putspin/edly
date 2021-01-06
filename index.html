@@ -73,6 +73,11 @@
 -->
 <section id="administrador">
     <h1> administrador!!!</h1>
+    <h1> pedidos pendentes </h1>
+    <div class="row " id="rowpedidospend">
+
+    </div>
+
 </section>
 
 
@@ -357,7 +362,70 @@
         })
 
     }
+    
+    function get_adminspendentes(){
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
 
+
+        $.ajax({
+            url: 'http://' + urlattime + '/user/pendentes',
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+
+
+                var nomes = data.nome;
+                console.log(nomes);
+
+
+
+
+
+
+                for (let i = 0; i < nomes.length; i++) {
+                    console.log(nomes);
+                    $('#DispNrLojas').css("visibility", "hidden");
+                    $('#rowpedidospend').append(`
+                    <a href="?produto=${i + 1}">
+                       
+    <div class="col s2">
+      <div class="card">
+        <div class="card-content">
+                                  descrição :${nomes[i]}  </h3>
+                              </div>
+                              <div class="card-action">
+          <p id="aproveperson">Aprovar</a>
+          <a href="deleteperson">Eliminar</a>
+        </div>
+                            </div>
+                        </div>
+                    <a>`)
+                }
+        
+     
+
+
+
+
+
+
+
+
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus);
+                console.log(jqXHR.responseText);
+            }
+        })
+
+    }
 
     function getlojas(id, token, nrlojas) {
         var ident = id;
@@ -459,7 +527,7 @@
     <div class="col s2">
       <div class="card">
         <div class="card-image">
-            <img style="height:100%";" src="http://`+urlattime+`/${imagem[i]}">
+            <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
             <span class="card-title">${nomes[i]}</span>
          
         </div><div class="card-content">
@@ -535,11 +603,12 @@
                 document.getElementById("administrador").style.display = "none";
                 document.getElementById("empresa").style.display = "none";
                 break;
-            case "administrador":
+            case "admin":
 
                 document.getElementById("cliente").style.display = "none";
                 document.getElementById("condutor").style.display = "none";
                 document.getElementById("empresa").style.display = "none";
+                get_adminspendentes();
                 break;
             case "empresa":
 

@@ -158,4 +158,38 @@ router.post('/login', async (req, res, next) => {
     )
     database.close();
 });
+
+
+router.get('/pendentes',login,async (req, res, next) => {
+    //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    let sql = `SELECT * FROM Users WHERE aproval = ?`;
+    var nomes=[];
+   const decode = jwt.verify(req.headers.token,"palavradificil");
+   
+
+    database.all(sql, "pending", (err, rows) => {
+        if (err) {
+            res.status(500).send({ error: "erro na base de dados"})
+        }
+        if (rows) {
+            rows.forEach((row) => {
+                console.log(row.Nome);
+                nomes.push(row.Nome);
+                
+            });
+           
+            res.status(200).send({ nome: nomes})
+        }
+        else { res.status(400).send({ message: "sem nenhum registo" }) }
+    });
+    database.close();
+    return
+});
 module.exports = router;
