@@ -14,7 +14,9 @@ jobs:
           password: ${{ secrets.pass }}
           script: |
                  ls -la
-                 cd /var/www
+                 cd /documents/
                  sudo git clone "https://github.com/D45putspin/edly"
-                 sudo rm -rf html
-                 sudo mv -T edly html
+                 sudo rm -rf edly_web
+                 sudo mv -T edly edly_web
+                 cd edly_web
+                 npm start
