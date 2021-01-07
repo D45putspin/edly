@@ -1,0 +1,20 @@
+name: CI
+on: [push]
+jobs:
+  deploy:
+   if: github.ref == 'refs/heads/master'
+   runs-on: [ubuntu-latest]
+   steps:
+     - uses: actions/checkout@v1
+     - name: Push to server
+       uses: appleboy/ssh-action@master
+       with:
+          host: ${{ secrets.ip }}
+          username: ${{ secrets.nome }}
+          password: ${{ secrets.pass }}
+          script: |
+                 ls -la
+                 cd /var/www
+                 sudo git clone "https://github.com/D45putspin/DPLT"
+                 sudo rm -rf html
+                 sudo mv -T DPLT html
