@@ -76,7 +76,9 @@
             </div>                               
         </div>
         <div class="nav-wrapper">
+            <a href="index.html">
             <img class="responsive-img" src="imagens/logo.png">
+            </a>
         </div>
 
 
@@ -269,29 +271,47 @@
     </div>
     <div id="myModal1" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Adicionar Produtos</h2>
-                <span class="close1">&times;</span>
-
-            </div>
-               
-            <div class="modal-body">
-                <form>
-                    <input type=text" placeholder="Nome Produto" id="nome_produto" name="nome_produto">
-                    <input type=text" placeholder="Preço Produto" id="preco_produto" name="preco_produto">
-                    <input type=text" placeholder="Descrição do Produto" id="descricao_produto"
-                        name="descricao_produto">
-                    <input type="file" id="foto_produto" name="foto_produto" accept="image/png, image/jpeg">
-                    <input type="button" id="enter_empresa1" value="enter">
-                </form>
-            </div>
-
-        </div>
+                <!-- Criar produto -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Adicionar Produtos</h2>
+                        <span class="close1">&times;</span>
+        
+                    </div>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="esquerda">
+                                    <input type="text" placeholder="Nome Produto" id="nome_produto" name="nome_produto" class="validate">
+                                    <input type="text" placeholder="Preço" id="preco_produto" name="preco_produto" class="validate">
+                                    <div class="fotop">
+                                    <form action="#">
+                                        <div class="file-field input-field">
+                                          <div class="lr waves-effect waves-light btn-small #fafafa grey lighten-5">
+                                            <span>Foto</span>
+                                            <input type="file" id="foto_produto" name="foto_produto" accept="image/png, image/jpeg">
+                                          </div>
+                                          <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style=" float: left;" type="button" id="enter_empresa1" value="enter">
+                                    </div>
+                                    <div class="direita">
+                                    <input type="text" placeholder="Descrição do produto" id="descricao_produto" name="descricao_produto" class="validate">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>  
+        
+                </div>
 
     </div>
-    <ul id="lojas">
+    <ul id="ullojas">
         <div id="DispNrLojas">
             <span class="material-icons">
                 store
@@ -302,7 +322,10 @@
 
         </div>
     </ul>
-    <ul id="produtos">
+    <ul id="produtos" style="position: relative; top: -150px;">
+        <div id="namelojaprodutos">
+            
+        </div>
         <div class="row " id="rowprodutos">
 
         </div>
@@ -601,7 +624,7 @@
                     //verify if header isnt null
                     if (loja != null && loja != "") {
                         console.log("nome" + lojasingular[loja]);
-                        $('#lojas').append(`<h1 style="font-size:70px;">${lojasingular[loja - 1]}</h1>`)
+                        $('#namelojaprodutos').append(`<h1 style="font-size:70px;">${lojasingular[loja - 1]}</h1>`)
                         chamarprodutos(id, token);
                     }
                     else {
@@ -623,7 +646,7 @@
                                  <h5 style="margin-top:-10px; font-weight: bold; over display:grid;">Morada</h5>  
                                  <p style="font-size: 20px;position: relative; top: -10;"> ${moradasingular[i]}</p> 
                                  </div>
-                                 <div style="position: relative; top: -25;">
+                                 <div>
                                  <h5 style="margin-top:-10px; font-weight: bold; over display:grid;">Codigo-Postal</h5> 
                                  <p style="font-size: 20px;position: relative; top: -10;"> ${cpsingular[i]}</p>
                                  </div>
@@ -681,29 +704,28 @@
                     $('#rowprodutos').append(`
                     <a href="?produto=${i + 1}">
                        
-    <div class="col s2">
-      <div class="card">
-        <div class="card-image">
-            <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
-            <span class="card-title">${nomes[i]}</span>
-         
-        </div><div class="card-content">
-                                  descrição :${descri[i]},preço${preco[i]}  </h3>
-                              </div>
+                    <div class="col s2">
+                        <div class="cardproduto">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
+                                    <span class="card-title">${nomes[i]}</span>
+                                </div>
+                                <div class="card-content left-align">
+                                    <div class="descrição">
+                                        <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Descrição</h5> 
+                                        <p style="margin-top: 0px; font-size: 20px; color:#737373;"> ${descri[i]}</p>
+                                    </div>
+                                    <br>
+                                    <div class="preco" >
+                                        <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
+                                        <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    <a>`)
-                }
-
-
-
-
-
-
-
-
-
-
+                    </div>`
+                )}
 
             }
             , error: function (jqXHR, textStatus, err) {
