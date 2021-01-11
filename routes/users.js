@@ -5,19 +5,19 @@ const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const login = require('../midlleware/login');
-const multer=require('multer');
+const multer = require('multer');
 
 const storage = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null,'./uploads_empresa/');
+    destination: function (req, file, cb) {
+        cb(null, './uploads_empresa/');
     },
-    filename: function(req,file,cb){
-        cb(null,file.originalname);
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
     }
-    })
-    const uploads=multer({storage :storage});
- 
-router.post('/register',  uploads.single('img_empresa'), async (req, res, next) => {
+})
+const uploads = multer({ storage: storage });
+
+router.post('/register', uploads.single('img_empresa'), async (req, res, next) => {
     //request body  assign
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -38,61 +38,61 @@ router.post('/register',  uploads.single('img_empresa'), async (req, res, next) 
     var tipo_ = req.body.tipo;
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
- 
+
     // check type of user for admin can permission entrance
-    
+
     if (tipo_ == "condutor" || tipo_ == "empresa") {
         var status = "pending";
-        if (tipo_=="empresa"){   var image_= req.file.filename;}else{var image_=""}
+        if (tipo_ == "empresa") { var image_ = req.file.filename; } else { var image_ = "" }
     } else {
         var status = "acepted"
-        var image_=""
+        var image_ = ""
     }
 
     // check if user is valid
-    if(tipo_ == "condutor" || "empresa" || "cliente" ){
+    if (tipo_ == "condutor" || "empresa" || "cliente") {
 
-    }else{
+    } else {
         return res.status(400).send({ messagem: 'O user nao é valido' })
     }
 
     // check if any field is not empty
 
-    if(nome || password || email_ || nif_ || morada_ || cod_postal_ || cidade_ || tipo_ || veiculo_ || matricula_ ) {
+    if (nome || password || email_ || nif_ || morada_ || cod_postal_ || cidade_ || tipo_ || veiculo_ || matricula_) {
 
-    }else {
+    } else {
         return res.status(400).send({ messagem: 'Erro de campos' })
-    }  
+    }
 
     // check if both passwords are the same 
 
-    if( password == password1 ){
+    if (password == password1) {
 
     } else {
         return res.status(400).send({ messagem: 'Passwords nao coincidem' })
     }
 
     // check if nick have 9 numbers
-    if(nif_.length == 9) {
+    if (nif_.length == 9) {
 
     } else {
         return res.status(400).send({ messagem: 'O nif nao contem 9 numeros' })
     }
 
     // check if first number of nif is valid and the rest too
-    if(nif_.match ("[1,2,5]{1}[0-9]{8}")){
+    if (nif_.match("[1,2,5]{1}[0-9]{8}")) {
 
-    }else {
-        return res.status(400).send({ messagem: 'Nif incorreto' }) 
+    } else {
+        return res.status(400).send({ messagem: 'Nif incorreto' })
     }
 
     // check if postal code is valid
-    if(cod_postal_.match ("[0-9]{4}[-]{1}[0-9]{3}")){
-    }else {
+    if (cod_postal_.match("[0-9]{4}[-]{1}[0-9]{3}")) {
+    } else {
         return res.status(400).send({ messagem: 'Codigo postal incorreto' })
     }
 
-    
+
 
 
     const hash = bcrypt.hashSync(password, 10);
@@ -124,7 +124,7 @@ router.post('/login', async (req, res, next) => {
     database.get(sql, [email_],
         async function (err, row) {
             if (err) {
-                res.status(500).send({ message: "erro 500" })
+                res.status(500).send({ message: "bd_error" })
             }
 
             if (row) {
@@ -144,9 +144,9 @@ router.post('/login', async (req, res, next) => {
                         console.log("Y");
                         res.status(200).json({ message: token });
                     }
-                    else{
-                        res.status(403).json({ message: "need_activation"});
-                   
+                    else {
+                        res.status(403).json({ message: "need_activation" });
+
                     }
                 } else {
                     res.status(403).json({ message: "wrong_fields" });
@@ -160,7 +160,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 
-router.get('/pendentes',login,async (req, res, next) => {
+router.get('/pendentes', login, async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -170,24 +170,91 @@ router.get('/pendentes',login,async (req, res, next) => {
         }
     });
     let sql = `SELECT * FROM Users WHERE aproval = ?`;
-    var nomes=[];
-   const decode = jwt.verify(req.headers.token,"palavradificil");
-   
+    var nomes = [];
+    var ids = []
+    const decode = jwt.verify(req.headers.token, "palavradificil");
+
 
     database.all(sql, "pending", (err, rows) => {
         if (err) {
-            res.status(500).send({ error: "erro na base de dados"})
+            res.status(500).send({ error: "bd_error" })
         }
         if (rows) {
             rows.forEach((row) => {
-                console.log(row.Nome);
+
                 nomes.push(row.Nome);
-                
+                ids.push(row.Id_user);
+
             });
-           
-            res.status(200).send({ nome: nomes})
+
+            res.status(200).send({ nome: nomes, id: ids })
         }
-        else { res.status(400).send({ message: "sem nenhum registo" }) }
+        else { res.status(404).send({ message: "No_registry" }) }
+    });
+    database.close();
+    return
+});
+router.put('/acept_pending/:id', login, async (req, res, next) => {
+    //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var idget = req.params.id;
+    var id = idget.replace("id=", "");
+    console.log("este id aqui :" + id);
+    let sql = `UPDATE Users SET aproval= 'acepted'  WHERE id_user = ?`;
+
+
+
+    database.all(sql, id, (err, rows) => {
+        if (err) {
+            res.status(500).send({ error: "bd_error" })
+        }
+        if (rows) {
+            rows.forEach((row) => {
+                console.log(
+                    "sucesso!")
+                    ;
+            });
+
+            res.status(200).send({ message: "successfully_edited" })
+        }
+        else { res.status(400).send({ message: "No_registry" }) }
+    });
+    database.close();
+    return
+});
+
+router.delete('/delete_pending/', login, async (req, res, next) => {
+    //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var id = req.body.id;
+    console.log(id);
+    let sql = `DELETE FROM Users WHERE id_user = ?`;
+
+
+
+
+    database.all(sql, id, (err, rows) => {
+        if (err) {
+            res.status(500).send({ error: "bd_error" })
+        }
+        if (rows) {
+
+
+            res.status(200).send({ message: "successfully_deleted" })
+        }
+        else { res.status(400).send({ message: "No_registry" }) }
     });
     database.close();
     return

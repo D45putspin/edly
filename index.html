@@ -141,7 +141,7 @@
     </div>
     <!-- Pagina de contacte-->
     <div id="contacte">
-        <h1>contacte</h1>
+     
     </div>
 
 </section>
@@ -152,6 +152,7 @@
     <!-- Pagina do encontrar-->
     <div id="encontrar">
         <h1>encontrar</h1>
+
     </div>
     <!-- Pagina de editar cliente-->
     <div id="editarcondutor">
@@ -159,7 +160,7 @@
     </div>
     <!-- Pagina de contacte-->
     <div id="contacte">
-        <h1>contacte</h1>
+      
     </div>
 </section>
 
@@ -182,6 +183,7 @@
         <div id="pedidos">
             <h1> pedidos pendentes </h1>
             <div class="row " id="rowpedidospend">
+            </div>
         </div>
         <!-- Pagina de editar admin-->
         <div id="editaradmin">
@@ -189,7 +191,7 @@
         </div>
         <!-- Pagina de contacte-->
         <div id="contacte">
-            <h1>contacte</h1>
+            
         </div>
 
     </div>
@@ -500,6 +502,7 @@
 
 
     }
+    //functions empresa 
     function verificarloja(token) {
         var json = decode(token);
         var id = json.id_user;
@@ -507,6 +510,7 @@
 
 
     }
+    //functions empresa 
     function getnrlojas(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
@@ -537,7 +541,7 @@
         })
 
     }
-    
+    //functions admin 
     function get_adminspendentes(){
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
@@ -554,6 +558,7 @@
 
 
                 var nomes = data.nome;
+                var ids=data.id;
                 console.log(nomes);
 
 
@@ -566,18 +571,19 @@
                     $('#DispNrLojas').css("visibility", "hidden");
                     $('#rowpedidospend').append(`
                     <a href="?produto=${i + 1}">
-                       
-    <div class="col s2">
-      <div class="card">
-        <div class="card-content">
-                                  descrição :${nomes[i]}  </h3>
-                              </div>
-                              <div class="card-action">
-          <p id="aproveperson">Aprovar</a>
-          <a href="deleteperson">Eliminar</a>
-        </div>
-                            </div>
-                        </div>
+                       <div class="col s2">
+                           <div class="card">
+                                <div class="card-content">
+                                     <p>Nome User :${nomes[i]}</p>
+                                     <p id="iduser">Id User :${ids[i]}
+                               </div>
+                               <div class="card-action">
+                                   <a id="aproveperson" onclick='aprove(${ids[i]})'>Aprovar</a>
+                                   <a onclick='delete_aprove(${ids[i]})'>Eliminar</a>
+                                   
+                               </div>
+                         </div>
+                      </div>
                     <a>`)
                 }
         
@@ -602,6 +608,72 @@
 
     }
 
+    //functions admin 
+    function aprove(id){
+        var ident=id;
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+        if (tokendecode.tipo=="admin"){
+            $.ajax({
+            url: 'http://' + urlattime + '/user/acept_pending/id='+ident ,
+            type: 'PUT',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+                location.reload(); 
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+
+
+            
+        }
+        
+    }
+    //functions admin
+    function delete_aprove(id){
+        window.alert("eee")
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+        if (tokendecode.tipo=="admin"){
+            $.ajax({
+            url: 'http://' + urlattime + '/user/delete_pending' ,
+            type: 'DELETE',
+            cache: false,
+            data: { id : id },
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+                location.reload(); 
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+
+
+            
+        }
+        
+    }
+
+
+
+
+//functions empresa 
     function getlojas(id, token, nrlojas) {
         var ident = id;
         var nr = nrlojas
@@ -690,7 +762,7 @@
 
     }
 
-
+//functions empresa -loja
     function chamarprodutos(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
@@ -758,19 +830,14 @@
 
 
     }
-    $('aproveperson').click(function(){
-
-
-
-        
-    })
+   
     //LOGOUT/**//**//**//**//**//**//**//**//**//**//**//**//**//**/
     $('#logout').click(function () {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     });
     var x = document.cookie;
 
-
+    //functions decode token
     function decode(token) {
         var base64Url = x.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -819,7 +886,8 @@
                 document.getElementById("navempresa2").style.display = "none"; 
                 document.getElementById("navcondutor").style.display = "none";
                 document.getElementById("navadministrador").style.display = "none";
-                document.getElementById("navempresa").style.display = "none";                  
+                document.getElementById("navempresa").style.display = "none";    
+                getlojastopcliente();              
                 break;
             case "admin":
 
@@ -865,6 +933,41 @@
         }
 
     }, 1000);
+
+    // client area
+
+    function getlojastopcliente(){
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+
+
+        $.ajax({
+            url: 'http://' + urlattime + '/cliente/top_stores',
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+
+            success: function (data) {
+
+                if (data.message != "sem lojas") {
+                    document.getElementById("numerodeloja").innerHTML = data.message;
+                    getlojas(ident, token, data.message);
+                }
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+
+            }
+
+        })
+
+
+    }
 
 
 </script>
