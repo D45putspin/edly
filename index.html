@@ -379,12 +379,13 @@
             processData: false,
             success: function (data) {
                 console.log(data);
+                M.toast({html: 'Produto criado com sucesso!',classes: 'rounded'})
 
 
             }
             , error: function (jqXHR, textStatus, err) {
                 console.log(err, textStatus);
-
+                M.toast({html: 'Erro ao criar o produto!',classes: 'rounded'})
             }
         })
 
@@ -407,6 +408,8 @@
         let tokendecode = decode(tokenrl);
         let id = tokendecode.id_user;
 
+        if(nome && tipo && morada && cod_postal) {
+        
         $.ajax({
             url: 'http://' + urlattime + '/loja/inserir_lojas',
             type: 'POST',
@@ -415,13 +418,17 @@
             headers: { "token": tokenrl },
             success: function (data) {
                 window.location.href = "?sucesso=y";
+                M.toast({html: 'Loja criada com sucesso!',classes: 'rounded'})
 
             }
             , error: function (jqXHR, textStatus, err) {
-
+                M.toast({html: 'Erro ao criar a loja!',classes: 'rounded'})
                 console.log(err, textStatus);
             }
         })
+        }else {
+            M.toast({html: 'Campos vazios',classes: 'rounded'})
+        }
     });
 
 
@@ -624,7 +631,7 @@
                     //verify if header isnt null
                     if (loja != null && loja != "") {
                         console.log("nome" + lojasingular[loja]);
-                        $('#namelojaprodutos').append(`<h1 style="font-size:70px;">${lojasingular[loja - 1]}</h1>`)
+                        $('#namelojaprodutos').append(`<h1 style="font-size:70px;font-family: 'Ubuntu', sans-serif; color:#282828; font-weight: bold !important;">${lojasingular[loja - 1]}</h1>`)
                         chamarprodutos(id, token);
                     }
                     else {
@@ -639,17 +646,25 @@
                                     <hr style="width:100%;text-align:left;color:#f8f8f8">
                                  </div>
                                  <div style="position: relative; top: -25;">
-                                 <h5 style="margin-top:-10px; font-weight: bold; over display:grid;">Tipo de comida</h5>
-                                 <p style="font-size: 20px;position: relative; top: -10;">${tiposingular[i]}</p> 
+                                 <h5 style="margin-top:-5px; font-size:25px;font-weight: bold; over display:grid;">Tipo de comida</h5>
+                                 <p style="font-size: 15px;position: relative; top: -10;">${tiposingular[i]}</p> 
                                  </div>
                                  <div style="position: relative; top: -25;">
-                                 <h5 style="margin-top:-10px; font-weight: bold; over display:grid;">Morada</h5>  
-                                 <p style="font-size: 20px;position: relative; top: -10;"> ${moradasingular[i]}</p> 
+                                 <h5 style="margin-top:-5px; font-size:25px; font-weight: bold; over display:grid;">Morada</h5>  
+                                 <p style="font-size: 15px;position: relative; top: -10;"> ${moradasingular[i]}</p> 
                                  </div>
                                  <div>
-                                 <h5 style="margin-top:-10px; font-weight: bold; over display:grid;">Codigo-Postal</h5> 
-                                 <p style="font-size: 20px;position: relative; top: -10;"> ${cpsingular[i]}</p>
+                                 <h5 style="margin-top:-20px; font-size:25px; font-weight: bold; over display:grid;">Codigo-Postal</h5> 
+                                 <p style="font-size: 15px;position: relative; top: -10;"> ${cpsingular[i]}</p>
                                  </div>
+                                 <div>
+                                    <span class="material-icons" style="right: -100px;position: relative;">
+                                        create
+                                    </span>
+                                    <span class="material-icons" style="right: -120px;position: relative;">
+                                        delete
+                                    </span>
+                                </div>
                                 </div>
                                 </div>
                                <a>`)
@@ -698,9 +713,9 @@
 
                 var descri = data.descricao;
                 var preco = data.preco;
+                $('#DispNrLojas').css("visibility", "hidden");
                 for (let i = 0; i < nomes.length; i++) {
                     console.log(imagem[i]);
-                    $('#DispNrLojas').css("visibility", "hidden");
                     $('#rowprodutos').append(`
                     <a href="?produto=${i + 1}">
                        
@@ -721,6 +736,12 @@
                                         <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
                                         <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
                                     </div>
+                                    <span class="material-icons orange-text darken-1" style="right: -220px; position: relative; bottom: -15px;">
+                                        create
+                                    </span>
+                                    <span class="material-icons red-text darken-1" style="right: -240px; position: relative; bottom: -15px;">
+                                        delete
+                                    </span>                                    
                                 </div>
                             </div>
                         </div>
