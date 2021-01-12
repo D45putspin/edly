@@ -1,72 +1,637 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt_pt">
+
 <head>
-  <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>    
+  <meta charset="UTF-8">
+  <title>Registar</title>
+  <link rel="stylesheet" href="registar.css">
+  <!-- Compiled and minified CSS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
-<form >
-    <input type="text" placeholder="nome" name="nome" id="nome">
-    <input type="password" placeholder="password" name="pass" id="password">
-    <input type="text" placeholder="email" name="email" id="email">
-    <input type="text" placeholder="NIF" name="nif" id="nif">
-    <input type="text" placeholder="morada" name="morada" id="morada">
-    <input type="text" placeholder="código postal" name="cod_postal" id="cod_postal">
-    <input type="text" placeholder="cidade" name="cidade" id="cidade">
-    <input type="text" placeholder="matricula" id="matricula" name="matricula" style="display:none;">
-    <input type="text"  placeholder="tipo de veiculo" id="tipo_veic" name="tipo_veic" style="display:none;">
-    <select name="tipo" id="tipo">
-      <option value="cliente">cliente</option>
-      <option value="condutor">condutor</option>
-      <option value="empresa">empresa</option>
-    </select>
-   
-    <input type="button" id="enter" value="enter" >
+
+<body>
+  <main>
+    <div class="container">
+      <a href="../index.html">
+        <img class="responsive-img" src="imagens/logo.png">
+      </a>
+    </div>
+    <div class="escolha">
+
+      <div class="row colunas">
+        <div class="col s10">
+          <ul class="tabs">
+            <li class="tab col s2"><a href="#cliente">Cliente</a></li>
+            <li class="tab col s2"><a href="#condutor">Condutor</a></li>
+            <li class="tab col s2"><a href="#empresa">Empresa</a></li>
+          </ul>
+        </div>
+      </div>
+      <form>
+      <div class="inputs">
+        <div id="cliente" class="col s12">
+          <div id="esquerda">
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="nome"  type="text" class="validate">
+                <label for="nome">Nome</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="password" type="password" class="validate" oninput="setpasswd()">
+                <label for="password">Palavra-passe</label>
+                <p class="message" id="message"></p>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="morada" type="text" class="validate">
+                <label for="morada">Morada</label>
+              </div>
+            </div>
+          </div>
+          <div id="direita">
+
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="nif" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}" title="Insira um NIF valido.">
+                <label for="nif">NIF</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="codigopostal" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX"  placeholder="XXXX-XXX">
+                <label for="codigopostal">Codigo-Postal</label>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="password1" type="password" class="validate" oninput="checkpwd()">
+                <label for="password1">Repetir Palavra-passe</label>
+                <p class="coincidense" id="coincidense">As passwords não coincidem</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="cidade" type="text" class="validate">
+                <label for="cidade">Cidade</label>
+              </div>
+            </div>
+          </div>
+          <div id="registar">
+            <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="entercliente" >Registar</button>
+          </div>
+          
+        </div>
+      </form>
 
 
-    <script type="text/javascript">
-    $("#tipo").mouseup(function() {
-    var open = $(this).data("isopen");
-    if(open) {
-      
-        if (tipo.value=="condutor"){
-          document.getElementById("matricula").style.display="block";
-        document.getElementById('tipo_veic').style.display="block";
-      }
-      else {
-          document.getElementById("matricula").style.display="none";
-        document.getElementById('tipo_veic').style.display="none";
+
+      <form>
+        <div id="condutor" class="col s12">
+
+          <div id="esquerda">
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="nome_condutor" type="text" class="validate">
+                <label for="nome_condutor">Nome</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="email_condutor" type="email" class="validate">
+                <label for="email_condutor">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="password_condutor" type="password" class="validate" oninput="setpasswd1()">
+                <label for="password_condutor">Palavra-passe</label>
+                <p class="message_cond" id="message_cond"></p>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="morada_condutor" type="text" class="validate">
+                <label for="morada_condutor">Morada</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="tipo_veic" type="text" class="validate">
+                <label for="tipo_veic">Tipo de veiculo</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="direita">
+
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="nif_condutor" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}" title="Insira um NIF valido.">
+                <label for="nif_condutor">NIF</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="codigopostal_condutor" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX"  placeholder="XXXX-XXX">
+                <label for="codigopostal_condutor">Codigo-Postal</label>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="password1_condutor" type="password" class="validate" oninput="checkpwd1()">
+                <label for="password1_condutor">Repetir Palavra-passe</label>
+                <p class="coincidense_cond" id="coincidense_cond">As passwords não coincidem</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="cidade_condutor" type="text" class="validate">
+                <label for="cidade_condutor">Cidade</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="matricula" type="text" class="validate">
+                <label for="matricula">Matricula</label>
+              </div>
+            </div>
+          </div>
+          <div id="registar">
+            <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="entercondutor" >Registar</button>
+          </div>
+        </div>
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+        <form>
+        <div id="empresa" class="col s12">
+          <div id="esquerda">
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="nome_empresa" type="text" class="validate">
+                <label for="nome_empresa">Nome</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="email_empresa" type="email" class="validate">
+                <label for="email_empresa">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="password_empresa" type="password" class="validate" oninput="setpasswd2()">
+                <label for="password_empresa">Palavra-passe</label>
+                <p class="message_empresa" id="message_empresa"></p>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="morada_empresa" type="text" class="validate">
+                <label for="morada_empresa">Morada</label>
+              </div>
+            </div>
+            
+          </div>
+
+          <div id="direita">
+
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="nif_empresa" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}" title="Insira um NIF valido.">
+                <label for="nif_empresa">NIF</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="codigopostal_empresa" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX"  placeholder="XXXX-XXX">
+                <label for="codigopostal_empresa">Codigo-Postal</label>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="password1_empresa" type="password" class="validate" oninput="checkpwd2()">
+                <label for="password1_empresa">Repetir Palavra-passe</label>
+                <p class="coincidense_empresa" id="coincidense_empresa">As passwords não coincidem</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s10">
+                <input id="cidade_empresa" type="text" class="validate">
+                <label for="cidade_empresa">Cidade</label>
+              </div>
+            </div>
+            
+          </div>
+          <div class="file-field input-field">
+            <div class="waves-effect waves-light btn-small #212121 grey darken-4">
+              <span>Foto</span>
+              <input type="file" name="img_empresa" id="img_empresa">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="escolha uma foto ">
+            </div>
+          </div>
+          <div id="registar">
+            <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="enterempresa" >Registar</button>
+          </div>
+
+        </div>
+        </form>
+
+      </div>
+    </div>
+    </div>
+
+  </main>
+  <script> M.AutoInit();</script>
+</body>
+
+</html>
+<script type="text/javascript">
+  //--------------------------------------cliente----------------------------------
+  function checkpwd() {
+
+    var password1 = document.getElementById("password").value;
+    var password2 = document.getElementById("password1").value;
+    if (password1 == password2) {
+      document.getElementById("coincidense").style.visibility = "hidden";
+
+    }
+    else { document.getElementById("coincidense").style.visibility = "visible"; }
+  }
+  function setpasswd() {
+
+    password = document.getElementById("password").value;
+    validatePassword(password);
+  }
+  function validatePassword(password) {
+
+    //não mostrar nada quando o comrimento é 0
+    if (password.length === 0) {
+      document.getElementById("msg").innerHTML = "";
+      return;
+    }
+    //criar uma array e fazer push a todos os valores possiveis 
+    var matchedCase = new Array();
+    matchedCase.push("[$@$!%*#?&]"); // caracteres especiais
+    matchedCase.push("[A-Z]");      // letras uppercase
+    matchedCase.push("[0-9]");      // Numeros
+    matchedCase.push("[a-z]");     // letras lowercase
+
+    // ver condições
+    var ctr = 0;
+    for (var i = 0; i < matchedCase.length; i++) {
+      if (new RegExp(matchedCase[i]).test(password)) {
+        ctr++;
       }
     }
-    $(this).data("isopen", !open);
+    // mostrar
+    var color = "";
+    var strength = "";
+    switch (ctr) {
+      case 0:
+      case 1:
+      case 2:
+        strength = "Muito fraca";
+        color = "#d95341";
+        break;
+      case 3:
+        strength = "Média";
+        color = "#f0ad4e";
+        break;
+      case 4:
+        strength = "Forte";
+        color = "#5cb85c ";
+        break;
+    }
+    document.getElementById("message").innerHTML = strength;
+    document.getElementById("message").style.color = color;
+  }
+
+  //----------------------------------condutor---------------------------------------------------------
+  function checkpwd1() {
+
+    var password1 = document.getElementById("password_condutor").value;
+    var password2 = document.getElementById("password1_condutor").value;
+    if (password1 == password2) {
+      document.getElementById("coincidense_cond").style.visibility = "hidden";
+
+    }
+    else { document.getElementById("coincidense_cond").style.visibility = "visible"; }
+  }
+  function setpasswd1() {
+
+    password = document.getElementById("password_condutor").value;
+
+    validatePassword1(password);
+  }
+  function validatePassword1(password) {
+
+    //não mostrar nada quando o comrimento é 0
+    if (password.length === 0) {
+      document.getElementById("msg").innerHTML = "";
+      return;
+    }
+    //criar uma array e fazer push a todos os valores possiveis 
+    var matchedCase = new Array();
+    matchedCase.push("[$@$!%*#?&]"); // caracteres especiais
+    matchedCase.push("[A-Z]");      // letras uppercase
+    matchedCase.push("[0-9]");      // Numeros
+    matchedCase.push("[a-z]");     // letras lowercase
+
+    // ver condições
+    var ctr = 0;
+    for (var i = 0; i < matchedCase.length; i++) {
+      if (new RegExp(matchedCase[i]).test(password)) {
+        ctr++;
+      }
+    }
+    // mostrar
+    var color = "";
+    var strength = "";
+    switch (ctr) {
+      case 0:
+      case 1:
+      case 2:
+        strength = "Muito fraca";
+        color = "#d95341";
+        break;
+      case 3:
+        strength = "Média";
+        color = "#f0ad4e";
+        break;
+      case 4:
+        strength = "Forte";
+        color = "#5cb85c ";
+        break;
+    }
+    console.log(strength, color);
+    document.getElementById("message_cond").innerHTML = strength;
+    document.getElementById("message_cond").style.color = color;
+  }
+
+//--------------------------------empresa--------------------------
+function checkpwd2() {
+
+var password1 = document.getElementById("password_empresa").value;
+var password2 = document.getElementById("password1_empresa").value;
+if (password1 == password2) {
+  document.getElementById("coincidense_empresa").style.visibility = "hidden";
+
+}
+else { document.getElementById("coincidense_empresa").style.visibility = "visible"; }
+}
+function setpasswd2() {
+
+password = document.getElementById("password_empresa").value;
+validatePassword2(password);
+}
+function validatePassword2(password) {
+
+//não mostrar nada quando o comrimento é 0
+if (password.length === 0) {
+  document.getElementById("message_empresa").innerHTML = "";
+  return;
+}
+//criar uma array e fazer push a todos os valores possiveis 
+var matchedCase = new Array();
+matchedCase.push("[$@$!%*#?&]"); // caracteres especiais
+matchedCase.push("[A-Z]");      // letras uppercase
+matchedCase.push("[0-9]");      // Numeros
+matchedCase.push("[a-z]");     // letras lowercase
+
+// ver condições
+var ctr = 0;
+for (var i = 0; i < matchedCase.length; i++) {
+  if (new RegExp(matchedCase[i]).test(password)) {
+    ctr++;
+  }
+}
+// mostrar
+var color = "";
+var strength = "";
+switch (ctr) {
+  case 0:
+  case 1:
+  case 2:
+    strength = "Muito fraca";
+    color = "#d95341";
+    break;
+  case 3:
+    strength = "Média";
+    color = "#f0ad4e";
+    break;
+  case 4:
+    strength = "Forte";
+    color = "#5cb85c ";
+    break;
+}
+document.getElementById("message_empresa").innerHTML = strength;
+document.getElementById("message_empresa").style.color = color;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //--------------------------cliente----------------------------------------------------------
+
+  $('#entercliente').click(function () {
+
+    password = document.getElementById("password").value;
+    password1 = document.getElementById("password1").value;
+    if (password == password1) {
+      let password_ = password;
+      let password1_ = password1;
+      let nome_ = nome.value;
+      let email_ = email.value;
+      let nif_ = nif.value;
+      let morada_ = morada.value;
+      let cod_postal_ = codigopostal.value;
+      let cidade_ = cidade.value;
+      let tipo_ = "cliente";
+      //let matricula_=matricula.value;
+      //let tipo_veic_=tipo_veic.value;
+
+
+
+      $.ajax({
+        url: 'http://localhost:3000/user/register',
+        type: 'POST',
+        cache: false,
+        //data: { nome:nome_ , password: password_,email:email_,nif:nif_,morada:morada_,cod_post:cod_postal_,cidade:cidade_,tipo:tipo_,matricula:matricula_,veiculo:tipo_veic_}, 
+        data: { nome: nome_, password: password_,password1:password1_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_ },
+        success: function (data) {
+          window.location.href = "../edly/login.html";
+        }
+        , error: function (jqXHR, textStatus, err) {
+          window.alert('text status ' + textStatus + ', err ' + err)
+          window.alert(jqXHR.responseText);
+        }
+      })
+      window.alert("x")
+    }
+    else {
+
+      console.log(password + "" + password)
+      document.getElementById("coincidense").style.visibility = "visible";
+    }
+  });
+  //-------------------------------condutor -------------------------------------------------------
+  $('#entercondutor').click(function () {
+    
+    password = document.getElementById("password_condutor").value;
+    password1 = document.getElementById("password1_condutor").value;
+    if (password == password1) {
+      let password_ = password_condutor.value
+      let password1_ = password1_condutor.value
+      let email_ = email_condutor.value;
+      let nome_ = nome_condutor.value;
+      let nif_ = nif_condutor.value;
+      let morada_ = morada_condutor.value;
+      let cod_postal_ = codigopostal_condutor.value;
+      let cidade_ = cidade_condutor.value;
+      let tipo_ = "condutor";
+      let matricula_ = matricula.value;
+      let tipo_veic_ = tipo_veic.value;
+
+
+
+     
+      $.ajax({
+        url: 'http://localhost:3000/user/register',
+        type: 'POST',
+        cache: false,
+        data: { nome: nome_, password: password_,password1:password1_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_, matricula: matricula_, veiculo: tipo_veic_ },
+
+        success: function (data) {
+          window.location.href = "../edly/login.html";
+          
+        }
+        , error: function (jqXHR, textStatus, err) {
+          window.alert('text status ' + textStatus + ', err ' + err)
+          window.alert(jqXHR.responseText);
+        }
+      })
+      window.alert("x")
+    }
+    else {
+
+      console.log(password + "" + password)
+      document.getElementById("coincidense").style.visibility = "visible";
+    }
+  });
+
+
+
+
+  $('#enterempresa').click(function () {
+
+password = document.getElementById("password_empresa").value;
+password1 = document.getElementById("password1_empresa").value;
+if (password == password1) {
+  let password_ = password_empresa.value
+  let password1_ = password1_empresa.value
+  let email_ = email_empresa.value;
+  let nome_ = nome_empresa.value;
+  let nif_ = nif_empresa.value;
+  let morada_ = morada_empresa.value;
+  let cod_postal_ = codigopostal_empresa.value;
+  let cidade_ = cidade_empresa.value;
+  let tipo_ = "empresa";
+  var fd = new FormData();
+  var file = $('#img_empresa')[0].files[0];
+  fd.append('img_empresa', file);
+  fd.append('nome', nome_);
+  fd.append('email',email_);
+  fd.append('tipo', tipo_);
+  fd.append('password', password_);
+  fd.append('password1', password1_);
+  fd.append('nif', nif_)
+  fd.append('morada', morada_);
+  fd.append('cod_postal',cod_postal_);
+  fd.append('cidade_',cidade_);
+  console.log (fd.get(file));
+ 
+
+
+
+
+
+  $.ajax({
+    url: 'http://localhost:3000/user/register',
+    type: 'POST',
+    cache: false,
+    data: fd,
+    contentType: false,
+            processData: false,
+    success: function (data) {
+      window.location.href = "../edly/login.html";
+    }
+    , error: function (jqXHR, textStatus, err) {
+      window.alert('text status ' + textStatus + ', err ' + err)
+      window.alert(jqXHR.responseText);
+    }
+    
+  })
+  window.alert("x");
+}
+else {
+
+  console.log(password + "" + password)
+  document.getElementById("coincidense").style.visibility = "visible";
+}
 });
-      $('#enter').click(function(){  
-    let password_=password.value;
-    let nome_=nome.value;
-    let email_=email.value;
-    let nif_=nif.value;
-    let morada_=morada.value;
-    let cod_postal_=cod_postal.value;
-    let cidade_=cidade.value;
-    let tipo_=tipo.value;
-    let matricula_=matricula.value;
-    let tipo_veic_=tipo_veic.value;
 
-    
 
-    
-     $.ajax({ 
-           url: 'http://localhost:3000/user/register',
-           type: 'POST',
-           cache: false, 
-           data: { nome:nome_ , password: password_,email:email_,nif:nif_,morada:morada_,cod_post:cod_postal_,cidade:cidade_,tipo:tipo_,matricula:matricula_,veiculo:tipo_veic_}, 
-           success: function(data){
-            window.location.href = "../edly/login.html";
-           }
-           , error: function(jqXHR, textStatus, err){
-               alert('text status '+textStatus+', err '+err)
-           }
-        })
-     });            
-    
-    </script>
-    </form>
-    
+</script>

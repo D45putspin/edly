@@ -3,309 +3,395 @@
 <head>
 
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>EDLY</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Amatic SC', serif;
-
-        }
-
-        #empresa {
-            width: 100%;
-            text-align: center;
-        }
-
-        .float {
-
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 140px;
-            right: 140px;
-            background-color: slategray;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            box-shadow: 2px 2px 3px #999;
-        }
-
-        .float:hover {
-            background-color: rgb(89, 101, 114);
-            color: white;
-            box-shadow: 4px 4px 5px #999;
-            width: 63px;
-            height: 63px;
-        }
-
-        .my-float {
-            margin-top: 22px;
-        }
-
-        .rowslojas {
-            background-color: blue;
-            border: 1px solid black;
-        }
-
-        /* The Modal (background) */
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-            -webkit-animation-name: fadeIn;
-            /* Fade in the background */
-            -webkit-animation-duration: 0.4s;
-            animation-name: fadeIn;
-            animation-duration: 0.4s
-        }
-
-        /* Modal Content */
-        .modal-content {
-            font-size: 30px;
-            position: fixed;
-            bottom: 50%;
-            left: 25%;
-            background-color: #fefefe;
-            width: 50%;
-            -webkit-animation-name: slideIn;
-            -webkit-animation-duration: 0.4s;
-            animation-name: slideIn;
-            animation-duration: 0.4s
-        }
-
-        /* The Close Button */
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-header {
-            padding: 2px 16px;
-            background-color: #3E4551;
-            color: white;
-        }
-
-        .modal-body {
-            padding: 2px 16px;
-        }
-
-        .modal-footer {
-            padding: 2px 16px;
-            background-color: #5cb85c;
-            color: white;
-        }
-
-        /* Add Animation */
-        @-webkit-keyframes slideIn {
-            from {
-                bottom: -300px;
-                opacity: 0
-            }
-
-            to {
-                bottom: 0;
-                opacity: 1
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                bottom: -300px;
-                opacity: 0
-            }
-
-            to {
-                bottom: 0;
-                opacity: 1
-            }
-        }
-
-        @-webkit-keyframes fadeIn {
-            from {
-                opacity: 0
-            }
-
-            to {
-                opacity: 1
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0
-            }
-
-            to {
-                opacity: 1
-            }
-        }
-    </style>
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" id="username" href="#"></a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-item nav-link  " type="button" id="logout" value="logout">logout</a>
-            </li>
-        </ul>
+<header>
+    <!-- Navegation bar-->
+    <nav class="nav-extended">
+        <div class="navlr">
+            
+            <!-- Nome do user e botao logout-->              
+            <ul>
+                <li><a class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style="color:black;"
+                id="username" href="#"></a></li>
+                <li> <a class="lr" type="button" id="logout" value="logout">logout</a></li>
+            </ul>
+            <!-- Navegation bar para clientes-->            
+            <div id="navcliente2">
+                <ul>
+                    <div class="typeln">
+                        <span class="material-icons">
+                            person
+                        </span>
+                        <h4>Cliente</h4>
+                    </div>
+                </ul>
+            </div>
+            <!-- Navegation bar para condutores-->  
+            <div id="navcondutor2">
+                <ul>
+                    <div class="typeln">
+                        <span class="material-icons">
+                            moped
+                        </span>
+                        <h4>Condutor</h4>
+                    </div>
+                </ul>
+            </div>  
+            <!-- Navegation bar para empresas--> 
+            <div id="navempresa2">
+                <ul>
+                    <div class="typeln">
+                        <span class="material-icons">
+                            business
+                        </span>
+                        <h4>Empresa</h4>
+                    </div>
+                </ul>
+            </div>   
+            <!-- Navegation bar para admin--> 
+            <div id="navadministrador2">
+                <ul>
+                    <div class="typeln">
+                        <span class="material-icons">
+                            supervisor_account
+                        </span>
+                        <h4>Administrador</h4>
+                    </div>
+                </ul>
+            </div>                               
+        </div>
+        <div class="nav-wrapper">
+            <a href="index.html">
+            <img class="responsive-img" src="imagens/logo.png">
+            </a>
+        </div>
 
-    </div>
-</nav>
+
+                <!-- Navegation bar para clientes-->
+                <div id="navcliente"> 
+                    <div class="nav-content">
+                        <ul class="tabs tabs-transparent">  
+                            <li class="tab"><a class="active" href="#encontrar">Encontrar</a></li>
+                            <li class="tab"><a href="#editarcliente">Editar dados</a></li>
+                            <li class="tab"><a href="#contacte">Contacte-nos</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Navegation bar para condutores-->
+                <div id="navcondutor">
+                    <div class="nav-content">
+                        <ul class="tabs tabs-transparent">  
+                            <li class="tab"><a class="active" href="#encomendas">Encomendas</a></li>
+                            <li class="tab"><a href="#editarcondutor">Editar dados</a></li>
+                            <li class="tab"><a href="#contacte">Contacte-nos</a></li> 
+                        </ul>
+                    </div>
+                </div>
+                <!-- Navegation bar para empresas-->
+                <div id="navempresa">
+                    <div class="nav-content">
+                        <ul class="tabs tabs-transparent"> 
+                            <li class="tab"><a class="active" href="#lojas">Lojas</a></li>
+                            <li class="tab"><a href="#editarempresas">Editar dados</a></li>
+                            <li class="tab"><a href="#contacte">Contacte-nos</a></li> 
+                        </ul>
+                    </div> 
+                </div>
+                <!-- Navegation bar para admin-->
+                <div id="navadministrador">
+                    <div class="nav-content">
+                        <ul class="tabs tabs-transparent"> 
+                            <li class="tab"><a class="active" href="#pedidos">Pedidos</a></li>
+                            <li class="tab"><a href="#editaradmin">Editar dados</a></li>
+                            <li class="tab"><a href="#contacte">Contacte-nos</a></li>  
+                        </ul>
+                    </div> 
+                </div>
+
+    </nav>
+</header>
 
 
-
+<!-- Pagina do condutor-->
 
 <section id="condutor">
-    <h1> condutor!!!</h1>
+
+    <!-- Pagina das encomendas-->
+    <div id="encomendas">
+        <h1>encomendas</h1>
+    </div>
+    <!-- Pagina de editar condutor-->
+    <div id="editarcondutor">
+        <h1>editar</h1>
+    </div>
+    <!-- Pagina de contacte-->
+    <div id="contacte">
+     
+    </div>
+
 </section>
+
+<!-- Pagina do cliente-->
+
 <section id="cliente">
-    <h1> cliente!!!</h1>
+    <!-- Pagina do encontrar-->
+    <div id="encontrar">
+        <h1>Top</h1>
+        <div class="row" id="encontrartoplojas">
+
+
+        </div>
+
+    </div>
+    <!-- Pagina de editar cliente-->
+    <div id="editarcondutor">
+        <h1>editar</h1>
+    </div>
+    <!-- Pagina de contacte-->
+    <div id="contacte">
+      
+    </div>
 </section>
+
+
+<!-- Currently working section  start date- 30/12/2020 
+    what to do: -panel to deny or accept enterprises/workers account creation.
+                -create another admin accounts
+                -delete  already acepted enterprises
+                
+
+
+
+
+-->
+
+<!-- Pagina do administradores-->
+
 <section id="administrador">
-    <h1> administrador!!!</h1>
+        <!-- Pagina dos pedidos-->
+        <div id="pedidos">
+            <h1> pedidos pendentes </h1>
+            <div class="row " id="rowpedidospend">
+            </div>
+        </div>
+        <!-- Pagina de editar admin-->
+        <div id="editaradmin">
+            <h1>editar</h1>
+        </div>
+        <!-- Pagina de contacte-->
+        <div id="contacte">
+            
+        </div>
+
+    </div>
+
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- almost done !!!!! 30/12/2020 
+    empresas - enterprises
+    can add lojas - stores 
+    stores can add produtos-products
+
+
+    falta imagem da store e da empresa se for necessário
+    produtos ja com foto a funcionar, codigo em : linha 10/19 produtos.js; 
+
+
+-->
+
+<!-- Pagina da empresas-->
+
 <section id="empresa">
 
-    <h1 id="numerodeloja"> 0 </h1>
-    <h2> lojas associadas</h2>
+<!-- Pagina de lojas-->
+
+<div id="lojas">
 
     <a href="#" id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
+        <span class="material-icons">
+            add
+        </span>
         <i class="fa fa-plus my-float"> </i>
     </a>
 
     <div id="myModal" class="modal">
 
-        <!-- Modal content -->
+        <!-- Criar loja -->
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Nova Loja</h2>
                 <span class="close">&times;</span>
 
             </div>
-            <div class="modal-body">
-                <form>
-                    <input type=text" placeholder="Nome" id="nome_empresa" name="nome_empresa">
-                    <input type=text" placeholder="Tipo de Comida" id="tipo_empresa" name="tipo_empresa">
-                    <input type=text" placeholder="Morada" id="morada_empresa" name="morada_empresa">
-                    <input type=text" placeholder="Código postal" id="cp_empresa" name="cp_empresa">
-                    <input type="button" id="enter_empresa" value="enter">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <div class="esquerda">
+                            <input type="text" placeholder="Nome" id="nome_empresa" name="nome_empresa" class="validate">
+                            <input type="text" placeholder="Tipo de Comida" id="tipo_empresa" name="tipo_empresa" class="validate">
+                            <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style=" float: left;" type="button" id="enter_empresa" value="enter">
+                            </div>
+                            <div class="direita">
+                            <input type="text" placeholder="Morada" id="morada_empresa" name="morada_empresa" class="validate">
+                            <input type="text" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX" placeholder="Código postal (XXXX-XXX)" id="cp_empresa" name="cp_empresa" class="validate">
+                            </div>
+                        </div>
+                    </div>
                 </form>
-            </div>
+            </div>  
 
         </div>
 
     </div>
     <div id="myModal1" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Adicionar Produtos</h2>
-                <span class="close1">&times;</span>
-
-            </div>
-            <div class="modal-body">
-                <form>
-                    <input type=text" placeholder="Nome Produto" id="nome_produto" name="nome_produto">
-                    <input type=text" placeholder="Preço Produto" id="preco_produto" name="preco_produto">
-                    <input type=text" placeholder="Descrição do Produto" id="descricao_produto"
-                        name="descricao_produto">
-                    <input type="file" id="foto_produto" name="foto_produto" accept="image/png, image/jpeg">
-                    <input type="button" id="enter_empresa1" value="enter">
-                </form>
-            </div>
-
-        </div>
+                <!-- Criar produto -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Adicionar Produtos</h2>
+                        <span class="close1">&times;</span>
+        
+                    </div>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="esquerda">
+                                    <input type="text" placeholder="Nome Produto" id="nome_produto" name="nome_produto" class="validate">
+                                    <input type="text" placeholder="Preço" id="preco_produto" name="preco_produto" class="validate">
+                                    <div class="fotop">
+                                    <form action="#">
+                                        <div class="file-field input-field">
+                                          <div class="lr waves-effect waves-light btn-small #fafafa grey lighten-5">
+                                            <span>Foto</span>
+                                            <input type="file" id="foto_produto" name="foto_produto" accept="image/png, image/jpeg">
+                                          </div>
+                                          <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style=" float: left;" type="button" id="enter_empresa1" value="enter">
+                                    </div>
+                                    <div class="direita">
+                                    <input type="text" placeholder="Descrição do produto" id="descricao_produto" name="descricao_produto" class="validate">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>  
+        
+                </div>
 
     </div>
-    <ul id="lojas">
+    <ul id="ullojas">
+        <div id="DispNrLojas">
+            <span class="material-icons">
+                store
+            </span>
+            <h1 id="numerodeloja"> 0 </h1>
+        </div>
+        <div class="row " id="row">
 
+        </div>
     </ul>
-    <ul id="produtos">
+    <ul id="produtos" style="position: relative; top: -150px;">
+        <div id="namelojaprodutos">
+            
+        </div>
+        <div class="row " id="rowprodutos">
 
+        </div>
     </ul>
+</div>
 
+<!-- Pagina de editar empresas-->
+
+<div id="editarempresas">
+
+</div>
+
+<!-- Pagina de contacte-->
+
+<div id="contacte">
+
+</div>
 
 </section>
 <script>
+    const urlattime = "localhost:3000";
     let params = (new URL(document.location)).searchParams;
     let loja = params.get("loja");
-    
+
     $('#enter_empresa1').click(function () {
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
-        var nome_prod=document.getElementById('nome_produto').value;
-        var preco_prod=document.getElementById('preco_produto').value;
-        var descricao_produto=document.getElementById('descricao_produto').value;
+        var nome_prod = document.getElementById('nome_produto').value;
+        var preco_prod = document.getElementById('preco_produto').value;
+        var descricao_produto = document.getElementById('descricao_produto').value;
+        //appends image (and the other data) to fd so you can send it on data to database 
         var fd = new FormData();
         var file = $('#foto_produto')[0].files[0];
         fd.append('produto_imagem', file);
         fd.append('nome_produto', nome_prod);
         fd.append('tipo', descricao_produto);
         fd.append('id', loja);
-        fd.append('id_empresa',tokendecode.id_user)
+        fd.append('id_empresa', tokendecode.id_user);
         fd.append('preco', preco_prod);
 
 
 
         $.ajax({
-            url: 'http://localhost:3000/produtos/criar-produtos',
+            url: 'http://' + urlattime + '/produtos/criar-produtos',
             type: 'POST',
             cache: false,
             data: fd,
-            headers:{"token":tokenrl},
+            headers: { "token": tokenrl },
             contentType: false,
             processData: false,
             success: function (data) {
                 console.log(data);
-              
+                M.toast({html: 'Produto criado com sucesso!',classes: 'rounded'})
+
 
             }
             , error: function (jqXHR, textStatus, err) {
                 console.log(err, textStatus);
-               
+                M.toast({html: 'Erro ao criar o produto!',classes: 'rounded'})
             }
         })
 
@@ -317,7 +403,7 @@
 
 
     })
-    
+
     $('#enter_empresa').click(function () {
         let nome = nome_empresa.value;
         let tipo = tipo_empresa.value;
@@ -327,22 +413,28 @@
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
         let id = tokendecode.id_user;
+
+        if(nome && tipo && morada && cod_postal) {
         
         $.ajax({
-            url: 'http://localhost:3000/loja/inserir_lojas',
+            url: 'http://' + urlattime + '/loja/inserir_lojas',
             type: 'POST',
             cache: false,
-            data: { nome: nome, tipo: tipo, morada: morada,token:tokenrl, id: id, cod_postal: cod_postal },
-            headers:{"token":tokenrl},
+            data: { nome: nome, tipo: tipo, morada: morada, token: tokenrl, id: id, cod_postal: cod_postal },
+            headers: { "token": tokenrl },
             success: function (data) {
                 window.location.href = "?sucesso=y";
+                M.toast({html: 'Loja criada com sucesso!',classes: 'rounded'})
 
             }
             , error: function (jqXHR, textStatus, err) {
-                
+                M.toast({html: 'Erro ao criar a loja!',classes: 'rounded'})
                 console.log(err, textStatus);
             }
         })
+        }else {
+            M.toast({html: 'Campos vazios',classes: 'rounded'})
+        }
     });
 
 
@@ -414,6 +506,7 @@
 
 
     }
+    //functions empresa 
     function verificarloja(token) {
         var json = decode(token);
         var id = json.id_user;
@@ -421,21 +514,22 @@
 
 
     }
+    //functions empresa 
     function getnrlojas(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
-        
+
 
         $.ajax({
-            url: 'http://localhost:3000/loja/verificar_lojas/id='+ident,
+            url: 'http://' + urlattime + '/loja/verificar_lojas/id=' + ident,
             type: 'GET',
             cache: false,
-            headers: {"token": tokenrl},
-            
+            headers: { "token": tokenrl },
 
-            
+
+
             success: function (data) {
-                
+
                 if (data.message != "sem lojas") {
                     document.getElementById("numerodeloja").innerHTML = data.message;
                     getlojas(ident, token, data.message);
@@ -443,31 +537,162 @@
 
             }
             , error: function (jqXHR, textStatus, err) {
-               
+
                 console.log(err, textStatus)
 
             }
 
         })
+
+    }
+    //functions admin 
+    function get_adminspendentes(){
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+
+
+        $.ajax({
+            url: 'http://' + urlattime + '/user/pendentes',
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+
+
+                var nomes = data.nome;
+                var ids=data.id;
+                console.log(nomes);
+
+
+
+
+
+
+                for (let i = 0; i < nomes.length; i++) {
+                    console.log(nomes);
+                    $('#DispNrLojas').css("visibility", "hidden");
+                    $('#rowpedidospend').append(`
+                    <a href="?produto=${i + 1}">
+                       <div class="col s2">
+                           <div class="card">
+                                <div class="card-content">
+                                     <p>Nome User :${nomes[i]}</p>
+                                     <p id="iduser">Id User :${ids[i]}
+                               </div>
+                               <div class="card-action">
+                                   <a id="aproveperson" onclick='aprove(${ids[i]})'>Aprovar</a>
+                                   <a onclick='delete_aprove(${ids[i]})'>Eliminar</a>
+                                   
+                               </div>
+                         </div>
+                      </div>
+                    <a>`)
+                }
+        
+     
+
+
+
+
+
+
+
+
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus);
+                console.log(jqXHR.responseText);
+            }
+        })
+
+    }
+
+    //functions admin 
+    function aprove(id){
+        var ident=id;
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+        if (tokendecode.tipo=="admin"){
+            $.ajax({
+            url: 'http://' + urlattime + '/user/acept_pending/id='+ident ,
+            type: 'PUT',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+                location.reload(); 
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+
+
+            
+        }
+        
+    }
+    //functions admin
+    function delete_aprove(id){
+        window.alert("eee")
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+        if (tokendecode.tipo=="admin"){
+            $.ajax({
+            url: 'http://' + urlattime + '/user/delete_pending' ,
+            type: 'DELETE',
+            cache: false,
+            data: { id : id },
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+                location.reload(); 
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+
+
+            
+        }
         
     }
 
 
+
+
+//functions empresa 
     function getlojas(id, token, nrlojas) {
         var ident = id;
         var nr = nrlojas
         let params = (new URL(document.location)).searchParams;
         let loja = params.get("loja");
         var tokenrl = token.replace("token=", "");
-       
+
 
         $.ajax({
-            url: 'http://localhost:3000/loja/listar_lojas/id='+ident,
+            url: 'http://' + urlattime + '/loja/listar_lojas/id=' + ident,
             type: 'GET',
             cache: false,
-            headers: {"token": tokenrl},
+            headers: { "token": tokenrl },
 
-           
+
             success: function (data) {
 
                 if (data.message != "sem lojas") {
@@ -479,16 +704,46 @@
                     var moradasingular = moradas.split(',');
                     var codigos_postal = "" + data.cp;
                     var cpsingular = codigos_postal.split(',');
-
-                    if (loja != null) {
+                    //verify if header isnt null
+                    if (loja != null && loja != "") {
                         console.log("nome" + lojasingular[loja]);
-                        $('#lojas').append(`<a ><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[loja - 1]}</h1><h3>tipo de comida : ${tiposingular[loja - 1]} , Morada :${moradasingular[loja - 1]},${cpsingular[loja - 1]}  </h3></div><a>`)
-                        chamarprodutos(id,token);
+                        $('#namelojaprodutos').append(`<h1 style="font-size:70px;font-family: 'Ubuntu', sans-serif; color:#282828; font-weight: bold !important;">${lojasingular[loja - 1]}</h1>`)
+                        chamarprodutos(id, token);
                     }
                     else {
                         for (let i = 0; i < nr; i++) {
-                          
-                            $('#lojas').append(`<a href="?loja=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${lojasingular[i]}</h1><h3>tipo de comida : ${tiposingular[i]} , Morada :${moradasingular[i]},${cpsingular[i]}  </h3></div><a>`)
+
+                            $('#row').append(`<a style="color:white;font-style: normal;"href="?loja=${i + 1}">
+                                
+                                <div class="col s2 ">
+                                <div class="card grey darken-4 center-align">
+                                  <div class="card-content white-text">
+                                      <span class="card-title" style="font-size:40px;font-family: 'Ubuntu', sans-serif;color:#f8f8f8; font-weight: bold !important;"><h3> ${lojasingular[i]}<h1></span>
+                                    <hr style="width:100%;text-align:left;color:#f8f8f8">
+                                 </div>
+                                 <div style="position: relative; top: -25;">
+                                 <h5 style="margin-top:-5px; font-size:25px;font-weight: bold; over display:grid;">Tipo de comida</h5>
+                                 <p style="font-size: 15px;position: relative; top: -10;">${tiposingular[i]}</p> 
+                                 </div>
+                                 <div style="position: relative; top: -25;">
+                                 <h5 style="margin-top:-5px; font-size:25px; font-weight: bold; over display:grid;">Morada</h5>  
+                                 <p style="font-size: 15px;position: relative; top: -10;"> ${moradasingular[i]}</p> 
+                                 </div>
+                                 <div>
+                                 <h5 style="margin-top:-20px; font-size:25px; font-weight: bold; over display:grid;">Codigo-Postal</h5> 
+                                 <p style="font-size: 15px;position: relative; top: -10;"> ${cpsingular[i]}</p>
+                                 </div>
+                                 <div>
+                                    <span class="material-icons" style="right: -100px;position: relative;">
+                                        create
+                                    </span>
+                                    <span class="material-icons" style="right: -120px;position: relative;">
+                                        delete
+                                    </span>
+                                </div>
+                                </div>
+                                </div>
+                               <a>`)
                         }
                     }
 
@@ -511,44 +766,61 @@
 
     }
 
+//functions empresa -loja
+    function chamarprodutos(id, token) {
+        var ident = id;
+        var tokenrl = token.replace("token=", "");
+        let params = (new URL(document.location)).searchParams;
+        let loja = params.get("loja");
 
-function chamarprodutos(id,token){
-    var ident = id;
-    var tokenrl = token.replace("token=", "");
-    let params = (new URL(document.location)).searchParams;
-    let loja = params.get("loja");
-    
 
         $.ajax({
-            url: 'http://localhost:3000/produtos/get-products/id='+loja,
+            url: 'http://' + urlattime + '/produtos/get-products/id=' + loja,
             type: 'GET',
             cache: false,
-            headers: {"token": tokenrl},
+            headers: { "token": tokenrl },
 
-           
+
             success: function (data) {
 
-  
-                    var nomes=data.nome;
-                    var imagem=data.url;
-                    
-                    var descri=data.descricao;
-                    var preco=data.preco;
-                        for (let i = 0; i < nomes.length; i++) {
-                          console.log(imagem[i]);
-                          
-                            $('#produtos').append(`<a href="?produto=${i + 1}"><div class="container p-3 my-3 bg-dark text-white" ><h1>${nomes[i]}</h1><img src="http://localhost:3000/${imagem[i]}"> alt="Italian Trulli"> <h3> , descrição :${descri[i]},preço${preco[i]}  </h3></div><a>`)
-                        }
-                    
 
-
-
-
-
-
-
-
-                
+                var nomes = data.nome;
+                var imagem = data.url;
+                var descri = data.descricao;
+                var preco = data.preco;
+                $('#DispNrLojas').css("visibility", "hidden");
+                for (let i = 0; i < nomes.length; i++) {
+                    console.log(imagem[i]);
+                    $('#rowprodutos').append(`
+                    <a href="?produto=${i + 1}">
+                    <div class="col s2">
+                        <div class="cardproduto">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
+                                    <span class="card-title">${nomes[i]}</span>
+                                </div>
+                                <div class="card-content left-align">
+                                    <div class="descrição">
+                                        <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Descrição</h5> 
+                                        <p style="margin-top: 0px; font-size: 20px; color:#737373;"> ${descri[i]}</p>
+                                    </div>
+                                    <br>
+                                    <div class="preco" >
+                                        <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
+                                        <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
+                                    </div>
+                                    <span class="material-icons orange-text darken-1" style="right: -220px; position: relative; bottom: -15px;">
+                                        create
+                                    </span>
+                                    <span class="material-icons red-text darken-1" style="right: -240px; position: relative; bottom: -15px;">
+                                        delete
+                                    </span>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+                )}
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -558,15 +830,16 @@ function chamarprodutos(id,token){
         })
 
 
-    
-}
+
+    }
+   
     //LOGOUT/**//**//**//**//**//**//**//**//**//**//**//**//**//**/
     $('#logout').click(function () {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     });
     var x = document.cookie;
 
-
+    //functions decode token
     function decode(token) {
         var base64Url = x.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -598,24 +871,50 @@ function chamarprodutos(id,token){
                 document.getElementById("cliente").style.display = "none";
                 document.getElementById("administrador").style.display = "none";
                 document.getElementById("empresa").style.display = "none";
+                document.getElementById("navcliente2").style.display = "none";
+                document.getElementById("navadministrador2").style.display = "none";
+                document.getElementById("navempresa2").style.display = "none"; 
+                document.getElementById("navcliente").style.display = "none";
+                document.getElementById("navadministrador").style.display = "none";
+                document.getElementById("navempresa").style.display = "none";          
                 break;
             case "cliente":
 
                 document.getElementById("condutor").style.display = "none";
                 document.getElementById("administrador").style.display = "none";
                 document.getElementById("empresa").style.display = "none";
+                document.getElementById("navcondutor2").style.display = "none";
+                document.getElementById("navadministrador2").style.display = "none";
+                document.getElementById("navempresa2").style.display = "none"; 
+                document.getElementById("navcondutor").style.display = "none";
+                document.getElementById("navadministrador").style.display = "none";
+                document.getElementById("navempresa").style.display = "none";    
+                getlojastopcliente();              
                 break;
-            case "administrador":
+            case "admin":
 
                 document.getElementById("cliente").style.display = "none";
                 document.getElementById("condutor").style.display = "none";
                 document.getElementById("empresa").style.display = "none";
+                document.getElementById("navcliente2").style.display = "none";
+                document.getElementById("navcondutor2").style.display = "none";
+                document.getElementById("navempresa2").style.display = "none";
+                document.getElementById("navcliente").style.display = "none";
+                document.getElementById("navcondutor").style.display = "none";
+                document.getElementById("navempresa").style.display = "none";
+                get_adminspendentes();
                 break;
             case "empresa":
 
                 document.getElementById("cliente").style.display = "none";
                 document.getElementById("administrador").style.display = "none";
                 document.getElementById("condutor").style.display = "none";
+                document.getElementById("navcliente2").style.display = "none";
+                document.getElementById("navadministrador2").style.display = "none";
+                document.getElementById("navcondutor2").style.display = "none";  
+                document.getElementById("navcliente").style.display = "none";
+                document.getElementById("navadministrador").style.display = "none";
+                document.getElementById("navcondutor").style.display = "none";  
                 verificarloja(token);
                 break;
         }
@@ -637,7 +936,83 @@ function chamarprodutos(id,token){
 
     }, 1000);
 
+    // client area
 
+    function getlojastopcliente(){
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+
+
+        $.ajax({
+            url: 'http://' + urlattime + '/cliente/top_stores',
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+
+            success: function (data) {
+
+              
+                var nomes=data.nome;
+                var id= data.id;
+                for(counter = 0; counter < nomes.length; counter++){
+                    getimage(id[counter]);
+                    $('#encontrartoplojas').append(`<div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img id="${id[counter]}" src="">
+          <span  style="color:black"class="card-title">${nomes[counter]}</span>
+        </div>
+        </div>`)
+                }
+                
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+
+            }
+
+        })
+
+
+    }
+
+function getimage(id){
+    var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+       var url;
+    $.ajax({
+            url: 'http://' + urlattime + '/cliente/image/id='+id,
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+            success: function (data) {
+            console.log(data.nome_ficheiro)
+              url= data.nome_ficheiro;
+               test(url,id);
+                
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus , jqXHR.responseText)
+
+            }
+
+        })
+        
+return url;
+
+}
+function test(url,id){console.log(url+id)
+    document.getElementById(id).src='http://' + urlattime + '/'+url}
 </script>
+<script> M.AutoInit();</script>
 
 </html>
