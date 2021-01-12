@@ -996,6 +996,7 @@ function getimage(id){
             console.log(data.nome_ficheiro)
               url= data.nome_ficheiro;
                test(url,id);
+               
                 
 
             }
@@ -1010,7 +1011,8 @@ function getimage(id){
 return url;
 
 }
-function test(url,id){console.log(url+id)
+function test(url,id){
+    console.log(url+id)
     document.getElementById(id).src='http://' + urlattime + '/'+url}
 </script>
 <script> M.AutoInit();</script>
