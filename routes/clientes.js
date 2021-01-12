@@ -49,17 +49,19 @@ router.get('/image/:id', login, async (req, res, next) => {
             console.log("OK");
         }
     });
-    console.log(id);
-    let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () LIMIT 1 `;
+   
+    let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () Limit `;
     var idrl = req.params.id;
     var ids = idrl.replace("id=", "");
-    
+    console.log("aqui foi um "+ids);
+    console.log("----")
     database.all(sql,ids, (err, rows) => {
         if (err) {
+            console.log("erroimagem");
             res.status(500).send({ error: "bd_error" })
         }
         if (rows) {
-            
+            console.log("existe imagem");
             rows.forEach((row) => {
                 console.log(row.image);
                 res.status(200).send({ nome_ficheiro:row.image})
@@ -68,7 +70,8 @@ router.get('/image/:id', login, async (req, res, next) => {
             
            
         }
-        else { res.status(404).send({ message: "No_registry" }) }
+        else { console.log("n existe");
+        res.status(404).send({ message: "No_registry" }) }
     });
     database.close();
     return
