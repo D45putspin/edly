@@ -49,6 +49,7 @@ router.get('/image/:id', login, async (req, res, next) => {
             console.log("OK");
         }
     });
+    console.log(id);
     let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () LIMIT 1 `;
     var idrl = req.params.id;
     var ids = idrl.replace("id=", "");
