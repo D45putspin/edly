@@ -151,7 +151,11 @@
 <section id="cliente">
     <!-- Pagina do encontrar-->
     <div id="encontrar">
-        <h1>encontrar</h1>
+        <h1>Top</h1>
+        <div class="row" id="encontrartoplojas">
+
+
+        </div>
 
     </div>
     <!-- Pagina de editar cliente-->
@@ -782,7 +786,6 @@
 
                 var nomes = data.nome;
                 var imagem = data.url;
-
                 var descri = data.descricao;
                 var preco = data.preco;
                 $('#DispNrLojas').css("visibility", "hidden");
@@ -790,7 +793,6 @@
                     console.log(imagem[i]);
                     $('#rowprodutos').append(`
                     <a href="?produto=${i + 1}">
-                       
                     <div class="col s2">
                         <div class="cardproduto">
                             <div class="card">
@@ -952,10 +954,20 @@
 
             success: function (data) {
 
-                if (data.message != "sem lojas") {
-                    document.getElementById("numerodeloja").innerHTML = data.message;
-                    getlojas(ident, token, data.message);
+              
+                var nomes=data.nome;
+                var id= data.id;
+                for(counter = 0; counter < nomes.length; counter++){
+                    getimage(id[counter]);
+                    $('#encontrartoplojas').append(`<div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img id="${id[counter]}" src="">
+          <span  style="color:black"class="card-title">${nomes[counter]}</span>
+        </div>
+        </div>`)
                 }
+                
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -969,7 +981,37 @@
 
     }
 
+function getimage(id){
+    var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+       var url;
+    $.ajax({
+            url: 'http://' + urlattime + '/cliente/image/id='+id,
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
 
+
+            success: function (data) {
+            console.log(data.nome_ficheiro)
+              url= data.nome_ficheiro;
+               test(url,id);
+                
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus , jqXHR.responseText)
+
+            }
+
+        })
+        
+return url;
+
+}
+function test(url,id){console.log(url+id)
+    document.getElementById(id).src='http://' + urlattime + '/'+url}
 </script>
 <script> M.AutoInit();</script>
 
