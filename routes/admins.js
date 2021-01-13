@@ -30,7 +30,7 @@ router.post('/create_admin', async (req, res, next) => {
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
 
-    // check type of user for admmin can permission entrance
+    // check type of user for admin can permission entrance
 
     if (tipo_ == "condutor" || tipo_ == "empresa") {
         var status = "pending";
