@@ -957,15 +957,18 @@
               
                 var nomes=data.nome;
                 var id= data.id;
-                for(counter = 0; counter < nomes.length; counter++){
-                    getimage(id[counter]);
+                for( var counter = 0; counter < nomes.length; counter++){
+                   
                     $('#encontrartoplojas').append(`<div class="col s12 m4">
       <div class="card">
         <div class="card-image">
-          <img id="${id[counter]}" src="">
+          <img style="height:80%"id="${id[counter]}"< src="">
           <span  style="color:black"class="card-title">${nomes[counter]}</span>
         </div>
         </div>`)
+     
+        getimage(id[counter]);
+        
                 }
                 
 
@@ -985,6 +988,7 @@ function getimage(id){
     var token = document.cookie;
         var tokenrl = token.replace("token=", "");
        var url;
+      
     $.ajax({
             url: 'http://' + urlattime + '/cliente/image/id='+id,
             type: 'GET',
@@ -993,26 +997,27 @@ function getimage(id){
 
 
             success: function (data) {
-            console.log(data.nome_ficheiro)
-              url= data.nome_ficheiro;
+          
+               url= data.nome_ficheiro;
+            
                test(url,id);
                
                 
 
             }
             , error: function (jqXHR, textStatus, err) {
-
+               
                 console.log(err, textStatus , jqXHR.responseText)
 
             }
-
+             
         })
         
 return url;
 
 }
 function test(url,id){
-    console.log(url+id)
+    
     document.getElementById(id).src='http://' + urlattime + '/'+url}
 </script>
 <script> M.AutoInit();</script>
