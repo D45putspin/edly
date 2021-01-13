@@ -18,7 +18,7 @@ router.get('/top_stores', login, async (req, res, next) => {
     var nomes = [];
     var ids = []
     const decode = jwt.verify(req.headers.token, "palavradificil");
-    
+
 
     database.all(sql, (err, rows) => {
         if (err) {
@@ -26,13 +26,13 @@ router.get('/top_stores', login, async (req, res, next) => {
         }
         if (rows) {
             rows.forEach((row) => {
-                
-            nomes.push(row.Nome);
-            ids.push(row.Id_loja)
+
+                nomes.push(row.Nome);
+                ids.push(row.Id_loja)
 
 
             });
-            
+
             res.status(200).send({ nome: nomes, id: ids })
         }
         else { res.status(404).send({ message: "No_registry" }) }
@@ -49,29 +49,35 @@ router.get('/image/:id', login, async (req, res, next) => {
             console.log("OK");
         }
     });
-   
-    let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () Limit `;
+
+    let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () Limit 1 `;
     var idrl = req.params.id;
     var ids = idrl.replace("id=", "");
-    console.log("aqui foi um "+ids);
-    console.log("----")
-    database.all(sql,ids, (err, rows) => {
+
+    database.all(sql, ids, (err, rows) => {
         if (err) {
             console.log("erroimagem");
             res.status(500).send({ error: "bd_error" })
         }
-        if (rows) {
-            console.log("existe imagem");
-            rows.forEach((row) => {
-                console.log(row.image);
-                res.status(200).send({ nome_ficheiro:row.image})
+        else {
+            if (rows) {
+                console.log("aqui foi um " + ids);
+                console.log("----");
+                console.log("existe imagem");
+                console.log(rows);
+                rows.forEach((row) => {
+                    console.log(row.image);
+                    res.status(200).send({ nome_ficheiro: row.image })
 
-            });
-            
-           
+                });
+
+
+            }
+            else {
+                console.log("n existe");
+                res.status(404).send({ message: "No_registry" })
+            }
         }
-        else { console.log("n existe");
-        res.status(404).send({ message: "No_registry" }) }
     });
     database.close();
     return
