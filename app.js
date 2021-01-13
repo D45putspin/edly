@@ -8,6 +8,7 @@ const rotaClientes = require('./routes/clientes');
 const rotaUtilizadores = require('./routes/users');
 const rotaLojas = require('./routes/lojas');
 const rotaEncomendas= require('./routes/encomendas');
+const rotaAdmins= require('./routes/admins');
 
 app.use(bodyParser.urlencoded({extended: false})); //apenas dados simples
 app.use(bodyParser.json());
@@ -18,5 +19,6 @@ app.use('/loja',rotaLojas);
 app.use('/cliente',rotaClientes);
 app.use(express.static('uploads'));
 app.use('/encomenda',rotaEncomendas);
+app.use('/funcadmin',rotaAdmins);
 
 module.exports = app;
