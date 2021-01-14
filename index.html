@@ -23,14 +23,13 @@
     <!-- Navegation bar-->
     <nav class="nav-extended">
         <div class="navlr">
-            
-            <!-- Nome do user e botao logout-->              
+            <!-- Nome do user e botao logout-->
             <ul>
                 <li><a class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style="color:black;"
-                id="username" href="#"></a></li>
+                        id="username" href="#"></a></li>
                 <li> <a class="lr" type="button" id="logout" value="logout">logout</a></li>
             </ul>
-            <!-- Navegation bar para clientes-->            
+            <!-- Navegation bar para clientes-->
             <div id="navcliente2">
                 <ul>
                     <div class="typeln">
@@ -41,7 +40,7 @@
                     </div>
                 </ul>
             </div>
-            <!-- Navegation bar para condutores-->  
+            <!-- Navegation bar para condutores-->
             <div id="navcondutor2">
                 <ul>
                     <div class="typeln">
@@ -51,8 +50,8 @@
                         <h4>Condutor</h4>
                     </div>
                 </ul>
-            </div>  
-            <!-- Navegation bar para empresas--> 
+            </div>
+            <!-- Navegation bar para empresas-->
             <div id="navempresa2">
                 <ul>
                     <div class="typeln">
@@ -62,8 +61,8 @@
                         <h4>Empresa</h4>
                     </div>
                 </ul>
-            </div>   
-            <!-- Navegation bar para admin--> 
+            </div>
+            <!-- Navegation bar para admin-->
             <div id="navadministrador2">
                 <ul>
                     <div class="typeln">
@@ -73,55 +72,54 @@
                         <h4>Administrador</h4>
                     </div>
                 </ul>
-            </div>                               
+            </div>
         </div>
         <div class="nav-wrapper">
             <a href="index.html">
-            <img class="responsive-img" src="imagens/logo.png">
+                <img class="responsive-img" src="imagens/logo.png">
             </a>
         </div>
 
-
-                <!-- Navegation bar para clientes-->
-                <div id="navcliente"> 
-                    <div class="nav-content">
-                        <ul class="tabs tabs-transparent">  
-                            <li class="tab"><a class="active" href="#encontrar">Encontrar</a></li>
-                            <li class="tab"><a href="#editarcliente">Editar dados</a></li>
-                            <li class="tab"><a href="#contacte">Contacte-nos</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Navegation bar para condutores-->
-                <div id="navcondutor">
-                    <div class="nav-content">
-                        <ul class="tabs tabs-transparent">  
-                            <li class="tab"><a class="active" href="#encomendas">Encomendas</a></li>
-                            <li class="tab"><a href="#editarcondutor">Editar dados</a></li>
-                            <li class="tab"><a href="#contacte">Contacte-nos</a></li> 
-                        </ul>
-                    </div>
-                </div>
-                <!-- Navegation bar para empresas-->
-                <div id="navempresa">
-                    <div class="nav-content">
-                        <ul class="tabs tabs-transparent"> 
-                            <li class="tab"><a class="active" href="#lojas">Lojas</a></li>
-                            <li class="tab"><a href="#editarempresas">Editar dados</a></li>
-                            <li class="tab"><a href="#contacte">Contacte-nos</a></li> 
-                        </ul>
-                    </div> 
-                </div>
-                <!-- Navegation bar para admin-->
-                <div id="navadministrador">
-                    <div class="nav-content">
-                        <ul class="tabs tabs-transparent"> 
-                            <li class="tab"><a class="active" href="#pedidos">Pedidos</a></li>
-                            <li class="tab"><a href="#editaradmin">Editar dados</a></li>
-                            <li class="tab"><a href="#contacte">Contacte-nos</a></li>  
-                        </ul>
-                    </div> 
-                </div>
+        <!-- Navegation bar para clientes-->
+        <div id="navcliente">
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a class="active" href="#encontrar">Encontrar</a></li>
+                    <li class="tab"><a href="#editarcliente">Editar dados</a></li>
+                    <li class="tab"><a href="#contactecliente">Contacte-nos</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Navegation bar para condutores-->
+        <div id="navcondutor">
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a class="active" href="#encomendas">Encomendas</a></li>
+                    <li class="tab"><a href="#editarcondutor">Editar dados</a></li>
+                    <li class="tab"><a href="#contactecondutor">Contacte-nos</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Navegation bar para empresas-->
+        <div id="navempresa">
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a class="active" href="#lojas">Lojas</a></li>
+                    <li class="tab"><a href="#editarempresa">Editar dados</a></li>
+                    <li class="tab"><a href="#contacteempresa">Contacte-nos</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Navegation bar para admin-->
+        <div id="navadministrador">
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a class="active" href="#pedidos">Pedidos</a></li>
+                    <li class="tab"><a href="#editaradmin">Editar dados</a></li>
+                    <li class="tab"><a href="#contacteadmin">Contacte-nos</a></li>
+                </ul>
+            </div>
+        </div>
 
     </nav>
 </header>
@@ -137,11 +135,89 @@
     </div>
     <!-- Pagina de editar condutor-->
     <div id="editarcondutor">
-        <h1>editar</h1>
+        <h2>Editar dados</h2>
+        <div class="row" style="margin-left: 10%; margin-right: auto;">
+            <form class="col s12">
+                <div id="esquerda">
+                    <h6>Nome</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nome" type="text" class="validate">
+                        </div>
+                    </div>
+                    <h6>Email</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="email" type="email" class="validate">
+                        </div>
+                    </div>
+                    <h6>Codigo-Postal</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="codigopostal" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}"
+                                title="Coloque o formato correto XXXX-XXX" placeholder="XXXX-XXX">
+                        </div>
+                    </div>
+                    <h6>Morada</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="morada" type="text" class="validate">
+                        </div>
+                    </div>
+                    <h6>Tipo de veiculo</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="tipo_veiculo" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+                <div id="direita">
+                    <h6>NIF</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nif" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}"
+                                title="Insira um NIF valido.">
+                        </div>
+                    </div>
+
+                    <h6>Cidade</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="cidade" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <h6>Matricula</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="matricula type=" text" class="validate">
+                        </div>
+                    </div>
+
+                    <h6>Palavra-passe</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="password" type="password" class="validate" oninput="setpasswd()">
+                            <p class="message" id="message"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="botoes">
+                    <button class="waves-effect waves-light btn-small #212121 grey darken-4"
+                        id="confirmarcondutor">Confirmar</button>
+                    <button class="waves-effect waves-light btn-small #212121 orange darken-1"
+                        id="editarpasswordcondutor">Alterar palavra-passe</button>
+                    <button class="waves-effect waves-light btn-small red darken-4" id="eliminarcondutor">Eliminar
+                        conta</button>
+                </div>
+        </div>
+        </form>
+    </div>
+
     </div>
     <!-- Pagina de contacte-->
-    <div id="contacte">
-     
+    <div id="contactecondutor">
+
     </div>
 
 </section>
@@ -153,18 +229,79 @@
     <div id="encontrar">
         <h1>Top</h1>
         <div class="row" id="encontrartoplojas">
+        </div>
+    </div>
 
+    <!-- Pagina de editar cliente-->
+    <div id="editarcliente">
+        <h2>Editar dados</h2>
+        <div class="row" style="margin-left: 10%; margin-right: auto;">
+            <form class="col s12">
+                <div id="esquerda">
+                    <h6>Nome</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nome" type="text" class="validate">
+                        </div>
+                    </div>
+                    <h6>Email</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="email" type="email" class="validate">
+                        </div>
+                    </div>
+                    <h6>Codigo-Postal</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="codigopostal" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}"
+                                title="Coloque o formato correto XXXX-XXX" placeholder="XXXX-XXX">
+                        </div>
+                    </div>
+                    <h6>Morada</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="morada" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+                <div id="direita">
+                    <h6>NIF</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nif" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}"
+                                title="Insira um NIF valido.">
+                        </div>
+                    </div>
 
+                    <h6>Cidade</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="cidade" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <h6>Palavra-passe</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="password" type="password" class="validate" oninput="setpasswd()">
+                            <p class="message" id="message"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="botoes">
+                    <button class="waves-effect waves-light btn-small #212121 grey darken-4"
+                        id="editarcliente">Confirmar</button>
+                    <button class="waves-effect waves-light btn-small #212121 orange darken-1"
+                        id="editarpasswordcliente">Alterar palavra-passe</button>
+                    <button class="waves-effect waves-light btn-small red darken-4" id="eliminarcliente">Eliminar
+                        conta</button>
+                </div>
+            </form>
         </div>
 
     </div>
-    <!-- Pagina de editar cliente-->
-    <div id="editarcondutor">
-        <h1>editar</h1>
-    </div>
     <!-- Pagina de contacte-->
-    <div id="contacte">
-      
+    <div id="contactecliente">
     </div>
 </section>
 
@@ -183,20 +320,85 @@
 <!-- Pagina do administradores-->
 
 <section id="administrador">
-        <!-- Pagina dos pedidos-->
-        <div id="pedidos">
-            <h1> pedidos pendentes </h1>
-            <div class="row " id="rowpedidospend">
-            </div>
+    <!-- Pagina dos pedidos-->
+    <div id="pedidos">
+        <h1> pedidos pendentes </h1>
+        <div class="row " id="rowpedidospend">
         </div>
-        <!-- Pagina de editar admin-->
-        <div id="editaradmin">
-            <h1>editar</h1>
+    </div>
+    <!-- Pagina de editar admin-->
+    <div id="editaradmin">
+        <h2>Editar dados</h2>
+        <div class="row" style="margin-left: 10%; margin-right: auto;">
+            <form class="col s12">
+                <div id="esquerda">
+                    <h6>Nome</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nome" type="text" class="validate">
+                        </div>
+                    </div>
+                    <h6>Email</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="email" type="email" class="validate">
+                        </div>
+                    </div>
+                    <h6>Codigo-Postal</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="codigopostal" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}"
+                                title="Coloque o formato correto XXXX-XXX" placeholder="XXXX-XXX">
+                        </div>
+                    </div>
+                    <h6>Morada</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="morada" type="text" class="validate">
+                        </div>
+
+                    </div>
+                </div>
+                <div id="direita">
+                    <h6>NIF</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nif" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}"
+                                title="Insira um NIF valido.">
+                        </div>
+                    </div>
+
+                    <h6>Cidade</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="cidade" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <h6>Palavra-passe</h6>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="password" type="password" class="validate" oninput="setpasswd()">
+                            <p class="message" id="message"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="botoes">
+                    <button class="waves-effect waves-light btn-small #212121 grey darken-4"
+                        id="editaradmin">Confirmar</button>
+                    <button class="waves-effect waves-light btn-small #212121 orange darken-1"
+                        id="editarpasswordadmin">Alterar palavra-passe</button>
+                    <button class="waves-effect waves-light btn-small red darken-4" id="eliminaradmin">Eliminar
+                        conta</button>
+                </div>
         </div>
-        <!-- Pagina de contacte-->
-        <div id="contacte">
-            
-        </div>
+        </form>
+    </div>
+    </div>
+    <!-- Pagina de contacte-->
+    <div id="contacteadmin">
+
+    </div>
 
     </div>
 
@@ -234,121 +436,211 @@
 
 <section id="empresa">
 
-<!-- Pagina de lojas-->
+    <!-- Pagina de lojas-->
 
-<div id="lojas">
+    <div id="lojas">
 
-    <a href="#" id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
-        <span class="material-icons">
-            add
-        </span>
-        <i class="fa fa-plus my-float"> </i>
-    </a>
+        <a href="#" id="myBtn" class="float " data-toggle="tooltip" title="adicionar lojas">
+            <span class="material-icons">
+                add
+            </span>
+            <i class="fa fa-plus my-float"> </i>
+        </a>
 
-    <div id="myModal" class="modal">
+        <div id="myModal" class="modal">
 
-        <!-- Criar loja -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Nova Loja</h2>
-                <span class="close">&times;</span>
+            <!-- Criar loja -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Nova Loja</h2>
+                    <span class="close">&times;</span>
 
-            </div>
-            <div class="row">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <div class="esquerda">
-                            <input type="text" placeholder="Nome" id="nome_empresa" name="nome_empresa" class="validate">
-                            <input type="text" placeholder="Tipo de Comida" id="tipo_empresa" name="tipo_empresa" class="validate">
-                            <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style=" float: left;" type="button" id="enter_empresa" value="enter">
-                            </div>
-                            <div class="direita">
-                            <input type="text" placeholder="Morada" id="morada_empresa" name="morada_empresa" class="validate">
-                            <input type="text" pattern="[0-9]{4}[-]{1}[0-9]{3}" title="Coloque o formato correto XXXX-XXX" placeholder="Código postal (XXXX-XXX)" id="cp_empresa" name="cp_empresa" class="validate">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>  
-
-        </div>
-
-    </div>
-    <div id="myModal1" class="modal">
-
-                <!-- Criar produto -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>Adicionar Produtos</h2>
-                        <span class="close1">&times;</span>
-        
-                    </div>
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <div class="esquerda">
-                                    <input type="text" placeholder="Nome Produto" id="nome_produto" name="nome_produto" class="validate">
-                                    <input type="text" placeholder="Preço" id="preco_produto" name="preco_produto" class="validate">
-                                    <div class="fotop">
-                                    <form action="#">
-                                        <div class="file-field input-field">
-                                          <div class="lr waves-effect waves-light btn-small #fafafa grey lighten-5">
-                                            <span>Foto</span>
-                                            <input type="file" id="foto_produto" name="foto_produto" accept="image/png, image/jpeg">
-                                          </div>
-                                          <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
-                                          </div>
-                                        </div>
-                                      </form>
-                                    </div>
-                                    <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5" style=" float: left;" type="button" id="enter_empresa1" value="enter">
-                                    </div>
-                                    <div class="direita">
-                                    <input type="text" placeholder="Descrição do produto" id="descricao_produto" name="descricao_produto" class="validate">
-                                    </div>
+                </div>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <div class="esquerda">
+                                    <input type="text" placeholder="Nome" id="nome_empresa" name="nome_empresa"
+                                        class="validate">
+                                    <input type="text" placeholder="Tipo de Comida" id="tipo_empresa"
+                                        name="tipo_empresa" class="validate">
+                                    <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5"
+                                        style=" float: left;" type="button" id="enter_empresa" value="enter">
+                                </div>
+                                <div class="direita">
+                                    <input type="text" placeholder="Morada" id="morada_empresa" name="morada_empresa"
+                                        class="validate">
+                                    <input type="text" pattern="[0-9]{4}[-]{1}[0-9]{3}"
+                                        title="Coloque o formato correto XXXX-XXX"
+                                        placeholder="Código postal (XXXX-XXX)" id="cp_empresa" name="cp_empresa"
+                                        class="validate">
                                 </div>
                             </div>
-                        </form>
-                    </div>  
-        
+                        </div>
+                    </form>
                 </div>
 
+            </div>
+
+        </div>
+        <div id="myModal1" class="modal">
+
+            <!-- Criar produto -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Adicionar Produtos</h2>
+                    <span class="close1">&times;</span>
+
+                </div>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <div class="esquerda">
+                                    <input type="text" placeholder="Nome Produto" id="nome_produto" name="nome_produto"
+                                        class="validate">
+                                    <input type="text" placeholder="Preço" id="preco_produto" name="preco_produto"
+                                        class="validate">
+                                    <div class="fotop">
+                                        <form action="#">
+                                            <div class="file-field input-field">
+                                                <div
+                                                    class="lr waves-effect waves-light btn-small #fafafa grey lighten-5">
+                                                    <span>Foto</span>
+                                                    <input type="file" id="foto_produto" name="foto_produto"
+                                                        accept="image/png, image/jpeg">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text"
+                                                        placeholder="Upload one or more files">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <input class="lr waves-effect waves-light btn-small #fafafa grey lighten-5"
+                                        style=" float: left;" type="button" id="enter_empresa1" value="enter">
+                                </div>
+                                <div class="direita">
+                                    <input type="text" placeholder="Descrição do produto" id="descricao_produto"
+                                        name="descricao_produto" class="validate">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <ul id="ullojas">
+            <div id="DispNrLojas">
+                <span class="material-icons">
+                    store
+                </span>
+                <h1 id="numerodeloja"> 0 </h1>
+            </div>
+            <div class="row " id="row">
+
+            </div>
+        </ul>
+        <ul id="produtos" style="position: relative; top: -150px;">
+            <div id="namelojaprodutos">
+
+            </div>
+            <div class="row " id="rowprodutos">
+
+            </div>
+        </ul>
     </div>
-    <ul id="ullojas">
-        <div id="DispNrLojas">
-            <span class="material-icons">
-                store
-            </span>
-            <h1 id="numerodeloja"> 0 </h1>
+
+    <!-- Pagina de editar empresas-->
+
+    <div id="editarempresa">
+        <h2>Editar dados</h2>
+        <div class="row" style="margin-left: 10%; margin-right: auto;">
+            <form class="col s12">
+                <div id="esquerda">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h6>Nome</h6>
+                            <input id="nome" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h6>Email</h6>
+                            <input id="email" type="email" class="validate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h6>Codigo-Postal</h6>
+                            <input id="codigopostal" type="text" class="validate" pattern="[0-9]{4}[-]{1}[0-9]{3}"
+                                title="Coloque o formato correto XXXX-XXX" placeholder="XXXX-XXX">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h6>Morada</h6>
+                            <input id="morada" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+                <div id="direita">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h6>NIF</h6>
+                            <input id="nif" type="text" class="validate" pattern="[1,2,5]{1}[0-9]{8}"
+                                title="Insira um NIF valido.">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <h6>Cidade</h6>
+                            <input id="cidade" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6"> 
+                            <h6>Palavra-passe</h6>
+                            <input id="password" type="password" class="validate" oninput="setpasswd()">
+                            <p class="message" id="message"></p>
+                        </div>
+                    </div>
+
+                    <div class="file-field input-field col s6">
+                        <div class="waves-effect waves-light btn-small #212121 grey darken-4">
+                          <span>Foto</span>
+                          <input type="file" name="img_empresa" id="img_empresa">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input class="file-path validate" type="text" placeholder="escolha uma foto ">
+                        </div>
+                      </div>
+                </div>
+                <br>
+                <div id="botoes">
+                    <button class="waves-effect waves-light btn-small #212121 grey darken-4"
+                        id="confirmarempresa">Confirmar</button>
+                    <button class="waves-effect waves-light btn-small #212121 orange darken-1"
+                        id="editarpasswordempresa">Alterar palavra-passe</button>
+                    <button class="waves-effect waves-light btn-small red darken-4" id="eliminarempresa">Eliminar
+                        conta</button>
+                </div>
+            </form>
         </div>
-        <div class="row " id="row">
 
-        </div>
-    </ul>
-    <ul id="produtos" style="position: relative; top: -150px;">
-        <div id="namelojaprodutos">
-            
-        </div>
-        <div class="row " id="rowprodutos">
+    </div>
 
-        </div>
-    </ul>
-</div>
+    <!-- Pagina de contacte-->
 
-<!-- Pagina de editar empresas-->
+    <div id="contacteempresa">
 
-<div id="editarempresas">
-
-</div>
-
-<!-- Pagina de contacte-->
-
-<div id="contacte">
-
-</div>
+    </div>
 
 </section>
 <script>
@@ -373,27 +665,34 @@
         fd.append('id_empresa', tokendecode.id_user);
         fd.append('preco', preco_prod);
 
+        if (nome_prod && descricao_produto && preco_prod) {
+
+            if (preco_prod > 0) {
+                $.ajax({
+                    url: 'http://' + urlattime + '/produtos/criar-produtos',
+                    type: 'POST',
+                    cache: false,
+                    data: fd,
+                    headers: { "token": tokenrl },
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        M.toast({ html: 'Produto criado com sucesso!', classes: 'rounded' })
 
 
-        $.ajax({
-            url: 'http://' + urlattime + '/produtos/criar-produtos',
-            type: 'POST',
-            cache: false,
-            data: fd,
-            headers: { "token": tokenrl },
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                console.log(data);
-                M.toast({html: 'Produto criado com sucesso!',classes: 'rounded'})
-
-
+                    }
+                    , error: function (jqXHR, textStatus, err) {
+                        console.log(err, textStatus);
+                        M.toast({ html: 'Erro ao criar o produto!', classes: 'rounded' })
+                    }
+                })
+            } else {
+                M.toast({ html: 'Coloque um formato de preço correto', classes: 'rounded' })
             }
-            , error: function (jqXHR, textStatus, err) {
-                console.log(err, textStatus);
-                M.toast({html: 'Erro ao criar o produto!',classes: 'rounded'})
-            }
-        })
+        } else {
+            M.toast({ html: 'Campos vazios!', classes: 'rounded' })
+        }
 
 
 
@@ -414,26 +713,26 @@
         let tokendecode = decode(tokenrl);
         let id = tokendecode.id_user;
 
-        if(nome && tipo && morada && cod_postal) {
-        
-        $.ajax({
-            url: 'http://' + urlattime + '/loja/inserir_lojas',
-            type: 'POST',
-            cache: false,
-            data: { nome: nome, tipo: tipo, morada: morada, token: tokenrl, id: id, cod_postal: cod_postal },
-            headers: { "token": tokenrl },
-            success: function (data) {
-                window.location.href = "?sucesso=y";
-                M.toast({html: 'Loja criada com sucesso',classes: 'rounded'})
+        if (nome && tipo && morada && cod_postal) {
 
-            }
-            , error: function (jqXHR, textStatus, err) {
-                M.toast({html: 'Erro ao criar a loja!',classes: 'rounded'})
-                console.log(err, textStatus);
-            }
-        })
-        }else {
-            M.toast({html: 'Campos vazios',classes: 'rounded'})
+            $.ajax({
+                url: 'http://' + urlattime + '/loja/inserir_lojas',
+                type: 'POST',
+                cache: false,
+                data: { nome: nome, tipo: tipo, morada: morada, token: tokenrl, id: id, cod_postal: cod_postal },
+                headers: { "token": tokenrl },
+                success: function (data) {
+                    window.location.href = "?sucesso=y";
+                    M.toast({ html: 'Loja criada com sucesso', classes: 'rounded' })
+
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    M.toast({ html: 'Erro ao criar a loja!', classes: 'rounded' })
+                    console.log(err, textStatus);
+                }
+            })
+        } else {
+            M.toast({ html: 'Campos vazios', classes: 'rounded' })
         }
     });
 
@@ -546,7 +845,7 @@
 
     }
     //functions admin 
-    function get_adminspendentes(){
+    function get_adminspendentes() {
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
 
@@ -562,7 +861,7 @@
 
 
                 var nomes = data.nome;
-                var ids=data.id;
+                var ids = data.id;
                 console.log(nomes);
 
 
@@ -590,8 +889,8 @@
                       </div>
                     <a>`)
                 }
-        
-     
+
+
 
 
 
@@ -613,71 +912,71 @@
     }
 
     //functions admin 
-    function aprove(id){
-        var ident=id;
+    function aprove(id) {
+        var ident = id;
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
-        if (tokendecode.tipo=="admin"){
+        if (tokendecode.tipo == "admin") {
             $.ajax({
-            url: 'http://' + urlattime + '/user/acept_pending/id='+ident ,
-            type: 'PUT',
-            cache: false,
-            headers: { "token": tokenrl },
+                url: 'http://' + urlattime + '/user/acept_pending/id=' + ident,
+                type: 'PUT',
+                cache: false,
+                headers: { "token": tokenrl },
 
 
-            success: function (data) {
-                location.reload(); 
+                success: function (data) {
+                    location.reload();
 
 
-            }
-            , error: function (jqXHR, textStatus, err) {
+                }
+                , error: function (jqXHR, textStatus, err) {
 
-                console.log(err, textStatus)
-            }
-        })
+                    console.log(err, textStatus)
+                }
+            })
 
 
-            
+
         }
-        
+
     }
     //functions admin
-    function delete_aprove(id){
+    function delete_aprove(id) {
         window.alert("eee")
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
-        if (tokendecode.tipo=="admin"){
+        if (tokendecode.tipo == "admin") {
             $.ajax({
-            url: 'http://' + urlattime + '/user/delete_pending' ,
-            type: 'DELETE',
-            cache: false,
-            data: { id : id },
-            headers: { "token": tokenrl },
+                url: 'http://' + urlattime + '/user/delete_pending',
+                type: 'DELETE',
+                cache: false,
+                data: { id: id },
+                headers: { "token": tokenrl },
 
 
-            success: function (data) {
-                location.reload(); 
+                success: function (data) {
+                    location.reload();
 
 
-            }
-            , error: function (jqXHR, textStatus, err) {
+                }
+                , error: function (jqXHR, textStatus, err) {
 
-                console.log(err, textStatus)
-            }
-        })
+                    console.log(err, textStatus)
+                }
+            })
 
 
-            
+
         }
-        
+
     }
 
 
 
 
-//functions empresa 
+    //functions empresa 
     function getlojas(id, token, nrlojas) {
         var ident = id;
         var nr = nrlojas
@@ -734,12 +1033,14 @@
                                  <p style="font-size: 15px;position: relative; top: -10;"> ${cpsingular[i]}</p>
                                  </div>
                                  <div>
-                                    <span class="material-icons" style="right: -100px;position: relative;">
-                                        create
-                                    </span>
-                                    <span class="material-icons" style="right: -120px;position: relative;">
-                                        delete
-                                    </span>
+                                    <div class="iconslojas right-align" style="position:relative; right:30px">
+                                        <span class="material-icons">
+                                            create
+                                        </span>
+                                        <span class="material-icons" style="right: -15px; position:relative;">
+                                            delete
+                                        </span>
+                                    </div>
                                 </div>
                                 </div>
                                 </div>
@@ -766,7 +1067,7 @@
 
     }
 
-//functions empresa -loja
+    //functions empresa -loja
     function chamarprodutos(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
@@ -810,17 +1111,20 @@
                                         <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
                                         <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
                                     </div>
-                                    <span class="material-icons orange-text darken-1" style="right: -220px; position: relative; bottom: -15px;">
-                                        create
-                                    </span>
-                                    <span class="material-icons red-text darken-1" style="right: -240px; position: relative; bottom: -15px;">
-                                        delete
-                                    </span>                                    
+                                    <div class="iconsproduto right-align" style="position:relative; bottom: -15px;">
+                                        <span class="material-icons orange-text darken-1">
+                                            create
+                                        </span>
+                                        <span class="material-icons red-text darken-1" style="right: -20px; position: relative;">
+                                            delete
+                                        </span>   
+                                    </div>                                 
                                 </div>
                             </div>
                         </div>
                     </div>`
-                )}
+                    )
+                }
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -832,7 +1136,7 @@
 
 
     }
-   
+
     //LOGOUT/**//**//**//**//**//**//**//**//**//**//**//**//**//**/
     $('#logout').click(function () {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -873,10 +1177,10 @@
                 document.getElementById("empresa").style.display = "none";
                 document.getElementById("navcliente2").style.display = "none";
                 document.getElementById("navadministrador2").style.display = "none";
-                document.getElementById("navempresa2").style.display = "none"; 
+                document.getElementById("navempresa2").style.display = "none";
                 document.getElementById("navcliente").style.display = "none";
                 document.getElementById("navadministrador").style.display = "none";
-                document.getElementById("navempresa").style.display = "none";          
+                document.getElementById("navempresa").style.display = "none";
                 break;
             case "cliente":
 
@@ -885,11 +1189,11 @@
                 document.getElementById("empresa").style.display = "none";
                 document.getElementById("navcondutor2").style.display = "none";
                 document.getElementById("navadministrador2").style.display = "none";
-                document.getElementById("navempresa2").style.display = "none"; 
+                document.getElementById("navempresa2").style.display = "none";
                 document.getElementById("navcondutor").style.display = "none";
                 document.getElementById("navadministrador").style.display = "none";
-                document.getElementById("navempresa").style.display = "none";    
-                getlojastopcliente();              
+                document.getElementById("navempresa").style.display = "none";
+                getlojastopcliente();
                 break;
             case "admin":
 
@@ -911,10 +1215,10 @@
                 document.getElementById("condutor").style.display = "none";
                 document.getElementById("navcliente2").style.display = "none";
                 document.getElementById("navadministrador2").style.display = "none";
-                document.getElementById("navcondutor2").style.display = "none";  
+                document.getElementById("navcondutor2").style.display = "none";
                 document.getElementById("navcliente").style.display = "none";
                 document.getElementById("navadministrador").style.display = "none";
-                document.getElementById("navcondutor").style.display = "none";  
+                document.getElementById("navcondutor").style.display = "none";
                 verificarloja(token);
                 break;
         }
@@ -938,7 +1242,7 @@
 
     // client area
 
-    function getlojastopcliente(){
+    function getlojastopcliente() {
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
@@ -954,11 +1258,11 @@
 
             success: function (data) {
 
-              
-                var nomes=data.nome;
-                var id= data.id;
-                for( var counter = 0; counter < nomes.length; counter++){
-                   
+
+                var nomes = data.nome;
+                var id = data.id;
+                for (var counter = 0; counter < nomes.length; counter++) {
+
                     $('#encontrartoplojas').append(`<div class="col s12 m4">
       <div class="card">
         <div class="card-image">
@@ -966,11 +1270,11 @@
           <span  style="color:black"class="card-title">${nomes[counter]}</span>
         </div>
         </div>`)
-     
-        getimage(id[counter]);
-        
+
+                    getimage(id[counter]);
+
                 }
-                
+
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -984,41 +1288,42 @@
 
     }
 
-function getimage(id){
-    var token = document.cookie;
+    function getimage(id) {
+        var token = document.cookie;
         var tokenrl = token.replace("token=", "");
-       var url;
-      
-    $.ajax({
-            url: 'http://' + urlattime + '/cliente/image/id='+id,
+        var url;
+
+        $.ajax({
+            url: 'http://' + urlattime + '/cliente/image/id=' + id,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
 
 
             success: function (data) {
-          
-               url= data.nome_ficheiro;
-            
-               test(url,id);
-               
-                
+
+                url = data.nome_ficheiro;
+
+                test(url, id);
+
+
 
             }
             , error: function (jqXHR, textStatus, err) {
-               
-                console.log(err, textStatus , jqXHR.responseText)
+
+                console.log(err, textStatus, jqXHR.responseText)
 
             }
-             
-        })
-        
-return url;
 
-}
-function test(url,id){
-    
-    document.getElementById(id).src='http://' + urlattime + '/'+url}
+        })
+
+        return url;
+
+    }
+    function test(url, id) {
+
+        document.getElementById(id).src = 'http://' + urlattime + '/' + url
+    }
 </script>
 <script> M.AutoInit();</script>
 
