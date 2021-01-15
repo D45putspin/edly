@@ -101,13 +101,13 @@ router.delete('/delete_order_item/', async (req, res, next) => {
     var nr_encomenda = req.body.nrEncomenda;
     var id_prod = req.body.idProduto;
 
-    
 
 
 
 
-    database.run(`DELETE FROM Encomendas WHERE Nr_encomenda = ? AND Id_produto = ?`, [nr_encomenda,id_prod], function (err) {
-        
+
+    database.run(`DELETE FROM Encomendas WHERE Nr_encomenda = ? AND Id_produto = ?`, [nr_encomenda, id_prod], function (err) {
+
         if (err) {
             return console.log(err.message);
         }
@@ -118,5 +118,84 @@ router.delete('/delete_order_item/', async (req, res, next) => {
     return res.status(201).send({ messagem: 'order_item_deleted' })
 
 });
+//------- new 15 jan----//
+
+router.get('/get_order_items/:id', async (req, res, next) => {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    let sql = `SELECT * FROM Encomendas  WHERE Nr_encomenda = ?`;
+
+
+    var idrl = req.params.id;
+    var idencomenda = idrl.replace("id=", "");
+
+   
+
+   
+    database.all(sql, idencomenda, (err, rows) => {
+        
+        if (err) {
+            res.status(500).send({ error: "bd_error" })
+        }
+        if (rows) {
+            
+            rows.forEach(async(row) => {
+                
+                var teste = await getProductsInOrder(row.Id_produto)
+                console.log(teste)
+                
+                
+            });
+            res.status(200).send({ produtos: arrayprodutos, nrencomenda: idencomenda })
+            
+        }
+        else { res.status(404).send({ message: "No_registry" }) }
+    });
+    database.close();
+    return
+
+});
+function getProductsInOrder(idProduto) {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    let sql = `SELECT * FROM Produto WHERE Id_produto = ?`;
+
+    return new Promise(function (resolve, reject) {
+        
+        database.all(sql, idProduto, async(err, rows) => {
+            var responseObj;
+            if (err) {
+                responseObj = {
+                    'error': err
+                  };
+            }
+            if (rows) {
+                var nome_prod
+                rows.forEach((row) => {
+                  nome_prod=row.Nome_produto;
+                });
+                responseObj = {
+                    "nome":nome_prod
+                 };
+                 resolve(responseObj);
+                
+            }
+            else { responseObj = {
+                error:"erro"
+              };
+              resolve(responseObj); }
+        });
+    })
+}
 
 module.exports = router;
