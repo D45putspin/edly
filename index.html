@@ -230,6 +230,11 @@
         <h1>Recomendado</h1>
         <div class="row" id="encontrartoplojas">
         </div>
+        <h2> Mais Lojas</h2>
+        <div class="row" id="encontrarAllLojas">
+        </div>
+        <div class="row" id="rowprodutos_cliente">
+        </div>
     </div>
 
     <!-- Pagina de editar cliente-->
@@ -1071,9 +1076,9 @@
     function chamarprodutos(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
-        var tokenfr=decode(tokenrl);
-        var tipo=tokenfr.tipo;
-        
+        var tokenfr = decode(tokenrl);
+        var tipo = tokenfr.tipo;
+
         let params = (new URL(document.location)).searchParams;
         let loja = params.get("loja");
 
@@ -1087,15 +1092,15 @@
 
             success: function (data) {
 
-                if (tipo=="empresa"){
-                var nomes = data.nome;
-                var imagem = data.url;
-                var descri = data.descricao;
-                var preco = data.preco;
-                $('#DispNrLojas').css("visibility", "hidden");
-                for (let i = 0; i < nomes.length; i++) {
-                    console.log(imagem[i]);
-                    $('#rowprodutos').append(`
+                if (tipo == "empresa") {
+                    var nomes = data.nome;
+                    var imagem = data.url;
+                    var descri = data.descricao;
+                    var preco = data.preco;
+                    $('#DispNrLojas').css("visibility", "hidden");
+                    for (let i = 0; i < nomes.length; i++) {
+                        console.log(imagem[i]);
+                        $('#rowprodutos').append(`
                     <a href="?produto=${i + 1}">
                     <div class="col s2">
                         <div class="cardproduto">
@@ -1126,20 +1131,51 @@
                             </div>
                         </div>
                     </div>`
-                    )
-                }
-            }else{
-                var nomes = data.nome;
-                var imagem = data.url;
-                var descri = data.descricao;
-                var preco = data.preco;
-                console.log(nomes)
-                for (let i = 0; i < nomes.length; i++) {
-                   
-                }
+                        )
+                    }
+                } else {
+                    var nomes = data.nome;
+                    var imagem = data.url;
+                    var descri = data.descricao;
+                    var preco = data.preco;
+                    
+                    for (let i = 0; i < nomes.length; i++) {
+                        $('#rowprodutos_cliente').append(`
+                    <a href="?produto=${i + 1}">
+                    <div class="col s2">
+                        <div class="cardproduto">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
+                                    <span class="card-title">${nomes[i]}</span>
+                                </div>
+                                <div class="card-content left-align">
+                                    <div class="descrição">
+                                        <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Descrição</h5> 
+                                        <p style="margin-top: 0px; font-size: 20px; color:#737373;"> ${descri[i]}</p>
+                                    </div>
+                                    <br>
+                                    <div class="preco" >
+                                        <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
+                                        <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
+                                    </div>
+                                    <div class="iconsproduto right-align" style="position:relative; bottom: -15px;">
+                                        <span class="material-icons orange-text darken-1">
+                                            create
+                                        </span>
+                                        <span class="material-icons red-text darken-1" style="right: -20px; position: relative;">
+                                            delete
+                                        </span>   
+                                    </div>                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>`)
+
+                    }
 
 
-            }
+                }
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -1264,7 +1300,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/cliente/top_stores',
+            url: 'http://' + urlattime + '/cliente/stores/?getTop=yes',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1295,9 +1331,9 @@
                     }
                 }
                 else {
-                    
-                        chamarprodutos(idloja,tokenrl);
-                    
+
+                    chamarprodutos(idloja, tokenrl);
+
                 }
 
 
@@ -1312,7 +1348,63 @@
 
 
     }
-  
+    function getlojascliente() {
+        var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+        let tokendecode = decode(tokenrl);
+
+
+        $.ajax({
+            url: 'http://' + urlattime + '/cliente/stores/?getTop=No',
+            type: 'GET',
+            cache: false,
+            headers: { "token": tokenrl },
+
+
+
+            success: function (data) {
+
+                let params = (new URL(document.location)).searchParams;
+                let idloja = params.get("loja");
+                var nomes = data.nome;
+                var id = data.id;
+                if (idloja == "" || idloja == null) {
+
+
+                    for (var counter = 0; counter < nomes.length; counter++) {
+
+                        $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
+      <div class="card">
+        <div class="card-image">
+          <img style="height:80%"id="${id[counter]}"< src="">
+          <span  style="color:black"class="card-title">${nomes[counter]}</span>
+        </div>
+        </div></a>`)
+
+                        getimage(id[counter]);
+
+                    }
+                }
+                else {
+
+                    chamarprodutos(idloja, tokenrl);
+
+                }
+
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+
+            }
+
+        })
+
+
+    }
+
+
 
     function getimage(id) {
         var token = document.cookie;
