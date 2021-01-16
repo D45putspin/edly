@@ -128,7 +128,10 @@ router.get('/get_order_items/:id', async (req, res, next) => {
             console.log("OK");
         }
     });
-    let sql = `SELECT * FROM Encomendas  WHERE Nr_encomenda = ?`;
+    let sql = `SELECT p.Id_produto, p.Nome_produto, e.Nr_encomenda
+    FROM Produto AS p
+    INNER JOIN Encomendas AS e ON e.Id_produto = p.Id_produto
+    WHERE e.Nr_encomenda = ?`;
 
 
     var idrl = req.params.id;
@@ -138,18 +141,15 @@ router.get('/get_order_items/:id', async (req, res, next) => {
 
    
     database.all(sql, idencomenda, (err, rows) => {
+        var arrayprodutos=[];
         
         if (err) {
             res.status(500).send({ error: "bd_error" })
         }
         if (rows) {
-            
-            rows.forEach(async(row) => {
-                
-                var teste = await getProductsInOrder(row.Id_produto)
-                console.log(teste)
-                
-                
+           
+            rows.forEach((row) => {
+                arrayprodutos.push(row.Nome_produto); 
             });
             res.status(200).send({ produtos: arrayprodutos, nrencomenda: idencomenda })
             
@@ -160,7 +160,7 @@ router.get('/get_order_items/:id', async (req, res, next) => {
     return
 
 });
-function getProductsInOrder(idProduto) {
+router.get('/get_orders_clients/:id_user', async (req, res, next) =>{
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -168,34 +168,54 @@ function getProductsInOrder(idProduto) {
             console.log("OK");
         }
     });
-    let sql = `SELECT * FROM Produto WHERE Id_produto = ?`;
+    let sql = `SELECT u.Nome, u.Tipo, e.Nr_encomenda, e.Id_encomenda, e.state,p.Nome_produto,p.Preco_produto
+    FROM Users  AS u 
+    INNER JOIN Encomendas AS e
+	INNER JOIN Produto AS p
+	ON e.Id_user = u.Id_user AND  e.Id_produto = p.Id_produto
+    WHERE e.Id_user= ? `;
 
-    return new Promise(function (resolve, reject) {
-        
-        database.all(sql, idProduto, async(err, rows) => {
-            var responseObj;
-            if (err) {
-                responseObj = {
-                    'error': err
-                  };
-            }
-            if (rows) {
-                var nome_prod
-                rows.forEach((row) => {
-                  nome_prod=row.Nome_produto;
-                });
-                responseObj = {
-                    "nome":nome_prod
-                 };
-                 resolve(responseObj);
+
+    var idrl = req.params.id_user;
+    
+    var idencomenda = idrl.replace("id_user=", "");
+
+   
+    
+   
+    database.all(sql, idencomenda, (err, rows) => {
+        var arraynome=[];
+        var arrayTipo=[];
+        var arrayNrEncomenda=[];
+        var arrayIdEncomenda=[];
+        var arraystate=[];
+        var arrayNomeProd=[];
+        var arrayprecoProd=[];
+        if (err) {
+            res.status(500).send({ error: "bd_error" })
+        }
+        if (rows) {
+            if (rows!=""){
+            rows.forEach((row) => {
                 
-            }
-            else { responseObj = {
-                error:"erro"
-              };
-              resolve(responseObj); }
-        });
-    })
-}
+                arraynome.push(row.Nome); 
+                arrayTipo.push(row.Tipo); 
+                arrayNrEncomenda.push(row.Nr_encomenda); 
+                arrayIdEncomenda.push(row.Id_encomenda); 
+                arraystate.push(row.state);
+                arrayNomeProd.push(row.Nome_produto);
+                arrayprecoProd.push(row.Preco_produto);
+               
+            });
+            res.status(200).send({ nome: arraynome,tipo:arrayTipo,nrEncomenda:arrayNrEncomenda,idEncomenda:arrayIdEncomenda,state:arraystate , NomeProduto:arrayNomeProd,preco:arrayprecoProd})
+            }else{ res.status(404).send({ message: "No_registry" })}
+        }
+        else { res.status(404).send({ message: "No_registry" }) }
+    });
+    database.close();
+    return
+})
+
+
 
 module.exports = router;
