@@ -1133,9 +1133,9 @@
                 var imagem = data.url;
                 var descri = data.descricao;
                 var preco = data.preco;
-                
+                console.log(nomes)
                 for (let i = 0; i < nomes.length; i++) {
-                    console.log("y");
+                   
                 }
 
 
@@ -1274,7 +1274,7 @@
             success: function (data) {
 
                 let params = (new URL(document.location)).searchParams;
-                let idloja = params.get("id_loja");
+                let idloja = params.get("loja");
                 var nomes = data.nome;
                 var id = data.id;
                 if (idloja == "" || idloja == null) {
@@ -1282,7 +1282,7 @@
 
                     for (var counter = 0; counter < nomes.length; counter++) {
 
-                        $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?id_loja=${id[counter]}">
+                        $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
       <div class="card">
         <div class="card-image">
           <img style="height:80%"id="${id[counter]}"< src="">
