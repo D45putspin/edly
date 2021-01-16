@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const login = require('../midlleware/login');
 const multer = require('multer');
-router.get('/top_stores', login, async (req, res, next) => {
+router.get('/stores/:getTop', async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -14,10 +14,16 @@ router.get('/top_stores', login, async (req, res, next) => {
             console.log("OK");
         }
     });
-    let sql = `SELECT * FROM Loja  ORDER BY ranking desc LIMIT 3`;
+    var idrl = req.params.getTop;
+    var ids = idrl.replace("getTop=", "");
+    if (ids == "yes") { var sql = `SELECT * FROM Loja  ORDER BY ranking desc LIMIT 3`;  }
+    else {
+    
+        var sql = `SELECT * FROM Loja  ORDER BY ranking asc`;
+    }
     var nomes = [];
-    var ids = []
-    const decode = jwt.verify(req.headers.token, "palavradificil");
+    var ids = [];
+
 
 
     database.all(sql, (err, rows) => {
@@ -29,7 +35,7 @@ router.get('/top_stores', login, async (req, res, next) => {
 
                 nomes.push(row.Nome);
                 ids.push(row.Id_loja)
-
+   
 
             });
 
@@ -40,6 +46,22 @@ router.get('/top_stores', login, async (req, res, next) => {
     database.close();
     return
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //function to get a rangom product image from a given store id
 router.get('/image/:id', login, async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {

@@ -63,12 +63,13 @@ router.get('/listar_lojas/:id', login, async (req, res, next) => {
 
         var idrl = req.params.id;
         var id= idrl.replace("id=", "");
-        console.log(idrl);
+        console.log("o id da empresa é ="+id);
         let sql = `SELECT * From Loja WHERE id_empresa = ?`;
         var nomes = [];
         var tipos = [];
         var moradas = [];
         var cod_posts = [];
+        var ids=[]
         database.all(sql, [id], (err, rows) => {
             if (err) {
 
@@ -81,8 +82,10 @@ router.get('/listar_lojas/:id', login, async (req, res, next) => {
                     tipos.push(row.Tipo);
                     moradas.push(row.Morada);
                     cod_posts.push(row.Cod_postal);
+                    ids.push(row.Id_loja);
                 });
-                res.status(200).send({ nome: nomes, tipo: tipos, morada: moradas, cp: cod_posts })
+                console.log(nomes+" "+ids)
+                res.status(200).send({ nome: nomes, tipo: tipos, morada: moradas, cp: cod_posts,id:ids })
             }
             else { res.status(200).send({ message: "sem nenhum registro" }) }
         });

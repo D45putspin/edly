@@ -1008,16 +1008,24 @@
                     var moradasingular = moradas.split(',');
                     var codigos_postal = "" + data.cp;
                     var cpsingular = codigos_postal.split(',');
+                    var id__ = "" + data.id;
+                    var id_fr = id__.split(',');
                     //verify if header isnt null
                     if (loja != null && loja != "") {
-                        console.log("nome" + lojasingular[loja]);
-                        $('#namelojaprodutos').append(`<h1 style="font-size:70px;font-family: 'Ubuntu', sans-serif; color:#282828; font-weight: bold !important;">${lojasingular[loja - 1]}</h1>`)
+
+                        for (let i = 0; i < nr; i++) {
+                            console.log("nome" + lojasingular[i]);
+                            if (id_fr[i] == loja) {
+                                $('#namelojaprodutos').append(`<h1 style="font-size:70px;font-family: 'Ubuntu', sans-serif; color:#282828; font-weight: bold !important;">${lojasingular[i]}</h1>`)
+                            }
+                        }
+
                         chamarprodutos(id, token);
                     }
                     else {
                         for (let i = 0; i < nr; i++) {
 
-                            $('#row').append(`<a style="color:white;font-style: normal;"href="?loja=${i + 1}">
+                            $('#row').append(`<a style="color:white;font-style: normal;"href="?loja=${id_fr[i]}">
                                 
                                 <div class="col s2 ">
                                 <div class="card grey darken-4 center-align">
@@ -1138,7 +1146,7 @@
                     var imagem = data.url;
                     var descri = data.descricao;
                     var preco = data.preco;
-                    
+
                     for (let i = 0; i < nomes.length; i++) {
                         $('#rowprodutos_cliente').append(`
                     <a href="?produto=${i + 1}">
@@ -1159,14 +1167,7 @@
                                         <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
                                         <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
                                     </div>
-                                    <div class="iconsproduto right-align" style="position:relative; bottom: -15px;">
-                                        <span class="material-icons orange-text darken-1">
-                                            create
-                                        </span>
-                                        <span class="material-icons red-text darken-1" style="right: -20px; position: relative;">
-                                            delete
-                                        </span>   
-                                    </div>                                 
+                                                                   
                                 </div>
                             </div>
                         </div>
@@ -1245,6 +1246,7 @@
                 document.getElementById("navadministrador").style.display = "none";
                 document.getElementById("navempresa").style.display = "none";
                 getlojastopcliente();
+                getlojascliente();
                 break;
             case "admin":
 
@@ -1300,7 +1302,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/cliente/stores/?getTop=yes',
+            url: 'http://' + urlattime + '/cliente/stores/getTop=yes',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1321,12 +1323,13 @@
                         $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
       <div class="card">
         <div class="card-image">
-          <img style="height:80%"id="${id[counter]}"< src="">
+          <img style="height:80%"id="${id[counter]}top"< src="">
           <span  style="color:black"class="card-title">${nomes[counter]}</span>
         </div>
         </div></a>`)
 
                         getimage(id[counter]);
+
 
                     }
                 }
@@ -1340,7 +1343,8 @@
             }
             , error: function (jqXHR, textStatus, err) {
 
-                console.log(err, textStatus)
+                console.log(err, textStatus);
+                console.log(jqXHR.responseText);
 
             }
 
@@ -1355,7 +1359,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/cliente/stores/?getTop=No',
+            url: 'http://' + urlattime + '/cliente/stores/getTop=No',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1373,7 +1377,7 @@
 
                     for (var counter = 0; counter < nomes.length; counter++) {
 
-                        $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
+                        $('#encontrarAllLojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
       <div class="card">
         <div class="card-image">
           <img style="height:80%"id="${id[counter]}"< src="">
@@ -1441,6 +1445,7 @@
     function test(url, id) {
 
         document.getElementById(id).src = 'http://' + urlattime + '/' + url
+        document.getElementById(id + "top").src = 'http://' + urlattime + '/' + url
     }
 </script>
 <script> M.AutoInit();</script>
