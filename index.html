@@ -227,7 +227,7 @@
 <section id="cliente">
     <!-- Pagina do encontrar-->
     <div id="encontrar">
-        <h1>Top</h1>
+        <h1>Recomendado</h1>
         <div class="row" id="encontrartoplojas">
         </div>
     </div>
@@ -605,7 +605,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s6"> 
+                        <div class="input-field col s6">
                             <h6>Palavra-passe</h6>
                             <input id="password" type="password" class="validate" oninput="setpasswd()">
                             <p class="message" id="message"></p>
@@ -614,13 +614,13 @@
 
                     <div class="file-field input-field col s6">
                         <div class="waves-effect waves-light btn-small #212121 grey darken-4">
-                          <span>Foto</span>
-                          <input type="file" name="img_empresa" id="img_empresa">
+                            <span>Foto</span>
+                            <input type="file" name="img_empresa" id="img_empresa">
                         </div>
                         <div class="file-path-wrapper">
-                          <input class="file-path validate" type="text" placeholder="escolha uma foto ">
+                            <input class="file-path validate" type="text" placeholder="escolha uma foto ">
                         </div>
-                      </div>
+                    </div>
                 </div>
                 <br>
                 <div id="botoes">
@@ -1071,6 +1071,9 @@
     function chamarprodutos(id, token) {
         var ident = id;
         var tokenrl = token.replace("token=", "");
+        var tokenfr=decode(tokenrl);
+        var tipo=tokenfr.tipo;
+        
         let params = (new URL(document.location)).searchParams;
         let loja = params.get("loja");
 
@@ -1084,7 +1087,7 @@
 
             success: function (data) {
 
-
+                if (tipo=="empresa"){
                 var nomes = data.nome;
                 var imagem = data.url;
                 var descri = data.descricao;
@@ -1125,6 +1128,18 @@
                     </div>`
                     )
                 }
+            }else{
+                var nomes = data.nome;
+                var imagem = data.url;
+                var descri = data.descricao;
+                var preco = data.preco;
+                console.log(nomes)
+                for (let i = 0; i < nomes.length; i++) {
+                   
+                }
+
+
+            }
 
             }
             , error: function (jqXHR, textStatus, err) {
@@ -1258,21 +1273,31 @@
 
             success: function (data) {
 
-
+                let params = (new URL(document.location)).searchParams;
+                let idloja = params.get("loja");
                 var nomes = data.nome;
                 var id = data.id;
-                for (var counter = 0; counter < nomes.length; counter++) {
+                if (idloja == "" || idloja == null) {
 
-                    $('#encontrartoplojas').append(`<div class="col s12 m4">
+
+                    for (var counter = 0; counter < nomes.length; counter++) {
+
+                        $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
       <div class="card">
         <div class="card-image">
           <img style="height:80%"id="${id[counter]}"< src="">
           <span  style="color:black"class="card-title">${nomes[counter]}</span>
         </div>
-        </div>`)
+        </div></a>`)
 
-                    getimage(id[counter]);
+                        getimage(id[counter]);
 
+                    }
+                }
+                else {
+                    
+                        chamarprodutos(idloja,tokenrl);
+                    
                 }
 
 
@@ -1287,6 +1312,7 @@
 
 
     }
+  
 
     function getimage(id) {
         var token = document.cookie;
