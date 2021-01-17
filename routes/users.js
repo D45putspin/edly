@@ -259,4 +259,92 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
     database.close();
     return
 });
+
+router.put('/alterar_info_conta/:obj', async (req, res, next) => {
+
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var data = req.params.obj;
+    var obj = data.replace("obj=", "");
+    var arrayobj = obj.split(',');
+    var order = ['Nome', 'Email', 'Cod_postal', 'Morada', 'NIF', 'Cidade', 'id'];
+    //obj7-password, obj8-email no momento
+    if (verifylogin(arrayobj[7],arrayobj[8])) {
+
+
+        let sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=? WHERE Id_user = ?`;
+
+
+
+        database.all(sql, [arrayobj[0], arrayobj[1], arrayobj[2], arrayobj[3], arrayobj[4], arrayobj[5], arrayobj[6]], (err, rows) => {
+            if (err) {
+                res.status(500).send({ error: err.message })
+            }
+            else {
+                if (rows) {
+                    rows.forEach((row) => {
+                        console.log(
+                            "sucesso!")
+                            ;
+                    });
+
+                    res.status(200).send({ message: "successfully_edited" })
+                }
+                else { res.status(400).send({ message: "No_registry" }) }
+            }
+        });
+    }
+    database.close();
+    return
+});
+//- acabar!!!!!!!!!!!!!!!
+function verifylogin(password,email){
+    var x;
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    //set variables
+    var sql = 'SELECT * FROM Users WHERE Email = ?';
+    //init login function (checks if email exists, then compare bdpassword with sent one )
+    database.get(sql, [email],
+        async function (err, row) {
+            if (err) {
+                res.status(500).send({ message: "bd_error" })
+            }
+
+            if (row) {
+                //check password
+                //check if password is == bdpassword
+                const checkPass = await bcrypt.compareSync(password, row.Password);
+
+                if (checkPass) {
+                    //creates a token that is assigned to user
+                    if (row.aproval != "pending") {
+                      x=true;
+                    }
+                    else {
+                        res.status(403).json({ message: "need_activation" });
+
+                    }
+                } else {
+                    res.status(403).json({ message: "wrong_fields" });
+                }
+            } else {
+                res.status(400).send({ message: "not_found" });
+            }
+        })
+    database.close();
+   return x;
+};
+
+
 module.exports = router;
