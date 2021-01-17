@@ -582,3 +582,300 @@ overflow: hidden;
 #editarempresa span {
     color: white;
 }
+
+#pedidos span {
+    font-size: 45px;
+    position: relative;
+    top: 5px;
+}
+
+#pedidos .pedidospendentes {
+
+    display: block ruby;
+}
+
+
+#contactecliente #contactetitulo{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 65px;
+    color:#0e1113;
+    font-weight: bold;
+    padding-left: 17%;
+  }
+
+#contactecliente #contactetexto{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 22px;
+    color:#2E2E2E;
+    padding-left: 13.5%;
+    
+  }
+
+#contactecliente .padding {
+    padding-left: 13.5%;
+  }
+
+#contactecliente .col .row{
+  margin-right: -0rem !important;
+  }
+
+#contactecliente #mensagem {
+    padding-bottom: 15%;
+  }
+
+#contactecliente .informacoes {
+    position: absolute;
+    top: 250px;
+    right: 0;
+    width: 650px;
+    height: 600px;
+    background-color: #0e1113;
+  }
+
+#contactecliente .telefone h1{
+    position: absolute;
+    top: 75px;
+    right: 225px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contactecliente .telefone .material-icons {
+    position: absolute;
+    font-size: 60px;
+    top:50px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contactecliente .fax h1{
+    position: absolute;
+    top: 250px;
+    right: 195px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contactecliente .fax .material-icons{
+    position: absolute;
+    font-size: 60px;
+    top: 225px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contactecliente .email h1{
+    position: absolute;
+    top: 450px;
+    right: 195px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contactecliente .email .material-icons {
+    position: absolute;
+    font-size: 60px;
+    top: 425px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contactecliente .input-field [type=text] {
+    color: #2E2E2E;
+}
+
+#contactecondutor #contactetitulo{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 65px;
+    color:#0e1113;
+    font-weight: bold;
+    padding-left: 17%;
+
+  }
+
+#contactecondutor #contactetexto{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 22px;
+    color:#2E2E2E;
+    padding-left: 13.5%;
+    
+  }
+
+#contactecondutor .padding {
+    padding-left: 13.5%;
+  }
+
+#contactecondutor .col .row{
+  margin-right: -0rem !important;
+  }
+
+#contactecondutor #mensagem {
+    padding-bottom: 15%;
+  }
+
+#contactecondutor .informacoes {
+    position: absolute;
+    top: 250px;
+    right: 0;
+    width: 650px;
+    height: 600px;
+    background-color: #0e1113;
+  }
+
+#contactecondutor .telefone h1{
+    position: absolute;
+    top: 75px;
+    right: 225px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contactecondutor .telefone .material-icons {
+    position: absolute;
+    font-size: 60px;
+    top:50px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contactecondutor .fax h1{
+    position: absolute;
+    top: 250px;
+    right: 195px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contactecondutor .fax .material-icons{
+    position: absolute;
+    font-size: 60px;
+    top: 225px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contactecondutor .email h1{
+    position: absolute;
+    top: 450px;
+    right: 195px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contactecondutor .email .material-icons {
+    position: absolute;
+    font-size: 60px;
+    top: 425px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contactecondutor .input-field [type=text] {
+    color: #2E2E2E;
+}
+
+#contacteempresa #contactetitulo{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 65px;
+    color:#0e1113;
+    font-weight: bold;
+    padding-left: 17%;
+    position: relative;
+    left: -600px;
+  }
+
+#contacteempresa #contactetexto{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 22px;
+    color:#2E2E2E;
+    padding-left: 13.5%;
+    position: relative;
+    left: -575px;
+    
+  }
+
+#contacteempresa .padding {
+    padding-left: 13.5%;
+  }
+
+#contacteempresa .col .row{
+  margin-right: -0rem !important;
+  }
+
+#contacteempresa #mensagem {
+    padding-bottom: 15%;
+  }
+
+#contacteempresa .informacoes {
+    position: absolute;
+    top: 250px;
+    right: 0;
+    width: 650px;
+    height: 600px;
+    background-color: #0e1113;
+  }
+
+#contacteempresa .btn-small{
+    float: left;
+}
+
+#contacteempresa .telefone h1{
+    position: absolute;
+    top: 75px;
+    right: 225px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contacteempresa .telefone .material-icons {
+    position: absolute;
+    font-size: 60px;
+    top:50px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contacteempresa .fax h1{
+    position: absolute;
+    top: 250px;
+    right: 195px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contacteempresa .fax .material-icons{
+    position: absolute;
+    font-size: 60px;
+    top: 225px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contacteempresa .email h1{
+    position: absolute;
+    top: 450px;
+    right: 195px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#f8f8f8;
+  }
+
+#contacteempresa .email .material-icons {
+    position: absolute;
+    font-size: 60px;
+    top: 425px;
+    right: 275px;
+    color:#f8f8f8;
+  }
+
+#contacteempresa .input-field [type=text] {
+    color: #2E2E2E;
+}
