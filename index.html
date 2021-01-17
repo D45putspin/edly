@@ -217,7 +217,54 @@
     </div>
     <!-- Pagina de contacte-->
     <div id="contactecondutor">
+        <!-- Titulo e texto -->
+        <h1 id="contactetitulo">Contacte-nos</h1>
+        <p id="contactetexto">Em caso de duvidas ou questões preencher os campos</p>
+        <!-- Inputs -->
+        <div class="padding">
+          <div class="row">
+            <div class="input-field col s4">
+              <input id="nome" type="text" class="validate">
+              <label for="nome">Nome</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <input id="email" type="text" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <input id="mensagem" type="text" class="validate">
+              <label for="mensagem">Mensagem</label>
+            </div>
+          </div>
+          <!-- Botao de enviar -->
+          <a class="waves-effect waves-light btn-small #212121 grey darken-4">Enviar</a>
+        </div>
 
+        <!-- Informaçoes da direita-->
+        <div class="informacoes">
+          <div class="telefone">
+            <span class="material-icons">
+              smartphone
+            </span>
+            <h1>919999999</h1>
+          </div>
+          <div class="fax">
+            <span class="material-icons">
+              local_printshop
+            </span>
+            <h1>1-242-354-8900</h1>
+          </div>
+          <div class="email">
+            <span class="material-icons">
+              mail
+            </span>
+            <h1>edly@edly.com</h1>
+          </div>
+        </div> 
     </div>
 
 </section>
@@ -307,6 +354,54 @@
     </div>
     <!-- Pagina de contacte-->
     <div id="contactecliente">
+                <!-- Titulo e texto -->
+                <h1 id="contactetitulo">Contacte-nos</h1>
+                <p id="contactetexto">Em caso de duvidas ou questões preencher os campos</p>
+                <!-- Inputs -->
+                <div class="padding">
+                  <div class="row">
+                    <div class="input-field col s4">
+                      <input id="nome" type="text" class="validate">
+                      <label for="nome">Nome</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s4">
+                      <input id="email" type="text" class="validate">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s4">
+                      <input id="mensagem" type="text" class="validate">
+                      <label for="mensagem">Mensagem</label>
+                    </div>
+                  </div>
+                  <!-- Botao de enviar -->
+                  <a class="waves-effect waves-light btn-small #212121 grey darken-4">Enviar</a>
+                </div>
+        
+                <!-- Informaçoes da direita-->
+                <div class="informacoes">
+                  <div class="telefone">
+                    <span class="material-icons">
+                      smartphone
+                    </span>
+                    <h1>919999999</h1>
+                  </div>
+                  <div class="fax">
+                    <span class="material-icons">
+                      local_printshop
+                    </span>
+                    <h1>1-242-354-8900</h1>
+                  </div>
+                  <div class="email">
+                    <span class="material-icons">
+                      mail
+                    </span>
+                    <h1>edly@edly.com</h1>
+                  </div>
+                </div> 
     </div>
 </section>
 
@@ -327,7 +422,12 @@
 <section id="administrador">
     <!-- Pagina dos pedidos-->
     <div id="pedidos">
-        <h1> pedidos pendentes </h1>
+        <div class="pedidospendentes">
+        <span class="material-icons">
+            notification_add
+        </span>
+        <h3> Pedidos pendentes </h3>
+        </div>
         <div class="row " id="rowpedidospend">
         </div>
     </div>
@@ -645,6 +745,55 @@
 
     <div id="contacteempresa">
 
+ <!-- Titulo e texto -->
+ <h1 id="contactetitulo">Contacte-nos</h1>
+ <p id="contactetexto">Em caso de duvidas ou questões preencher os campos</p>
+ <!-- Inputs -->
+ <div class="padding">
+   <div class="row">
+     <div class="input-field col s4">
+       <input id="nome" type="text" class="validate">
+       <label for="nome">Nome</label>
+     </div>
+   </div>
+   <div class="row">
+     <div class="input-field col s4">
+       <input id="email" type="text" class="validate">
+       <label for="email">Email</label>
+     </div>
+   </div>
+   <div class="row">
+     <div class="input-field col s4">
+       <input id="mensagem" type="text" class="validate">
+       <label for="mensagem">Mensagem</label>
+     </div>
+   </div>
+   <!-- Botao de enviar -->
+   <a class="waves-effect waves-light btn-small #212121 grey darken-4">Enviar</a>
+ </div>
+
+ <!-- Informaçoes da direita-->
+ <div class="informacoes">
+   <div class="telefone">
+     <span class="material-icons">
+       smartphone
+     </span>
+     <h1>919999999</h1>
+   </div>
+   <div class="fax">
+     <span class="material-icons">
+       local_printshop
+     </span>
+     <h1>1-242-354-8900</h1>
+   </div>
+   <div class="email">
+     <span class="material-icons">
+       mail
+     </span>
+     <h1>edly@edly.com</h1>
+   </div>
+ </div> 
+
     </div>
 
 </section>
@@ -880,14 +1029,20 @@
                     $('#rowpedidospend').append(`
                     <a href="?produto=${i + 1}">
                        <div class="col s2">
-                           <div class="card">
+                           <div class="card" style="background: #282828;">
                                 <div class="card-content">
-                                     <p>Nome User :${nomes[i]}</p>
-                                     <p id="iduser">Id User :${ids[i]}
+                                    <div style="color: white; display: block ruby;"> 
+                                    <p style="font-weight: bold;">Nome User: </p>
+                                    <p>${nomes[i]}</p>
+                                    </div>
+                                    <div style="color: white; display: block ruby;">
+                                    <p id="iduser" style="font-weight: bold;">ID User: </p>
+                                    <p>${ids[i]}</p>        
+                                    </div>
                                </div>
                                <div class="card-action">
-                                   <a id="aproveperson" onclick='aprove(${ids[i]})'>Aprovar</a>
-                                   <a onclick='delete_aprove(${ids[i]})'>Eliminar</a>
+                                   <a id="aproveperson" onclick='aprove(${ids[i]})' style="color:#43a047; font-weight: bold;">Aprovar</a>
+                                   <a onclick='delete_aprove(${ids[i]})' style="color:#b71c1c; font-weight: bold;"">Eliminar</a>
                                    
                                </div>
                          </div>
@@ -934,6 +1089,7 @@
                     location.reload();
 
 
+
                 }
                 , error: function (jqXHR, textStatus, err) {
 
@@ -948,7 +1104,6 @@
     }
     //functions admin
     function delete_aprove(id) {
-        window.alert("eee")
         var token = document.cookie;
         var tokenrl = token.replace("token=", "");
         let tokendecode = decode(tokenrl);
