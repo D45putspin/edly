@@ -1475,13 +1475,17 @@
 
                     for (var counter = 0; counter < nomes.length; counter++) {
 
-                        $('#encontrartoplojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
-      <div class="card">
-        <div class="card-image">
-          <img style="height:80%"id="${id[counter]}top"< src="">
-          <span  style="color:black"class="card-title">${nomes[counter]}</span>
-        </div>
-        </div></a>`)
+                        $('#encontrartoplojas').append(`<div class="col s12 m2"><a href="?loja=${id[counter]}">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img style="height:80%"id="${id[counter]}top"<src="">
+                                </div>
+                                <div class="card-title center-align">
+                                    <h4 style="color:#2E2E2E; font-family: 'Ubuntu', sans-serif; font-weight: bold; margin-top: -70px;padding-bottom: 20px;">${nomes[counter]}</h4>
+                                </div>
+                            </div>
+                        </a>
+                        </div>`)
 
                         getimage(id[counter]);
 
@@ -1532,13 +1536,17 @@
 
                     for (var counter = 0; counter < nomes.length; counter++) {
 
-                        $('#encontrarAllLojas').append(`<div class="col s12 m4"><a href="?loja=${id[counter]}">
-      <div class="card">
-        <div class="card-image">
-          <img style="height:80%"id="${id[counter]}"< src="">
-          <span  style="color:black"class="card-title">${nomes[counter]}</span>
-        </div>
-        </div></a>`)
+                        $('#encontrarAllLojas').append(`<div class="col s12 m2"><a href="?loja=${id[counter]}">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img style="height:80%"id="${id[counter]}"< src="">
+                                </div>
+                                <div class="card-title center-align">
+                                <h4 style="color:#2E2E2E; font-family: 'Ubuntu', sans-serif; font-weight: bold; margin-top: -70px;padding-bottom: 20px;">${nomes[counter]}</h4>
+                                </div>
+                            </div>
+                        </a>
+                        </div>`)
 
                         getimage(id[counter]);
 
