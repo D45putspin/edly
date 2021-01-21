@@ -19,4 +19,5 @@ jobs:
                  sudo rm -rf edly_web
                  sudo mv -T edly edly_web
                  cd edly_web
+                 npm install
                  npm start
