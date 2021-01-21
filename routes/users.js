@@ -274,7 +274,8 @@ router.put('/alterar_info_conta/:obj', async (req, res, next) => {
     var arrayobj = obj.split(',');
     var order = ['Nome', 'Email', 'Cod_postal', 'Morada', 'NIF', 'Cidade', 'id'];
     //obj7-password, obj8-email no momento
-    if (verifylogin(arrayobj[7],arrayobj[8])) {
+    var verif=verifylogin(arrayobj[7],arrayobj[1]);
+    //if (verif==true){
 
 
         let sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=? WHERE Id_user = ?`;
@@ -298,12 +299,14 @@ router.put('/alterar_info_conta/:obj', async (req, res, next) => {
                 else { res.status(400).send({ message: "No_registry" }) }
             }
         });
-    }
+   // }
+    
     database.close();
     return
 });
 //- acabar!!!!!!!!!!!!!!!
-function verifylogin(password,email){
+/*function verifylogin(password,email){
+    console.log(email +"...."+password);
     var x;
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -315,10 +318,10 @@ function verifylogin(password,email){
     //set variables
     var sql = 'SELECT * FROM Users WHERE Email = ?';
     //init login function (checks if email exists, then compare bdpassword with sent one )
-    database.get(sql, [email],
+    database.get(sql, email,
         async function (err, row) {
             if (err) {
-                res.status(500).send({ message: "bd_error" })
+                console.log("err")
             }
 
             if (row) {
@@ -329,22 +332,54 @@ function verifylogin(password,email){
                 if (checkPass) {
                     //creates a token that is assigned to user
                     if (row.aproval != "pending") {
+                      
+                      console.log("yep");
                       x=true;
+                      return x;
                     }
                     else {
-                        res.status(403).json({ message: "need_activation" });
+                        console.log("yep1");
 
                     }
                 } else {
-                    res.status(403).json({ message: "wrong_fields" });
+                    console.log("yep2");
                 }
             } else {
-                res.status(400).send({ message: "not_found" });
+                return "falsepwd";
             }
         })
     database.close();
-   return x;
+   
 };
+*/
+router.delete('/delete_account/', login, async (req, res, next) => {
+    //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var id = req.body.id;
+    console.log(id);
+    let sql = `DELETE FROM Users WHERE id_user = ?`;
 
 
+
+
+    database.all(sql, id, (err, rows) => {
+        if (err) {
+            res.status(500).send({ error: "bd_error" })
+        }
+        if (rows) {
+
+
+            res.status(200).send({ message: "successfully_deleted" })
+        }
+        else { res.status(400).send({ message: "No_registry" }) }
+    });
+    database.close();
+    return
+});
 module.exports = router;
