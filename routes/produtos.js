@@ -114,10 +114,109 @@ router.get('/get-products/:id_loja', login, async (req, res, next) => {
     database.close();
     return
 });
+router.delete('/delete_product', async (req, res, next) => {
+    //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var id_produto= req.body.idprod;
+
+    
 
 
 
 
+    database.run(`DELETE FROM Produto WHERE Id_produto = ? `, [id_produto], function (err) {
+        
+        if (err) {
+            return console.log(err.message);
+        }
+        // get the last insert id
 
+    });
+    database.close();
+    return res.status(201).send({ messagem: 'Produto eliminado' })
+
+});
+
+
+
+router.put('/alterar_info_produto/:obj', async (req, res, next) => {
+
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var data = req.params.obj;
+    var obj = data.replace("obj=", "");
+    var arrayobj = obj.split(',');
+ 
+
+
+
+        let sql = `UPDATE Produtos SET Nome_produto=?,Tipo_produto=?,Preco_produto=? WHERE Id_Produto = ?`;
+
+
+
+        database.all(sql, [arrayobj[0], arrayobj[1], arrayobj[2], arrayobj[3]], (err, rows) => {
+            if (err) {
+                res.status(500).send({ error: err.message })
+            }
+            else {
+                if (rows) {
+                    rows.forEach((row) => {
+                        console.log(
+                            "sucesso!")
+                            ;
+                    });
+
+                    res.status(200).send({ message: "successfully_edited" })
+                }
+                else { res.status(400).send({ message: "No_registry" }) }
+            }
+        });
+   
+    
+    database.close();
+    return
+});
+router.delete('/delete_products/', async (req, res, next) => {
+    //set variables
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+        }
+    });
+    var id = req.body.id;
+    
+    let sql = `DELETE FROM Produto WHERE Id_produto = ?`;
+ 
+//}
+
+
+    database.all(sql, id, (err, rows) => {
+        if (err) {
+            res.status(500).send({ error: "bd_error" })
+            console.log(err.message);
+        }
+        if (rows) {
+
+
+            res.status(200).send({ message: "successfully_deleted" })
+        }
+        else { res.status(400).send({ message: "No_registry" }) }
+    });
+    database.close();
+    return
+});
 
 module.exports = router;

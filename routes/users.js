@@ -172,7 +172,7 @@ router.get('/pendentes', login, async (req, res, next) => {
     let sql = `SELECT * FROM Users WHERE aproval = ?`;
     var nomes = [];
     var ids = []
-    const decode = jwt.verify(req.headers.token, "palavradificil");
+    
 
 
     database.all(sql, "pending", (err, rows) => {
@@ -274,33 +274,34 @@ router.put('/alterar_info_conta/:obj', async (req, res, next) => {
     var arrayobj = obj.split(',');
     var order = ['Nome', 'Email', 'Cod_postal', 'Morada', 'NIF', 'Cidade', 'id'];
     //obj7-password, obj8-email no momento
-    var verif=verifylogin(arrayobj[7],arrayobj[1]);
+    //var verif = verifylogin(arrayobj[7], arrayobj[1]);
     //if (verif==true){
+     const decode = jwt.verify(req.headers.token, "palavradificil");
+    if (decode.tipo=='cliente'||decode.tipo=='empresa'){
+    var sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=? WHERE Id_user = ?`;
+    }
+    else if(decode.tipo=='condutor'){var sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=?,matricula=?,tipo_veic=? WHERE Id_user = ?`}
 
 
-        let sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=? WHERE Id_user = ?`;
+    database.all(sql, [arrayobj[0], arrayobj[1], arrayobj[2], arrayobj[3], arrayobj[4], arrayobj[5], arrayobj[6]], (err, rows) => {
+        if (err) {
+            res.status(500).send({ error: err.message })
+        }
+        else {
+            if (rows) {
+                rows.forEach((row) => {
+                    console.log(
+                        "sucesso!")
+                        ;
+                });
 
-
-
-        database.all(sql, [arrayobj[0], arrayobj[1], arrayobj[2], arrayobj[3], arrayobj[4], arrayobj[5], arrayobj[6]], (err, rows) => {
-            if (err) {
-                res.status(500).send({ error: err.message })
+                res.status(200).send({ message: "successfully_edited" })
             }
-            else {
-                if (rows) {
-                    rows.forEach((row) => {
-                        console.log(
-                            "sucesso!")
-                            ;
-                    });
+            else { res.status(400).send({ message: "No_registry" }) }
+        }
+    });
+    // }
 
-                    res.status(200).send({ message: "successfully_edited" })
-                }
-                else { res.status(400).send({ message: "No_registry" }) }
-            }
-        });
-   // }
-    
     database.close();
     return
 });
@@ -348,11 +349,11 @@ router.put('/alterar_info_conta/:obj', async (req, res, next) => {
                 return "falsepwd";
             }
         })
-    database.close();
+   
    
 };
 */
-router.delete('/delete_account/', login, async (req, res, next) => {
+router.delete('/delete_account/', async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -363,14 +364,18 @@ router.delete('/delete_account/', login, async (req, res, next) => {
     });
     var id = req.body.id;
     console.log(id);
-    let sql = `DELETE FROM Users WHERE id_user = ?`;
-
-
+    let sql = `DELETE FROM Users WHERE Id_user = ?`;
+    //const decode = jwt.verify(req.headers.token, "palavradificil");
+   // if (decode.tipo=='empresa'){
+    deleteprodempresa(database, id, res, req);
+    deletelojaempresa(database,id);
+//}
 
 
     database.all(sql, id, (err, rows) => {
         if (err) {
             res.status(500).send({ error: "bd_error" })
+            console.log(err.message);
         }
         if (rows) {
 
@@ -382,4 +387,28 @@ router.delete('/delete_account/', login, async (req, res, next) => {
     database.close();
     return
 });
+function deleteprodempresa(database, id, res, req) {
+    let sql = `DELETE FROM Produto WHERE Id_empresa = ?`;
+
+
+
+
+    database.all(sql, id, (err, rows) => {
+       
+    });
+
+
+}
+function deletelojaempresa(database, id, res, req) {
+    let sql = `DELETE FROM Loja WHERE Id_empresa = ?`;
+
+
+
+
+    database.all(sql, id, (err, rows) => {
+       
+    });
+
+
+}
 module.exports = router;
