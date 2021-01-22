@@ -17,6 +17,7 @@ jobs:
                  rm -rf *
                  git clone "https://github.com/D45putspin/edly"
                  cd edly
+                 docker login
                  docker stop edlyapp
                  docker rm edlyapp
                  docker rmi edly/node-web-app
