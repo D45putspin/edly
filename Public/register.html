@@ -512,7 +512,7 @@ document.getElementById("message_empresa").style.color = color;
         //data: { nome:nome_ , password: password_,email:email_,nif:nif_,morada:morada_,cod_post:cod_postal_,cidade:cidade_,tipo:tipo_,matricula:matricula_,veiculo:tipo_veic_}, 
         data: { nome: nome_, password: password_,password1:password1_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_ },
         success: function (data) {
-          window.location.href = "../edly/login.html";
+          window.location.href = "login.html";
         }
         , error: function (jqXHR, textStatus, err) {
           window.alert('text status ' + textStatus + ', err ' + err)
@@ -555,7 +555,7 @@ document.getElementById("message_empresa").style.color = color;
         data: { nome: nome_, password: password_,password1:password1_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_, matricula: matricula_, veiculo: tipo_veic_ },
 
         success: function (data) {
-          window.location.href = "../edly/login.html";
+          window.location.href = "login.html";
           
         }
         , error: function (jqXHR, textStatus, err) {
@@ -616,7 +616,7 @@ if (password == password1) {
     contentType: false,
             processData: false,
     success: function (data) {
-      window.location.href = "../edly/login.html";
+      window.location.href = "login.html";
     }
     , error: function (jqXHR, textStatus, err) {
       window.alert('text status ' + textStatus + ', err ' + err)

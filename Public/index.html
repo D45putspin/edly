@@ -1360,7 +1360,7 @@
         let json = JSON.parse(jsonPayload);
         return json;
     }
-    if (x == "") { window.location.href = "../edly/login.html"; }
+    if (x == "") { window.location.href = "login.html"; }
     let json = decode(x);
     let tipo = json.tipo
     let nome = json.nome;
@@ -1439,7 +1439,7 @@
         var x = document.cookie;
         if (x == "") {
             console.log("sem cookie")
-            window.location.href = "../edly/login.html";
+            window.location.href = "login.html";
 
         } else {
 
