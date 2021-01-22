@@ -13,11 +13,12 @@ jobs:
           username: ${{ secrets.nome }}
           password: ${{ secrets.pass }}
           script: |
-                 ls -la
-                 cd /documents/
-                 sudo git clone "https://github.com/D45putspin/edly"
-                 sudo rm -rf edly_web
-                 sudo mv -T edly edly_web
-                 cd edly_web
-                 npm install
-                 npm start
+                 cd projeto
+                 rm -rf *
+                 git clone "https://github.com/D45putspin/edly"
+                 cd edly
+                 docker stop edlyapp
+                 docker rm edlyapp
+                 docker rmi edly/node-web-app
+                 docker build -t edly/node-web-app .
+                 docker run -p 80:8080 --name edlyapp -d edly/node-web-app
