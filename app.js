@@ -11,7 +11,7 @@ const rotaEncomendas= require('./routes/encomendas');
 const rotaAdmins= require('./routes/admins');
 const rotaEntregas= require('./routes/deliver');
 const path=require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Public')));
 app.use(bodyParser.urlencoded({extended: false})); //apenas dados simples
 app.use(bodyParser.json());
 app.use(cors());
