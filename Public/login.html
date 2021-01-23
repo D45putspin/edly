@@ -48,14 +48,14 @@
 
     
     <script type="text/javascript">
-     
+     var url=document.location.origin;
         $('#enter').click(function () {
             
             let x = password.value;
             let y = email.value;
             console.log(y, x);
             $.ajax({
-                url: 'http://localhost:8080/user/login',
+                url: url+'/user/login',
                 type: 'POST',
                 cache: false,
                 data: { email: y, password: x },
