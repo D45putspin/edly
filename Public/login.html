@@ -55,7 +55,7 @@
             let y = email.value;
             console.log(y, x);
             $.ajax({
-                url: 'http://localhost:3000/user/login',
+                url: 'http://localhost:8080/user/login',
                 type: 'POST',
                 cache: false,
                 data: { email: y, password: x },
