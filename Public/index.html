@@ -798,7 +798,7 @@
 
 </section>
 <script>
-    const urlattime = "localhost:3000";
+    const urlattime = document.location.origin;
     let params = (new URL(document.location)).searchParams;
     let loja = params.get("loja");
 
@@ -823,7 +823,7 @@
 
             if (preco_prod > 0) {
                 $.ajax({
-                    url: 'http://' + urlattime + '/produtos/criar-produtos',
+                    url:  urlattime + '/produtos/criar-produtos',
                     type: 'POST',
                     cache: false,
                     data: fd,
@@ -870,7 +870,7 @@
         if (nome && tipo && morada && cod_postal) {
 
             $.ajax({
-                url: 'http://' + urlattime + '/loja/inserir_lojas',
+                url:  urlattime + '/loja/inserir_lojas',
                 type: 'POST',
                 cache: false,
                 data: { nome: nome, tipo: tipo, morada: morada, token: tokenrl, id: id, cod_postal: cod_postal },
@@ -974,7 +974,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/loja/verificar_lojas/id=' + ident,
+            url: urlattime + '/loja/verificar_lojas/id=' + ident,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1005,7 +1005,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/user/pendentes',
+            url: urlattime + '/user/pendentes',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1079,7 +1079,7 @@
         let tokendecode = decode(tokenrl);
         if (tokendecode.tipo == "admin") {
             $.ajax({
-                url: 'http://' + urlattime + '/user/acept_pending/id=' + ident,
+                url: urlattime + '/user/acept_pending/id=' + ident,
                 type: 'PUT',
                 cache: false,
                 headers: { "token": tokenrl },
@@ -1109,7 +1109,7 @@
         let tokendecode = decode(tokenrl);
         if (tokendecode.tipo == "admin") {
             $.ajax({
-                url: 'http://' + urlattime + '/user/delete_pending',
+                url:  urlattime + '/user/delete_pending',
                 type: 'DELETE',
                 cache: false,
                 data: { id: id },
@@ -1146,7 +1146,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/loja/listar_lojas/id=' + ident,
+            url:  urlattime + '/loja/listar_lojas/id=' + ident,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1247,7 +1247,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/produtos/get-products/id=' + loja,
+            url:  urlattime + '/produtos/get-products/id=' + loja,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1457,7 +1457,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/cliente/stores/getTop=yes',
+            url:  urlattime + '/cliente/stores/getTop=yes',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1518,7 +1518,7 @@
 
 
         $.ajax({
-            url: 'http://' + urlattime + '/cliente/stores/getTop=No',
+            url:  urlattime + '/cliente/stores/getTop=No',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1579,7 +1579,7 @@
         var url;
 
         $.ajax({
-            url: 'http://' + urlattime + '/cliente/image/id=' + id,
+            url:  urlattime + '/cliente/image/id=' + id,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
