@@ -47,7 +47,7 @@ router.post('/criar-produtos', login, uploads.single('produto_imagem'), async (r
 
 
 });
-router.get('/get-products/:id_loja', login, async (req, res, next) => {
+router.get('/get-products', login, async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -60,8 +60,8 @@ router.get('/get-products/:id_loja', login, async (req, res, next) => {
 
     const decode = jwt.verify(req.headers.token, "palavradificil");
     var id_empresa_ = decode.id_user;
-    var idrl = req.params.id_loja;
-    var id_loja = idrl.replace("id=", "");
+    var idrl = req.query.id_loja;
+
    
     var nomes = [];
     var descricoes = [];
@@ -70,7 +70,7 @@ router.get('/get-products/:id_loja', login, async (req, res, next) => {
   
     if (decode.Tipo == "empresa") {
         var sql = `SELECT * FROM Produto WHERE id_empresa = ? AND id_loja = ?`;
-        database.all(sql, [id_empresa_, id_loja], (err, rows) => {
+        database.all(sql, [id_empresa_, idrl], (err, rows) => {
             if (err) {
                 res.status(500).send({ error: "erro na base de dados" })
             }
@@ -89,9 +89,9 @@ router.get('/get-products/:id_loja', login, async (req, res, next) => {
             else { res.status(400).send({ message: "sem nenhum registo" }) }
         });
     } else {
-        console.log("cliente"+id_loja)
+        console.log("cliente"+idrl)
         var sql = `SELECT * FROM Produto WHERE id_loja = ?`;
-        database.all(sql, id_loja, (err, rows) => {
+        database.all(sql, idrl, (err, rows) => {
             if (err) {
                 res.status(500).send({ error: "erro na base de dados" })
             }
@@ -123,7 +123,7 @@ router.delete('/delete_product', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var id_produto= req.body.idprod;
+    var id_produto= req.query.idprod;
 
     
 
@@ -145,7 +145,7 @@ router.delete('/delete_product', async (req, res, next) => {
 
 
 
-router.put('/alterar_info_produto/:obj', async (req, res, next) => {
+router.put('/alterar_info_produto', async (req, res, next) => {
 
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -154,18 +154,20 @@ router.put('/alterar_info_produto/:obj', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var data = req.params.obj;
-    var obj = data.replace("obj=", "");
-    var arrayobj = obj.split(',');
+    var id = req.query.id;
+   var Nome_produto=req.body.nomeProduto;
+   var Tipo_produto=req.body.tipoProduto;
+   var Preco_produto=req.body.precoProduto;
+   
  
 
 
 
-        let sql = `UPDATE Produtos SET Nome_produto=?,Tipo_produto=?,Preco_produto=? WHERE Id_Produto = ?`;
+        let sql = `UPDATE Produto SET Nome_produto=?,Tipo_produto=?,Preco_produto=? WHERE Id_Produto = ?`;
 
 
 
-        database.all(sql, [arrayobj[0], arrayobj[1], arrayobj[2], arrayobj[3]], (err, rows) => {
+        database.all(sql, [Nome_produto,Tipo_produto,Preco_produto,id], (err, rows) => {
             if (err) {
                 res.status(500).send({ error: err.message })
             }
@@ -187,7 +189,7 @@ router.put('/alterar_info_produto/:obj', async (req, res, next) => {
     database.close();
     return
 });
-router.delete('/delete_products/', async (req, res, next) => {
+/*router.delete('/delete_products/', async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -218,5 +220,5 @@ router.delete('/delete_products/', async (req, res, next) => {
     database.close();
     return
 });
-
+*/
 module.exports = router;

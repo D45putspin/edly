@@ -7,7 +7,7 @@ const login = require('../midlleware/login');
 const jwt = require('jsonwebtoken');
 
 
-router.get('/verificar_lojas/:id', login, async (req, res, next) => {
+router.get('/verificar_lojas', login, async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -20,8 +20,8 @@ router.get('/verificar_lojas/:id', login, async (req, res, next) => {
     const decode = jwt.verify(token, "palavradificil");
     console.log(decode.tipo);
     if (decode.tipo == "empresa") {
-        var idrl = req.params.id;
-        var id = idrl.replace("id=", "");
+        var id = req.query.id;
+        
         var sql = 'SELECT COUNT(*) AS contalojas FROM Loja WHERE id_empresa = ?';
         var z = 0;
         //init login function (checks if email exists, then compare bdpassword with sent one )
@@ -46,7 +46,7 @@ router.get('/verificar_lojas/:id', login, async (req, res, next) => {
     else { res.status(401).send({ message: "erro de user" }) /*unauthorized cod401*/ }
     database.close();
 });
-router.get('/listar_lojas/:id', login, async (req, res, next) => {
+router.get('/listar_lojas', login, async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -61,8 +61,8 @@ router.get('/listar_lojas/:id', login, async (req, res, next) => {
     if (decode.tipo == "empresa") {
 
 
-        var idrl = req.params.id;
-        var id= idrl.replace("id=", "");
+        var id= req.query.id;
+ 
         console.log("o id da empresa é ="+id);
         let sql = `SELECT * From Loja WHERE id_empresa = ?`;
         var nomes = [];

@@ -59,7 +59,7 @@ router.post('/new_order', async (req, res, next) => {
     return res.status(201).send({ messagem: 'order_created' })
 
 });
-router.delete('/delete_client_order/', async (req, res, next) => {
+router.delete('/delete_client_order', async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -68,8 +68,8 @@ router.delete('/delete_client_order/', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var nrencomenda = req.body.nrEncomenda;
-    console.log(id);
+    var nrencomenda = req.query.nrEncomenda;
+   
     let sql = `DELETE FROM Encomendas WHERE Nr_encomenda = ?`;
 
 
@@ -89,7 +89,7 @@ router.delete('/delete_client_order/', async (req, res, next) => {
     database.close();
     return
 });
-router.delete('/delete_order_item/', async (req, res, next) => {
+router.delete('/delete_order_item', async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -98,8 +98,8 @@ router.delete('/delete_order_item/', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var nr_encomenda = req.body.nrEncomenda;
-    var id_prod = req.body.idProduto;
+    var nr_encomenda = req.query.nrEncomenda;
+    var id_prod = req.query.idProduto;
 
 
 
@@ -120,7 +120,7 @@ router.delete('/delete_order_item/', async (req, res, next) => {
 });
 //------- new 15 jan----//
 
-router.get('/get_order_items/:id', async (req, res, next) => {
+router.get('/get_order_items', async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -134,8 +134,8 @@ router.get('/get_order_items/:id', async (req, res, next) => {
     WHERE e.Nr_encomenda = ?`;
 
 
-    var idrl = req.params.id;
-    var idencomenda = idrl.replace("id=", "");
+    var idencomenda = req.query.id;
+ 
 
    
 
@@ -160,7 +160,7 @@ router.get('/get_order_items/:id', async (req, res, next) => {
     return
 
 });
-router.get('/get_orders_clients/:id_user', async (req, res, next) =>{
+router.get('/get_orders_clients', async (req, res, next) =>{
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -176,9 +176,8 @@ router.get('/get_orders_clients/:id_user', async (req, res, next) =>{
     WHERE e.Id_user= ? `;
 
 
-    var idrl = req.params.id_user;
-    
-    var idencomenda = idrl.replace("id_user=", "");
+    var idencomenda = req.query.id_user;
+   
 
    
     

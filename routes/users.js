@@ -172,7 +172,7 @@ router.get('/pendentes', login, async (req, res, next) => {
     let sql = `SELECT * FROM Users WHERE aproval = ?`;
     var nomes = [];
     var ids = []
-    
+
 
 
     database.all(sql, "pending", (err, rows) => {
@@ -194,7 +194,7 @@ router.get('/pendentes', login, async (req, res, next) => {
     database.close();
     return
 });
-router.put('/acept_pending/:id', login, async (req, res, next) => {
+router.put('/acept_pending', login, async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -203,8 +203,8 @@ router.put('/acept_pending/:id', login, async (req, res, next) => {
             console.log("OK");
         }
     });
-    var idget = req.params.id;
-    var id = idget.replace("id=", "");
+    var id = req.query.id;
+    
     console.log("este id aqui :" + id);
     let sql = `UPDATE Users SET aproval= 'acepted'  WHERE id_user = ?`;
 
@@ -238,7 +238,7 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
             console.log("OK");
         }
     });
-    var id = req.body.id;
+    var id = req.query.id;
     console.log(id);
     let sql = `DELETE FROM Users WHERE id_user = ?`;
 
@@ -260,7 +260,7 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
     return
 });
 
-router.put('/alterar_info_conta/:obj', async (req, res, next) => {
+router.put('/alterar_info_conta', async (req, res, next) => {
 
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -269,37 +269,61 @@ router.put('/alterar_info_conta/:obj', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var data = req.params.obj;
-    var obj = data.replace("obj=", "");
-    var arrayobj = obj.split(',');
-    var order = ['Nome', 'Email', 'Cod_postal', 'Morada', 'NIF', 'Cidade', 'id'];
-    //obj7-password, obj8-email no momento
+    var id = req.query.id;
+    var Nome=req.body.nome;
+    var Cod_postal=req.body.cp;
+    var Morada=req.body.morada;
+    var Cidade=req.body.cidade;
+    var TipoVeic=req.body.Tipo_veic;
+    var Matricula=req.body.matricula;
+
+
     //var verif = verifylogin(arrayobj[7], arrayobj[1]);
     //if (verif==true){
-     const decode = jwt.verify(req.headers.token, "palavradificil");
-    if (decode.tipo=='cliente'||decode.tipo=='empresa'){
-    var sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=? WHERE Id_user = ?`;
-    }
-    else if(decode.tipo=='condutor'){var sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=?,matricula=?,tipo_veic=? WHERE Id_user = ?`}
-
-
-    database.all(sql, [arrayobj[0], arrayobj[1], arrayobj[2], arrayobj[3], arrayobj[4], arrayobj[5], arrayobj[6]], (err, rows) => {
-        if (err) {
-            res.status(500).send({ error: err.message })
-        }
-        else {
-            if (rows) {
-                rows.forEach((row) => {
-                    console.log(
-                        "sucesso!")
-                        ;
-                });
-
-                res.status(200).send({ message: "successfully_edited" })
+    const decode = jwt.verify(req.headers.token, "palavradificil");
+    if (decode.tipo == 'cliente' || decode.tipo == 'empresa') {
+        var sql = `UPDATE Users SET Nome=?,Cod_postal=?,Morada=?,Cidade=? WHERE Id_user = ?`;
+        database.all(sql, [Nome,Cod_postal,Morada,Cidade,id], (err, rows) => {
+            if (err) {
+                res.status(500).send({ error: err.message })
             }
-            else { res.status(400).send({ message: "No_registry" }) }
-        }
-    });
+            else {
+                if (rows) {
+                    rows.forEach((row) => {
+                        console.log(
+                            "sucesso!")
+                            ;
+                    });
+
+                    res.status(200).send({ message: "successfully_edited" })
+                }
+                else { res.status(400).send({ message: "No_registry" }) }
+            }
+        });
+    }
+    else if (decode.tipo == 'condutor') {
+        var sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=?,matricula=?,tipo_veic=? WHERE Id_user = ?`;
+        database.all(sql, [Nome,Cod_postal,Morada,Cidade,TipoVeic,Matricula,id], (err, rows) => {
+            if (err) {
+                res.status(500).send({ error: err.message })
+            }
+            else {
+                if (rows) {
+                    rows.forEach((row) => {
+                        console.log(
+                            "sucesso!")
+                            ;
+                    });
+
+                    res.status(200).send({ message: "successfully_edited" })
+                }
+                else { res.status(400).send({ message: "No_registry" }) }
+            }
+        });
+    }
+
+
+
     // }
 
     database.close();
@@ -353,7 +377,7 @@ router.put('/alterar_info_conta/:obj', async (req, res, next) => {
    
 };
 */
-router.delete('/delete_account/', async (req, res, next) => {
+router.delete('/delete_account', async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -362,14 +386,14 @@ router.delete('/delete_account/', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var id = req.body.id;
+    var id = req.query.id;
     console.log(id);
     let sql = `DELETE FROM Users WHERE Id_user = ?`;
     //const decode = jwt.verify(req.headers.token, "palavradificil");
-   // if (decode.tipo=='empresa'){
+    // if (decode.tipo=='empresa'){
     deleteprodempresa(database, id, res, req);
-    deletelojaempresa(database,id);
-//}
+    deletelojaempresa(database, id);
+    //}
 
 
     database.all(sql, id, (err, rows) => {
@@ -394,7 +418,7 @@ function deleteprodempresa(database, id, res, req) {
 
 
     database.all(sql, id, (err, rows) => {
-       
+
     });
 
 
@@ -406,7 +430,7 @@ function deletelojaempresa(database, id, res, req) {
 
 
     database.all(sql, id, (err, rows) => {
-       
+
     });
 
 

@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const login = require('../midlleware/login');
 const multer = require('multer');
-router.get('/stores/:getTop', async (req, res, next) => {
+router.get('/stores', async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -14,8 +14,8 @@ router.get('/stores/:getTop', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var idrl = req.params.getTop;
-    var ids = idrl.replace("getTop=", "");
+    var ids = req.query.getTop;
+
     if (ids == "yes") { var sql = `SELECT * FROM Loja  ORDER BY ranking desc LIMIT 3`;  }
     else {
     
@@ -63,7 +63,7 @@ router.get('/stores/:getTop', async (req, res, next) => {
 
 
 //function to get a rangom product image from a given store id
-router.get('/image/:id', login, async (req, res, next) => {
+router.get('/image', login, async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -73,9 +73,9 @@ router.get('/image/:id', login, async (req, res, next) => {
     });
 
     let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () Limit 1 `;
-    var idrl = req.params.id;
-    var ids = idrl.replace("id=", "");
-
+    var ids = req.query.id;
+    
+   
     database.all(sql, ids, (err, rows) => {
         if (err) {
             console.log("erroimagem");

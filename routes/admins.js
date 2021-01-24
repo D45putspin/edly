@@ -104,7 +104,7 @@ router.delete('/delete_admin', async (req, res, next) => {
             console.log("OK");
         }
     });
-    var id_admin = req.body.idAdmin;
+    var id_admin = req.query.idAdmin;
 
     
 

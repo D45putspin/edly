@@ -16,7 +16,7 @@ router.post('/criar-deliver',   async (req, res, next) => {
     let iduserPegouPaDeliver=req.body.iduserPegou;
     let idEncomenda=req.body.idEncomenda;
 
-
+    updateencomenda(database,idEncomenda);
     database.run(`INSERT INTO Entregas(Id_user,Id_user_deliver,Id_encomenda,estado) values(?,?,?,?)`, [iduserCriouEncomeda, iduserPegouPaDeliver, idEncomenda,"onDeliver"], function (err) {
         if (err) {
             return console.log(err.message);
@@ -26,12 +26,24 @@ router.post('/criar-deliver',   async (req, res, next) => {
     });
     database.close();
     return res.status(201).send({ messagem: 'Criado deliver' })
-
+ 
 
 
 });
+function updateencomenda(database,nrencomenda){
+    database.run(` UPDATE Encomendas SET state= 'onDeliver' WHERE nr_encomenda=?`,[nrencomenda] , function (err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        // get the last insert id
 
-router.put('/fechar-deliver/:id_deliver',async(req,res,next)=>{
+    });
+
+   
+
+}
+
+router.put('/fechar-deliver',async(req,res,next)=>{
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -39,12 +51,14 @@ router.put('/fechar-deliver/:id_deliver',async(req,res,next)=>{
             console.log("OK");
         }
     });
-    var data = req.params.id_deliver;
-    var id = data.replace("id_deliver=", "");
+   
+    var id=req.query.id;
+    var nrEncomenda=req.query.nrEncomenda;
+  
     let sql = `UPDATE Entregas SET Estado="done" WHERE Id_entrega = ?`;
 
-
-
+    console.log(nrEncomenda);
+    updateencomendafech(database,nrEncomenda);
     database.all(sql, [id], (err, rows) => {
         if (err) {
             res.status(500).send({ error: err.message })
@@ -70,4 +84,16 @@ return
 
 
 })
+function updateencomendafech(database,nrencomenda){
+    database.run(` UPDATE Encomendas SET state= 'done' WHERE Nr_encomenda=?`,[nrencomenda] , function (err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        // get the last insert id
+
+    });
+
+   
+
+}
 module.exports = router;
