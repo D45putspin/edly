@@ -96,4 +96,62 @@ function updateencomendafech(database,nrencomenda){
    
 
 }
+router.get('/listar_encomendas', login, async (req, res, next) => {
+    var database = new sqlite3.Database('edly.db', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("");
+        }
+    });
+
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    
+    if (decode.tipo == "condutor") {
+
+
+        
+ 
+
+        let sql = `SELECT u.Nome, u.Tipo, e.Nr_encomenda, e.Id_encomenda, e.state,p.Nome_produto,p.Preco_produto
+        FROM Users  AS u 
+        INNER JOIN Encomendas AS e
+        INNER JOIN Produto AS p
+        ON e.Id_user = u.Id_user AND  e.Id_produto = p.Id_produto
+        WHERE e.state='awaiting' `;
+
+        var arraynome=[];
+        var arrayTipo=[];
+        var arrayNrEncomenda=[];
+        var arrayIdEncomenda=[];
+        var arraystate=[];
+        var arrayNomeProd=[];
+        var arrayprecoProd=[];
+        
+        database.all(sql, (err, rows) => {
+            if (err) {
+
+            }
+            if (rows) {
+                rows.forEach((row) => {
+
+                    arraynome.push(row.Nome); 
+                arrayTipo.push(row.Tipo); 
+                arrayNrEncomenda.push(row.Nr_encomenda); 
+                arrayIdEncomenda.push(row.Id_encomenda); 
+                arraystate.push(row.state);
+                arrayNomeProd.push(row.Nome_produto);
+                arrayprecoProd.push(row.Preco_produto);
+                });
+           
+                res.status(200).send({  nome: arraynome,tipo:arrayTipo,nrEncomenda:arrayNrEncomenda,idEncomenda:arrayIdEncomenda,state:arraystate , NomeProduto:arrayNomeProd,preco:arrayprecoProd})
+            }
+            else { res.status(200).send({ message: "sem nenhum registro" }) }
+        });
+    }
+    else { res.status(200).send({ message: "erro de user" }) }
+database.close();
+
+})
 module.exports = router;
