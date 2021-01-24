@@ -194,7 +194,7 @@ router.get('/get_orders_clients', async (req, res, next) =>{
             res.status(500).send({ error: "bd_error" })
         }
         if (rows) {
-            if (rows!=""){
+           
             rows.forEach((row) => {
                 
                 arraynome.push(row.Nome); 
@@ -207,7 +207,7 @@ router.get('/get_orders_clients', async (req, res, next) =>{
                
             });
             res.status(200).send({ nome: arraynome,tipo:arrayTipo,nrEncomenda:arrayNrEncomenda,idEncomenda:arrayIdEncomenda,state:arraystate , NomeProduto:arrayNomeProd,preco:arrayprecoProd})
-            }else{ res.status(404).send({ message: "No_registry" })}
+            
         }
         else { res.status(404).send({ message: "No_registry" }) }
     });

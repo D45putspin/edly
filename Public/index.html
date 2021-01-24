@@ -977,7 +977,7 @@
 
 
         $.ajax({
-            url: urlattime + '/loja/verificar_lojas/id=' + ident,
+            url: urlattime + '/loja/verificar_lojas?id=' + ident,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1082,7 +1082,7 @@
         let tokendecode = decode(tokenrl);
         if (tokendecode.tipo == "admin") {
             $.ajax({
-                url: urlattime + '/user/acept_pending/id=' + ident,
+                url: urlattime + '/user/acept_pending?id=' + ident,
                 type: 'PUT',
                 cache: false,
                 headers: { "token": tokenrl },
@@ -1149,7 +1149,7 @@
 
 
         $.ajax({
-            url:  urlattime + '/loja/listar_lojas/id=' + ident,
+            url:  urlattime + '/loja/listar_lojas?id=' + ident,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1247,22 +1247,25 @@
 
         let params = (new URL(document.location)).searchParams;
         let loja = params.get("loja");
+        
 
 
         $.ajax({
-            url:  urlattime + '/produtos/get-products/id=' + loja,
+            url:  urlattime + '/produtos/get-products?id_loja=' + loja,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
-
+ 
 
             success: function (data) {
 
                 if (tipo == "empresa") {
+                    
                     var nomes = data.nome;
                     var imagem = data.url;
                     var descri = data.descricao;
                     var preco = data.preco;
+                    console.log("nome->"+nomes);
                     $('#DispNrLojas').css("visibility", "hidden");
                     for (let i = 0; i < nomes.length; i++) {
                         console.log(imagem[i]);
@@ -1272,7 +1275,7 @@
                         <div class="cardproduto">
                             <div class="card">
                                 <div class="card-image">
-                                    <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
+                                    <img style="height:100%";" src="`+ urlattime + `/${imagem[i]}">
                                     <span class="card-title">${nomes[i]}</span>
                                 </div>
                                 <div class="card-content left-align">
@@ -1312,7 +1315,7 @@
                         <div class="cardproduto">
                             <div class="card">
                                 <div class="card-image">
-                                    <img style="height:100%";" src="http://`+ urlattime + `/${imagem[i]}">
+                                    <img style="height:100%";" src="`+ urlattime + `/${imagem[i]}">
                                     <span class="card-title">${nomes[i]}</span>
                                 </div>
                                 <div class="card-content left-align">
@@ -1460,7 +1463,7 @@
 
 
         $.ajax({
-            url:  urlattime + '/cliente/stores/getTop=yes',
+            url:  urlattime + '/cliente/stores?getTop=yes',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1478,7 +1481,8 @@
 
                     for (var counter = 0; counter < nomes.length; counter++) {
 
-                        $('#encontrartoplojas').append(`<div class="col s12 m2"><a href="?loja=${id[counter]}">
+                        $('#encontrartoplojas').append(`<div class="col s12 m2">
+                        <a href="?loja=${id[counter]}">
                             <div class="card">
                                 <div class="card-image">
                                     <img style="height:80%"id="${id[counter]}top"<src="">
@@ -1521,7 +1525,7 @@
 
 
         $.ajax({
-            url:  urlattime + '/cliente/stores/getTop=No',
+            url:  urlattime + '/cliente/stores?getTop=No',
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1582,7 +1586,7 @@
         var url;
 
         $.ajax({
-            url:  urlattime + '/cliente/image/id=' + id,
+            url:  urlattime + '/cliente/image?id=' + id,
             type: 'GET',
             cache: false,
             headers: { "token": tokenrl },
@@ -1610,8 +1614,8 @@
     }
     function test(url, id) {
 
-        document.getElementById(id).src = 'http://' + urlattime + '/' + url
-        document.getElementById(id + "top").src = 'http://' + urlattime + '/' + url
+        document.getElementById(id).src = urlattime + '/' + url
+        document.getElementById(id + "top").src =  urlattime + '/' + url
     }
 </script>
 <script> M.AutoInit();</script>
