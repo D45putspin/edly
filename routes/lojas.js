@@ -39,7 +39,7 @@ router.get('/verificar_lojas', login, async (req, res, next) => {
                 } else {
                     console.log("não encontrou loja");
 
-                    res.status(204).send({ message: "sem lojas" }/*no content cod204*/)
+                    res.status(400).send({ message: "sem lojas" }/*no content cod204*/)
                 }
             });
     }
@@ -87,10 +87,10 @@ router.get('/listar_lojas', login, async (req, res, next) => {
                 console.log(nomes+" "+ids)
                 res.status(200).send({ nome: nomes, tipo: tipos, morada: moradas, cp: cod_posts,id:ids })
             }
-            else { res.status(200).send({ message: "sem nenhum registro" }) }
+            else { res.status(400).send({ message: "sem nenhum registro" }) }
         });
     }
-    else { res.status(200).send({ message: "erro de user" }) }
+    else { res.status(401).send({ message: "erro de user" }) }
 database.close();
 
 })
@@ -126,7 +126,7 @@ router.post('/inserir_lojas', login, async (req, res, next) => {
         }
         else { return res.status(400).send({ messagem: 'não pode associar outras empresas que não a sua ' }) }
     }
-    else { return res.status(400).send({ messagem: 'para aceder a esta funcionalidade é necessário ser empresa' }) }
+    else { return res.status(401).send({ messagem: 'para aceder a esta funcionalidade é necessário ser empresa' }) }
 
 });
 

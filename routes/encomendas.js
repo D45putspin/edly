@@ -28,7 +28,7 @@ router.get('/nr_last_order', login, async (req, res, next) => {
 
             res.status(200).send({ last_nr_order: nr })
         }
-        else { res.status(404).send({ message: "No_registry" }) }
+        else { res.status(400).send({ message: "No_registry" }) }
     });
     database.close();
     return
@@ -119,7 +119,7 @@ router.delete('/delete_order_item', login, async (req, res, next) => {
 
     });
     database.close();
-    return res.status(201).send({ messagem: 'order_item_deleted' })
+    return res.status(200).send({ messagem: 'order_item_deleted' })
 
 });
 
@@ -159,7 +159,7 @@ router.get('/get_order_items', login, async (req, res, next) => {
             res.status(200).send({ produtos: arrayprodutos, nrencomenda: idencomenda })
 
         }
-        else { res.status(404).send({ message: "No_registry" }) }
+        else { res.status(400).send({ message: "No_registry" }) }
     });
     database.close();
     return
@@ -210,7 +210,7 @@ router.get('/get_orders_clients', login, async (req, res, next) => {
             res.status(200).send({ nome: arraynome, tipo: arrayTipo, nrEncomenda: arrayNrEncomenda, idEncomenda: arrayIdEncomenda, state: arraystate, NomeProduto: arrayNomeProd, preco: arrayprecoProd })
 
         }
-        else { res.status(404).send({ message: "No_registry" }) }
+        else { res.status(400).send({ message: "No_registry" }) }
     });
     database.close();
     return

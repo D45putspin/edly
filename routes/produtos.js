@@ -163,7 +163,7 @@ router.delete('/delete_product',login, async (req, res, next) => {
 
     });
     database.close();
-    return res.status(201).send({ messagem: 'Produto eliminado' })
+    return res.status(200).send({ messagem: 'Produto eliminado' })
 
 });
 
@@ -201,7 +201,7 @@ router.put('/alterar_info_produto', login,async (req, res, next) => {
                    
                 });
 
-                res.status(200).send({ message: "successfully_edited" })
+                res.status(201).send({ message: "successfully_edited" })
             }
             else { res.status(400).send({ message: "No_registry" }) }
         }

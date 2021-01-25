@@ -39,7 +39,7 @@ router.get('/stores', login, async (req, res, next) => {
             //send arrays
             res.status(200).send({ nome: nomes, id: ids })
         }
-        else { res.status(404).send({ message: "No_registry" }) }
+        else { res.status(400).send({ message: "No_registry" }) }
     });
     database.close();
     return
