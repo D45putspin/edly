@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const login = require('../midlleware/login');
 const multer = require('multer');
-router.get('/stores', async (req, res, next) => {
+router.get('/stores', login, async (req, res, next) => {
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
             console.log(err);
@@ -15,30 +15,28 @@ router.get('/stores', async (req, res, next) => {
         }
     });
     var ids = req.query.getTop;
-
-    if (ids == "yes") { var sql = `SELECT * FROM Loja  ORDER BY ranking desc LIMIT 3`;  }
+    // checks if is all stores or only top ones
+    if (ids == "yes") {
+        var sql = `SELECT * FROM Loja  ORDER BY ranking desc LIMIT 3`;
+    }
     else {
-    
-        var sql = `SELECT * FROM Loja  ORDER BY ranking asc`;
+         var sql = `SELECT * FROM Loja  ORDER BY ranking asc`;
     }
     var nomes = [];
     var ids = [];
-
-
-
     database.all(sql, (err, rows) => {
         if (err) {
             res.status(500).send({ error: "bd_error" })
         }
         if (rows) {
             rows.forEach((row) => {
-
+                //push data to arrays 
                 nomes.push(row.Nome);
                 ids.push(row.Id_loja)
-   
+
 
             });
-
+            //send arrays
             res.status(200).send({ nome: nomes, id: ids })
         }
         else { res.status(404).send({ message: "No_registry" }) }
@@ -74,8 +72,8 @@ router.get('/image', login, async (req, res, next) => {
 
     let sql = `SELECT * FROM Produto  WHERE Id_loja = ? ORDER BY RANDOM () Limit 1 `;
     var ids = req.query.id;
-    
-   
+
+
     database.all(sql, ids, (err, rows) => {
         if (err) {
             console.log("erroimagem");
