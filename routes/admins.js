@@ -29,7 +29,7 @@ router.post('/create_admin', async (req, res, next) => {
    var token = req.headers.token;
     const decode = jwt.verify(token, "palavradificil");
     if (decode.tipo!="admin"){
-        return res.status(400).send({ messagem: 'sem permissões' })
+        return res.status(401).send({ messagem: 'sem permissões' })
     }
     // check if any field is not empty
 

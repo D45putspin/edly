@@ -69,7 +69,7 @@ router.put('/fechar-deliver', login, async (req, res, next) => {
 
                 });
 
-                res.status(200).send({ message: "successfully_edited" })
+                res.status(201).send({ message: "successfully_edited" })
             }
             else { res.status(400).send({ message: "No_registry" }) }
         }
@@ -145,10 +145,10 @@ router.get('/listar_encomendas', login, async (req, res, next) => {
 
                 res.status(200).send({ nome: arraynome, tipo: arrayTipo, nrEncomenda: arrayNrEncomenda, idEncomenda: arrayIdEncomenda, state: arraystate, NomeProduto: arrayNomeProd, preco: arrayprecoProd })
             }
-            else { res.status(200).send({ message: "sem nenhum registro" }) }
+            else { res.status(400).send({ message: "sem nenhum registro" }) }
         });
     } 
-    else { res.status(200).send({ message: "erro de user" }) }
+    else { res.status(401).send({ message: "erro de user" }) }
     database.close();
 
 })

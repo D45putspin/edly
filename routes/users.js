@@ -101,7 +101,7 @@ router.post('/register', uploads.single('img_empresa'), async (req, res, next) =
         if (err) {
             return console.log(err.message);
         }
-  
+
 
     });
     database.close();
@@ -141,15 +141,15 @@ router.post('/login', async (req, res, next) => {
                             tipo: row.Tipo,
                             nome: row.Nome
                         }, 'palavradificil', { expiresIn: '5h' });
-                        
-                        res.status(200).json({ message: token });
+
+                        res.status(201).json({ message: token });
                     }
                     else {
-                        res.status(403).json({ message: "need_activation" });
+                        res.status(401).json({ message: "need_activation" });
 
                     }
                 } else {
-                    res.status(403).json({ message: "wrong_fields" });
+                    res.status(400).json({ message: "wrong_fields" });
                 }
             } else {
                 res.status(400).send({ message: "not_found" });
@@ -175,8 +175,8 @@ router.get('/pendentes', login, async (req, res, next) => {
 
     var token = req.headers.token;
     const decode = jwt.verify(token, "palavradificil");
-    if (decode.tipo!="admin"){
-        return res.status(400).send({ messagem: 'sem permissões' })
+    if (decode.tipo != "admin") {
+        return res.status(401).send({ messagem: 'sem permissões' })
     }
 
     database.all(sql, "pending", (err, rows) => {
@@ -193,7 +193,7 @@ router.get('/pendentes', login, async (req, res, next) => {
 
             res.status(200).send({ nome: nomes, id: ids })
         }
-        else { res.status(404).send({ message: "No_registry" }) }
+        else { res.status(400).send({ message: "No_registry" }) }
     });
     database.close();
     return
@@ -210,10 +210,10 @@ router.put('/acept_pending', login, async (req, res, next) => {
     var id = req.query.id;
     var token = req.headers.token;
     const decode = jwt.verify(token, "palavradificil");
-    if (decode.tipo!="admin"){
+    if (decode.tipo != "admin") {
         return res.status(400).send({ messagem: 'sem permissões' })
     }
-    
+
     let sql = `UPDATE Users SET aproval= 'acepted'  WHERE id_user = ?`;
 
 
@@ -224,11 +224,11 @@ router.put('/acept_pending', login, async (req, res, next) => {
         }
         if (rows) {
             rows.forEach((row) => {
-              
-                
+
+
             });
 
-            res.status(200).send({ message: "successfully_edited" })
+            res.status(201).send({ message: "successfully_edited" })
         }
         else { res.status(400).send({ message: "No_registry" }) }
     });
@@ -247,11 +247,11 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
     });
     var token = req.headers.token;
     const decode = jwt.verify(token, "palavradificil");
-    if (decode.tipo!="admin"){
-        return res.status(400).send({ messagem: 'sem permissões' })
+    if (decode.tipo != "admin") {
+        return res.status(401).send({ messagem: 'sem permissões' })
     }
     var id = req.query.id;
-   
+
     let sql = `DELETE FROM Users WHERE id_user = ?`;
 
 
@@ -272,7 +272,7 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
     return
 });
 
-router.put('/alterar_info_conta',login, async (req, res, next) => {
+router.put('/alterar_info_conta', login, async (req, res, next) => {
 
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -282,12 +282,12 @@ router.put('/alterar_info_conta',login, async (req, res, next) => {
         }
     });
     var id = req.query.id;
-    var Nome=req.body.nome;
-    var Cod_postal=req.body.cp;
-    var Morada=req.body.morada;
-    var Cidade=req.body.cidade;
-    var TipoVeic=req.body.Tipo_veic;
-    var Matricula=req.body.matricula;
+    var Nome = req.body.nome;
+    var Cod_postal = req.body.cp;
+    var Morada = req.body.morada;
+    var Cidade = req.body.cidade;
+    var TipoVeic = req.body.Tipo_veic;
+    var Matricula = req.body.matricula;
 
 
     //var verif = verifylogin(arrayobj[7], arrayobj[1]);
@@ -295,18 +295,18 @@ router.put('/alterar_info_conta',login, async (req, res, next) => {
     const decode = jwt.verify(req.headers.token, "palavradificil");
     if (decode.tipo == 'cliente' || decode.tipo == 'empresa') {
         var sql = `UPDATE Users SET Nome=?,Cod_postal=?,Morada=?,Cidade=? WHERE Id_user = ?`;
-        database.all(sql, [Nome,Cod_postal,Morada,Cidade,id], (err, rows) => {
+        database.all(sql, [Nome, Cod_postal, Morada, Cidade, id], (err, rows) => {
             if (err) {
                 res.status(500).send({ error: err.message })
             }
             else {
                 if (rows) {
                     rows.forEach((row) => {
-                       
-                        
+
+
                     });
 
-                    res.status(200).send({ message: "successfully_edited" })
+                    res.status(201).send({ message: "successfully_edited" })
                 }
                 else { res.status(400).send({ message: "No_registry" }) }
             }
@@ -314,17 +314,17 @@ router.put('/alterar_info_conta',login, async (req, res, next) => {
     }
     else if (decode.tipo == 'condutor') {
         var sql = `UPDATE Users SET Nome=?,Email=?,Cod_postal=?,Morada=?,NIF=?,Cidade=?,matricula=?,tipo_veic=? WHERE Id_user = ?`;
-        database.all(sql, [Nome,Cod_postal,Morada,Cidade,TipoVeic,Matricula,id], (err, rows) => {
+        database.all(sql, [Nome, Cod_postal, Morada, Cidade, TipoVeic, Matricula, id], (err, rows) => {
             if (err) {
                 res.status(500).send({ error: err.message })
             }
             else {
                 if (rows) {
                     rows.forEach((row) => {
-                      
+
                     });
 
-                    res.status(200).send({ message: "successfully_edited" })
+                    res.status(201).send({ message: "successfully_edited" })
                 }
                 else { res.status(400).send({ message: "No_registry" }) }
             }
@@ -339,7 +339,7 @@ router.put('/alterar_info_conta',login, async (req, res, next) => {
     return
 });
 
-router.delete('/delete_account',login, async (req, res, next) => {
+router.delete('/delete_account', login, async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -349,7 +349,7 @@ router.delete('/delete_account',login, async (req, res, next) => {
         }
     });
     var id = req.query.id;
- 
+
     let sql = `DELETE FROM Users WHERE Id_user = ?`;
     //const decode = jwt.verify(req.headers.token, "palavradificil");
     // if (decode.tipo=='empresa'){
