@@ -96,12 +96,12 @@ router.post('/register', uploads.single('img_empresa'), async (req, res, next) =
 
 
     const hash = bcrypt.hashSync(password, 10);
-    console.log(nome, password, hash)
+
     database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula,aproval,foto_empresa) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_, status, image_], function (err) {
         if (err) {
             return console.log(err.message);
         }
-        // get the last insert id
+  
 
     });
     database.close();
@@ -141,7 +141,7 @@ router.post('/login', async (req, res, next) => {
                             tipo: row.Tipo,
                             nome: row.Nome
                         }, 'palavradificil', { expiresIn: '5h' });
-                        console.log("Y");
+                        
                         res.status(200).json({ message: token });
                     }
                     else {
@@ -173,7 +173,11 @@ router.get('/pendentes', login, async (req, res, next) => {
     var nomes = [];
     var ids = []
 
-
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    if (decode.tipo!="admin"){
+        return res.status(400).send({ messagem: 'sem permissões' })
+    }
 
     database.all(sql, "pending", (err, rows) => {
         if (err) {
@@ -204,8 +208,12 @@ router.put('/acept_pending', login, async (req, res, next) => {
         }
     });
     var id = req.query.id;
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    if (decode.tipo!="admin"){
+        return res.status(400).send({ messagem: 'sem permissões' })
+    }
     
-    console.log("este id aqui :" + id);
     let sql = `UPDATE Users SET aproval= 'acepted'  WHERE id_user = ?`;
 
 
@@ -216,9 +224,8 @@ router.put('/acept_pending', login, async (req, res, next) => {
         }
         if (rows) {
             rows.forEach((row) => {
-                console.log(
-                    "sucesso!")
-                    ;
+              
+                
             });
 
             res.status(200).send({ message: "successfully_edited" })
@@ -238,8 +245,13 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
             console.log("OK");
         }
     });
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    if (decode.tipo!="admin"){
+        return res.status(400).send({ messagem: 'sem permissões' })
+    }
     var id = req.query.id;
-    console.log(id);
+   
     let sql = `DELETE FROM Users WHERE id_user = ?`;
 
 
@@ -260,7 +272,7 @@ router.delete('/delete_pending/', login, async (req, res, next) => {
     return
 });
 
-router.put('/alterar_info_conta', async (req, res, next) => {
+router.put('/alterar_info_conta',login, async (req, res, next) => {
 
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -290,9 +302,8 @@ router.put('/alterar_info_conta', async (req, res, next) => {
             else {
                 if (rows) {
                     rows.forEach((row) => {
-                        console.log(
-                            "sucesso!")
-                            ;
+                       
+                        
                     });
 
                     res.status(200).send({ message: "successfully_edited" })
@@ -310,9 +321,7 @@ router.put('/alterar_info_conta', async (req, res, next) => {
             else {
                 if (rows) {
                     rows.forEach((row) => {
-                        console.log(
-                            "sucesso!")
-                            ;
+                      
                     });
 
                     res.status(200).send({ message: "successfully_edited" })
@@ -329,55 +338,8 @@ router.put('/alterar_info_conta', async (req, res, next) => {
     database.close();
     return
 });
-//- acabar!!!!!!!!!!!!!!!
-/*function verifylogin(password,email){
-    console.log(email +"...."+password);
-    var x;
-    var database = new sqlite3.Database('edly.db', function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("OK");
-        }
-    });
-    //set variables
-    var sql = 'SELECT * FROM Users WHERE Email = ?';
-    //init login function (checks if email exists, then compare bdpassword with sent one )
-    database.get(sql, email,
-        async function (err, row) {
-            if (err) {
-                console.log("err")
-            }
 
-            if (row) {
-                //check password
-                //check if password is == bdpassword
-                const checkPass = await bcrypt.compareSync(password, row.Password);
-
-                if (checkPass) {
-                    //creates a token that is assigned to user
-                    if (row.aproval != "pending") {
-                      
-                      console.log("yep");
-                      x=true;
-                      return x;
-                    }
-                    else {
-                        console.log("yep1");
-
-                    }
-                } else {
-                    console.log("yep2");
-                }
-            } else {
-                return "falsepwd";
-            }
-        })
-   
-   
-};
-*/
-router.delete('/delete_account', async (req, res, next) => {
+router.delete('/delete_account',login, async (req, res, next) => {
     //set variables
     var database = new sqlite3.Database('edly.db', function (err) {
         if (err) {
@@ -387,7 +349,7 @@ router.delete('/delete_account', async (req, res, next) => {
         }
     });
     var id = req.query.id;
-    console.log(id);
+ 
     let sql = `DELETE FROM Users WHERE Id_user = ?`;
     //const decode = jwt.verify(req.headers.token, "palavradificil");
     // if (decode.tipo=='empresa'){
