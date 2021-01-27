@@ -29,107 +29,552 @@ SQLite
 - O Token expira passado 5 horas do Log-in .
 ```
 
-# Funções:
+# Utilizadores
 
 
-###  Registo Front-end:
-```js
- $.ajax({
+```markdown
+Cliente
+Condutor
+Empresa
+Adminstrador
+```
+
+# Funçoes
+ 
+ # Registo
+ 
+  ### URL
+  SERVER /user/register
+  
+  ### Metohod
+  POST
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+  ```markdown
+  { nome, 
+  password,
+  password1, 
+  email, 
+  nif, 
+  morada, 
+  cod_postal, 
+  cidade_, 
+  tipo}
+  ```
+  ### Success Response
+  ***Code:*** 201
+  
+  ***Content:*** { messagem: 'Criado com sucesso' }
+  
+  ### Error Response
+  ***Code:*** 500
+  
+  ***Content:*** {}
+  
+  ### Sample Cell
+  ```js
+  "  $.ajax({
         url: 'http://localhost:3000/user/register',
         type: 'POST',
         cache: false,
-        data: { nome: nome_, password: password_, password1: password1_, email: email_, nif: nif_, morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo: tipo_ },
+        
+        data: { nome: nome_,                                             password:password_,password1:password1_, email: email_, nif: nif_,    morada: morada_, cod_postal: cod_postal_, cidade_: cidade_, tipo:     tipo_ },
         success: function (data) {
-          window.location.href = "../edly/login.html";
+          window.location.href = ""../edly/login.html"";
         }
         , error: function (jqXHR, textStatus, err) {
           window.alert('text status ' + textStatus + ', err ' + err)
           window.alert(jqXHR.responseText);
         }
       })
-```
-      
-### Registo Back-end:
-
-```js
-database.run(`INSERT INTO Users(Nome,Password,Email,NIF,Morada,Cod_postal,Cidade,Tipo,tipo_veic,matricula,aproval,foto_empresa) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`, [nome, hash, email_, nif_, morada_, cod_postal_, cidade_, tipo_, veiculo_, matricula_, status, image_], function (err) {
-        if (err) {
-            return console.log(err.message);
-        }
-        // get the last insert id
-
-    });
-    database.close();
-    return res.status(201).send({ messagem: 'Criado com sucesso' })
-});
-```
-
-### Login Front-end:
-```js
- $.ajax({
+"
+  ```
+ # Login
+ 
+  ### URL
+  SERVER /user/login
+  
+  ### Metohod
+  POST
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+  ```markdown
+  
+  data: { email, password}
+  
+  ```
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** { message: token }
+  
+  ### Error Response
+  ***Code:*** 500
+  
+  ***Content:*** {}
+  
+  ***Code:*** 403
+  
+  ***Content:*** { message: "need_activation"}
+  
+  ***Code:*** 403
+  
+  ***Content:*** { message: "wrong_fields"}
+  
+  ***Code:*** 400
+  
+  ***Content:*** { message: "not_found"}
+  
+  ### Sample Cell
+  ```js
+  "  $.ajax({
                 url: 'http://localhost:3000/user/login',
                 type: 'POST',
                 cache: false,
                 data: { email: y, password: x },
                 success: function (data) {
                     $('#element').text(data.message);
-                    document.cookie = "token = " + data.message + ";secure";
-                    window.location.href = "index.html";
+                    document.cookie = ""token = "" + data.message + "";secure"";
+                    window.location.href = ""index.html"";
 
                 }
                 , error: function ( jqXHR, textStatus, err) {
                     var error= jQuery.parseJSON(jqXHR.responseText);
-                    console.log(error.message);
                     console.log(textStatus);
-                    console.log(err);
                     notiferror(error.message);
-                 
-                   
-                
-                
+                  }
+            })
+"
+
+  ```
+  
+  # Admin-pendentes
+ 
+  ### URL
+  SERVER /user/pendentes
+  
+  ### Metohod
+  GET
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+  None
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** { message: nomeia }
+  
+  ### Error Response
+  ***Code:*** 500
+  
+  ***Content:*** {}
+  
+  ***Code:*** 400
+  
+  ***Content:*** { message: "No_registry"}
+  
+  ### Sample Cell
+  ```js
+  " $.ajax({
+            url: 'http://' + urlattime + '/user/pendentes',
+            type: 'GET',
+            cache: false,
+            headers: { ""token"": tokenrl },
+
+
+            success: function (data) {
+
+
+                var nomes = data.nome;
+                var ids = data.id;
+                console.log(nomes);
+                functiondisplay(nomes,ids);
+               
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus);
+                console.log(jqXHR.responseText);
+            }
+        })
+
+"
+  ```
+  
+  # Admin-aceitar pendentes
+ 
+  ### URL
+  SERVER /user/acept_pending/id=
+  
+  ### Metohod
+  PUT
+  
+  ### URL Params
+  Ident
+  
+  ### Data Params
+  None
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** { message: ‘Successfully_edited’ }
+  
+  ### Error Response
+  ***Code:*** 500
+  
+  ***Content:*** { error: "bd_error"}
+  
+  ***Code:*** 400
+  
+  ***Content:*** { message: "No_registry"}
+  
+  ### Sample Cell
+  ```js
+  "$.ajax({
+                url: 'http://' + urlattime + '/user/acept_pending/id=' + ident,
+                type: 'PUT',
+                cache: false,
+                headers: { ""token"": tokenrl },
+
+
+                success: function (data) {
+                    location.reload();
+
+
+                }
+                , error: function (jqXHR, textStatus, err) {
+
+                    console.log(err, textStatus)
                 }
             })
-        });
-```
-### Login Back-end:
-```js
-var sql = 'SELECT * FROM Users WHERE Email = ?';
-    //init login function (checks if email exists, then compare bdpassword with sent one )
-    database.get(sql, [email_],
-        async function (err, row) {
-            if (err) {
-                res.status(500).send({ message: "erro 500" })
-            }
+"
 
-            if (row) {
-                //check password
-                //check if password is == bdpassword
-                const checkPass = await bcrypt.compareSync(password, row.Password);
+  ```
+  
+# Admin - Criar Admins
+ 
+  ### URL
+  SERVER /funcadmins/create_admin
+  
+  ### Metohod
+  POST
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+   ```markdown
+    { nome, 
+  password,
+  password1, 
+  email,}
+   ```
+  
+  ### Success Response
+  ***Code:*** 201
+  
+  ***Content:*** { message: ‘Criado com sucesso’ }
+  
+  ### Error Response
+  ***Code:*** 400
+  
+  ***Content:*** { error: "erro de campos"}
+  
+  ***Code:*** 400
+  
+  ***Content:*** { message: "passwords nao coincidem"}
+  
+  ### Sample Cell
+  ```js
 
-                if (checkPass) {
-                    //creates a token that is assigned to user
-                    if (row.aproval != "pending") {
-                        const token = jwt.sign({
-                            id_user: row.Id_user,
-                            email: row.Email,
-                            tipo: row.Tipo,
-                            nome: row.Nome
-                        }, 'palavradificil', { expiresIn: '5h' });
-                        console.log("Y");
-                        res.status(200).json({ message: token });
-                    }
-                    else{
-                        res.status(403).json({ message: "need_activation"});
-                   
-                    }
-                } else {
-                    res.status(403).json({ message: "wrong_fields" });
+  ```
+  
+ # Admin - Delete Admins
+ 
+  ### URL
+  SERVER /funcadmins/delete_admin
+  
+  ### Metohod
+  POST
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+   ```markdown
+  idAdmin
+   ```
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** { message: ‘Administrador eliminado’ }
+  
+  ### Error Response
+  ***Code:*** 500
+  
+  ***Content:*** {}
+  
+  ### Sample Cell
+  ```js
+
+  ```
+  
+ # Admin - Eliminar Pendentes
+ 
+  ### URL
+  SERVER /user/delete_pending
+  
+  ### Metohod
+  POST
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+   ```markdown
+   ID
+   ```
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** { message: ‘successfully deleted’ }
+  
+  ### Error Response
+  ***Code:*** 400
+  
+  ***Content:*** { error: "No_registry"}
+  
+  ### Sample Cell
+  ```js
+  "$.ajax({
+                url: 'http://' + urlattime + '/user/delete_pending',
+                type: 'DELETE',
+                cache: false,
+                data: { id: id },
+                headers: { ""token"": tokenrl },
+
+
+                success: function (data) {
+                    location.reload();
+
+
                 }
-            } else {
-                res.status(400).send({ message: "not_found" });
+                , error: function (jqXHR, textStatus, err) {
+
+                    console.log(err, textStatus)
+                }
+            })
+"
+  ```
+
+ # Lojas - Verificar quantas lojas existem
+ 
+  ### URL
+  SERVER /loja/verificar_lojas
+  
+  ### Metohod
+  GET
+  
+  ### URL Params
+  ID
+  
+  ### Data Params
+  None
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** { message: row.contalojas }
+  
+  ### Error Response
+  ***Code:*** 400
+  
+  ***Content:*** { message: ‘sem lojas’ }
+  
+  ***Code:*** 500
+  
+  ***Content:*** { message: ‘erro bd’ }
+  
+  ### Sample Cell
+  ```js
+  "$.ajax({
+            url: 'http://' + urlattime + '/loja/verificar_lojas/id=' + ident,
+            type: 'GET',
+            cache: false,
+            headers: { ""token"": tokenrl },
+
+
+
+            success: function (data) {
+
+                if (data.message != ""sem lojas"") {
+                    document.getElementById(""numerodeloja"").innerHTML = data.message;
+                    getlojas(ident, token, data.message);
+                }
+
             }
-        }
-    )
-    database.close();
-});
-```
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+
+            }
+
+        })
+"
+  ```
+  
+ # Lojas -  Listar lojas
+ 
+  ### URL
+  SERVER /loja/verificar_lojas
+  
+  ### Metohod
+  GET
+  
+  ### URL Params
+  ID
+  
+  ### Data Params
+  None
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** {nome, tipo,morada,cod_post}
+  
+  ### Error Response
+  ***Code:*** 400
+  
+  ***Content:*** { message: ‘sem nenhum registo’ }
+  
+  ***Code:*** 400
+  
+  ***Content:*** { message: ‘erro de user’ }
+  
+  ***Code:*** 500
+  
+  ***Content:*** { message: ‘erro bd’ }
+  
+  ### Sample Cell
+  ```js
+  "
+        $.ajax({
+            url: 'http://' + urlattime + '/loja/listar_lojas/id=' + ident,
+            type: 'GET',
+            cache: false,
+            headers: { ""token"": tokenrl },
+
+
+            success: function (data) {
+
+                if (data.message != ""sem lojas"") {
+                    var lojas = """" + data.nome;
+                    var lojasingular = lojas.split(',');
+                    var tipos = """" + data.tipo;
+                    var tiposingular = tipos.split(',');
+                    var moradas = """" + data.morada;
+                    var moradasingular = moradas.split(',');
+                    var codigos_postal = """" + data.cp;
+                    var cpsingular = codigos_postal.split(',');
+                    //verify if header isnt null
+                    if (loja != null && loja != """") {
+                        console.log(""nome"" + lojasingular[loja]);
+                        $('#namelojaprodutos').append(`<h1 style=""font-size:70px;font-family: 'Ubuntu', sans-serif; color:#282828; font-weight: bold !important;"">${lojasingular[loja - 1]}</h1>`)
+                        chamarprodutos(id, token);
+                    }
+                    else {
+                        for (let i = 0; i < nr; i++) {
+
+                            displaydata();                       }
+                    }
+
+
+
+
+
+
+
+
+                }
+
+            }
+            , error: function (jqXHR, textStatus, err) {
+
+                console.log(err, textStatus)
+            }
+        })
+"
+  ```
+  
+ # Lojas -  Inserir lojas
+ 
+  ### URL
+  SERVER /loja/inserir_lojas
+  
+  ### Metohod
+  POST
+  
+  ### URL Params
+  None
+  
+  ### Data Params
+  ```markdown
+  {id,
+  cod_postal,
+  tipo,
+  nome}
+  ```
+  
+  ### Success Response
+  ***Code:*** 200
+  
+  ***Content:*** {messagem: ‘criada com sucesso’}
+  
+  ### Error Response
+  ***Code:*** 400
+  
+  ***Content:*** { message: ‘Não pode associar outras empresas que não a sua’ }
+  
+  ***Code:*** 400
+  
+  ***Content:*** { message: ‘para aceder a esta funcionalidade é necessário ser do tipo “empresa”’ }
+  
+  ***Code:*** 500
+  
+  ***Content:*** { message: ‘erro bd’ }
+  
+  ### Sample Cell
+  ```js
+  " $.ajax({
+                url: 'http://' + urlattime + '/loja/inserir_lojas',
+                type: 'POST',
+                cache: false,
+                data: { nome: nome, tipo: tipo, morada: morada, token: tokenrl, id: id, cod_postal: cod_postal },
+                headers: { ""token"": tokenrl },
+                success: function (data) {
+                    window.location.href = ""?sucesso=y"";
+                    M.toast({ html: 'Loja criada com sucesso', classes: 'rounded' })
+
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    M.toast({ html: 'Erro ao criar a loja!', classes: 'rounded' })
+                    console.log(err, textStatus);
+                }
+            })
+"
+  ```
+  
+ 
+
