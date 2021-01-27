@@ -38,7 +38,7 @@ router.post('/register', uploads.single('img_empresa'), async (req, res, next) =
     var tipo_ = req.body.tipo;
     var veiculo_ = req.body.veiculo;
     var matricula_ = req.body.matricula;
-
+    
     // check type of user for admin can permission entrance
 
     if (tipo_ == "condutor" || tipo_ == "empresa") {
