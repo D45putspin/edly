@@ -46,6 +46,11 @@ router.post('/new_order', login, async (req, res, next) => {
     var preco = req.body.precoProduto;
     var nr_encomenda = req.body.nr_encomenda;
     var sql = `SELECT * FROM Produto WHERE Id_produto= ? `;
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    if (decode.tipo != "cliente") {
+        return res.status(401).send({ messagem: 'sem permissões' })
+    }
     database.all(sql, [id_prod], (err, rows) => {
         if (err) {
 
@@ -81,7 +86,11 @@ router.delete('/delete_client_order', login, async (req, res, next) => {
         }
     });
     var nrencomenda = req.query.nrEncomenda;
-
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    if (decode.tipo != "cliente") {
+        return res.status(401).send({ messagem: 'sem permissões' })
+    }
     let sql = `DELETE FROM Encomendas WHERE Nr_encomenda = ?`;
 
     database.all(sql, nrencomenda, (err, rows) => {
@@ -109,7 +118,11 @@ router.delete('/delete_order_item', login, async (req, res, next) => {
     });
     var nr_encomenda = req.query.nrEncomenda;
     var id_prod = req.query.idProduto;
-                            
+    var token = req.headers.token;
+    const decode = jwt.verify(token, "palavradificil");
+    if (decode.tipo != "cliente") {
+        return res.status(401).send({ messagem: 'sem permissões' })
+    }
     database.run(`DELETE FROM Encomendas WHERE Nr_encomenda = ? AND Id_produto = ?`, [nr_encomenda, id_prod], function (err) {
 
         if (err) {
