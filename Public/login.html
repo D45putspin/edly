@@ -62,7 +62,7 @@
                 data: { email: y, password: x },
                 success: function (data) {
                     $('#element').text(data.message);
-                    document.cookie = "token = " + data.message + ";secure";
+                    document.cookie = "token = " + data.message + ";";
                     window.location.href = "index.html";
 
                 }
