@@ -11,7 +11,7 @@
 HTML
 JavaScript
 CSS
-Bootstrap
+Materialize
 NodeJs
 SQLite
 ```
@@ -39,9 +39,76 @@ Empresa
 Adminstrador
 ```
 
-# Funçoes
+## Cliente 
+
+### Atributos
+```markdown
+- Nome
+- NIF
+- Email
+- Código-Postal
+- Palavra-Passe
+- Morada
+- Cidade
+```
+
+- Criar encomendas
+- Editar encomendas
+- Remover encomendas (se a entrega não estiver em curso)
+
+## Condutor 
+
+### Atributos
+```markdown
+- Nome
+- NIF
+- Email
+- Código-Postal
+- Palavra-Passe
+- Morada
+- Cidade
+- Tipo de veiculo
+- Matricula
+
+```
+
+- Alterar estado de encomendas
+- Selecionar encomendas em espera
+
+## Empresa
+
+### Atributos
+```markdown
+- Nome
+- NIF
+- Email
+- Código-Postal
+- Palavra-Passe
+- Morada
+- Cidade
+- Foto
+```
+
+- Adicionar produtos à aplicação
+- Editar os respetivos produtos
+- Remover os respetivos produtos
+
+## Administrador
+
+### Atributos
+```markdown
+- Nome
+- Email
+- Palavra-Passe
+```
+
+- Admitem acesso das empresas e condutores
+- Criam os outros administradores
+- Podem administrar todo o sistema
+
+# Funções
  
- # Registo
+ ## Registo
  
   ### URL
   SERVER /user/register
@@ -92,7 +159,7 @@ Adminstrador
       })
 "
   ```
- # Login
+ ## Login
  
   ### URL
   SERVER /user/login
@@ -154,7 +221,7 @@ Adminstrador
 
   ```
   
-  # Admin-pendentes
+  ## Admin-pendentes
  
   ### URL
   SERVER /user/pendentes
@@ -210,7 +277,7 @@ Adminstrador
 "
   ```
   
-  # Admin-aceitar pendentes
+  ## Admin-aceitar pendentes
  
   ### URL
   SERVER /user/acept_pending/id=
@@ -261,7 +328,7 @@ Adminstrador
 
   ```
   
-# Admin - Criar Admins
+## Admin - Criar Admins
  
   ### URL
   SERVER /funcadmins/create_admin
@@ -299,7 +366,7 @@ Adminstrador
 
   ```
   
- # Admin - Delete Admins
+ ## Admin - Delete Admins
  
   ### URL
   SERVER /funcadmins/delete_admin
@@ -330,7 +397,7 @@ Adminstrador
 
   ```
   
- # Admin - Eliminar Pendentes
+ ## Admin - Eliminar Pendentes
  
   ### URL
   SERVER /user/delete_pending
@@ -379,7 +446,7 @@ Adminstrador
 "
   ```
 
- # Lojas - Verificar quantas lojas existem
+ ## Lojas - Verificar quantas lojas existem
  
   ### URL
   SERVER /loja/verificar_lojas
@@ -435,7 +502,7 @@ Adminstrador
 "
   ```
   
- # Lojas -  Listar lojas
+ ## Lojas -  Listar lojas
  
   ### URL
   SERVER /loja/verificar_lojas
@@ -518,7 +585,7 @@ Adminstrador
 "
   ```
   
- # Lojas -  Inserir lojas
+ ## Lojas -  Inserir lojas
  
   ### URL
   SERVER /loja/inserir_lojas
@@ -576,5 +643,7 @@ Adminstrador
 "
   ```
   
+ # API
  
+ [Documentação da API](https://documenter.getpostman.com/view/13757331/TW6wK8tP)
 
