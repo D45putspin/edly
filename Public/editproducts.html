@@ -1,0 +1,84 @@
+<html>
+    <head>
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+        <meta charset="UTF-8">
+        <title>EDLY</title>
+        <link rel="stylesheet" href="index.css">
+        
+    
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    </head>
+    <body class="grey darken-4">
+
+    
+    <a>voltar</a>
+    <h1 style="color:white;"> Editar produto</h1>
+    <form class="col s12 grey darken-4"style="color:black" >
+        <div class="row">
+                        <div class="input-field col s6">
+        <label for="name">Nome:</label>
+        </div></div>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="descri">Descrição:</label>
+        <input type="text" id="descri" name="descri"><br><br>
+        <label for="price">Preço:</label>
+        <input type="text" id="price" name="price"><br><br>
+        
+        <button class="waves-effect waves-light btn-small #212121 grey darken-4" id="editProduct" >Registar</button>
+        
+          
+      </form> 
+    </body>
+<script>
+const urlattime = document.location.origin;
+const urlParams = new URLSearchParams(window.location.search);
+const preco = urlParams.get('aprice');
+const nome=urlParams.get('aname');
+const id=urlParams.get('id');
+const descricao=urlParams.get('adesc');
+console.log(preco,nome,id,descricao);
+document.getElementById("price").value = preco; 
+document.getElementById("name").value = nome; 
+document.getElementById("descri").value = descricao; 
+var token = document.cookie;
+        var tokenrl = token.replace("token=", "");
+$('#editProduct').click(function (e) {
+    e.preventDefault();
+var precoo=document.getElementById("price").value;
+var nomee =document.getElementById("name").value;
+var descc= document.getElementById("descri").value;
+$.ajax({
+        url: urlattime+'/produtos/alterar_info_produto?id='+id,
+        type: 'PUT',
+        cache: false,
+       
+        data: { nomeProduto:nomee,tipoProduto:descc,precoProduto:precoo},
+        headers: { "token": tokenrl },
+        success: function (data) {
+          console.log("sucesso");
+          window.alert("sucesso");
+          window.location.href = "index.html";
+        }
+        , error: function (jqXHR, textStatus, err) {
+            window.alert(jqXHR.responseText);
+            window.alert(err);
+        }
+    })
+     
+     
+    
+    
+ })
+
+</script>
+</html>
