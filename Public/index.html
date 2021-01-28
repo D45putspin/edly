@@ -1203,14 +1203,7 @@
                                  <p style="font-size: 15px;position: relative; top: -10;"> ${cpsingular[i]}</p>
                                  </div>
                                  <div>
-                                    <div class="iconslojas right-align" style="position:relative; right:30px">
-                                        <span class="material-icons">
-                                            create
-                                        </span>
-                                        <span class="material-icons" style="right: -15px; position:relative;">
-                                            delete
-                                        </span>
-                                    </div>
+                                    
                                 </div>
                                 </div>
                                 </div>
@@ -1264,6 +1257,7 @@
                     var imagem = data.url;
                     var descri = data.descricao;
                     var preco = data.preco;
+                    var ident=data.idrtt;
                     console.log("nome->"+nomes);
                     $('#DispNrLojas').css("visibility", "hidden");
                     for (let i = 0; i < nomes.length; i++) {
@@ -1288,9 +1282,11 @@
                                         <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
                                     </div>
                                     <div class="iconsproduto right-align" style="position:relative; bottom: -15px;">
-                                        <span class="material-icons orange-text darken-1">
+                                        <a href="editproducts.html?id=${ident[i]}&aname=${nomes[i]}&adesc=${descri[i]}&aprice=${preco[i]}">
+                                        <span class="material-icons orange-text darken-1" >
                                             create
                                         </span>
+                                        </a>
                                         <span class="material-icons red-text darken-1" style="right: -20px; position: relative;">
                                             delete
                                         </span>   

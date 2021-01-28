@@ -91,6 +91,7 @@ router.get('/get-products', login, async (req, res, next) => {
     var descricoes = [];
     var precos = [];
     var urls = [];
+    var idttt=[];
 
     if (decode.Tipo == "empresa") {
         var sql = `SELECT * FROM Produto WHERE id_empresa = ? AND id_loja = ?`;
@@ -105,10 +106,11 @@ router.get('/get-products', login, async (req, res, next) => {
                     descricoes.push(row.Tipo_produto);
                     precos.push(row.Preco_produto);
                     urls.push(row.image);
+                    idttt.push(row.Id_produto);
 
                 });
                 
-                res.status(200).send({ nome: nomes, url: urls, descricao: descricoes, preco: precos })
+                res.status(200).send({ nome: nomes, url: urls, descricao: descricoes, preco: precos,idrtt:idttt })
             }
             else { res.status(400).send({ message: "sem nenhum registo" }) }
         });
@@ -126,10 +128,11 @@ router.get('/get-products', login, async (req, res, next) => {
                     descricoes.push(row.Tipo_produto);
                     precos.push(row.Preco_produto);
                     urls.push(row.image);
+                    idttt.push(row.Id_produto);
 
                 });
                 
-                res.status(200).send({ nome: nomes, url: urls, descricao: descricoes, preco: precos })
+                res.status(200).send({ nome: nomes, url: urls, descricao: descricoes, preco: precos,idrtt:idttt })
             }
             else { res.status(400).send({ message: "sem nenhum registo" }) }
         });
