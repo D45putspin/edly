@@ -1304,7 +1304,7 @@
                     var imagem = data.url;
                     var descri = data.descricao;
                     var preco = data.preco;
-
+                    var ident=data.idrtt;
                     for (let i = 0; i < nomes.length; i++) {
                         $('#rowprodutos_cliente').append(`
                     <a href="?produto=${i + 1}">
@@ -1325,7 +1325,13 @@
                                         <h5 style="margin-top:-10px; font-weight: bold; color:#282828; font-size:20px;">Preço</h5> 
                                         <p style=" margin-top: 0px; font-size: 20px; color:#737373;"> ${preco[i]}</p>
                                     </div>
-                                                                   
+                                    <div class="iconsproduto right-align" style="position:relative; bottom: -15px;">
+                                        <a href="cart.html?id=${ident[i]}&descri=${descri[i]}&preco= ${preco[i]}&nome=${nomes[i]}"
+                                        <span class="material-icons red-text darken-1" style="right: -20px; position: relative;">
+                                          add_shopping_cart
+                                        </span>   
+                                        </a>
+                                    </div>                                                 
                                 </div>
                             </div>
                         </div>
