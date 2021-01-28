@@ -106,7 +106,7 @@ Adminstrador
 - Criam os outros administradores
 - Podem administrar todo o sistema
 
-# Funções
+## Funções
  
  ## Registo
  
