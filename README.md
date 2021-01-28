@@ -141,7 +141,7 @@ Adminstrador
   
   ***Content:*** {}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   "  $.ajax({
         url: 'http://localhost:3000/user/register',
@@ -198,7 +198,7 @@ Adminstrador
   
   ***Content:*** { message: "not_found"}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   "  $.ajax({
                 url: 'http://localhost:3000/user/login',
@@ -249,7 +249,7 @@ Adminstrador
   
   ***Content:*** { message: "No_registry"}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   " $.ajax({
             url: 'http://' + urlattime + '/user/pendentes',
@@ -305,7 +305,7 @@ Adminstrador
   
   ***Content:*** { message: "No_registry"}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   "$.ajax({
                 url: 'http://' + urlattime + '/user/acept_pending/id=' + ident,
@@ -361,7 +361,7 @@ Adminstrador
   
   ***Content:*** { message: "passwords nao coincidem"}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
 
   ```
@@ -392,7 +392,7 @@ Adminstrador
   
   ***Content:*** {}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
 
   ```
@@ -423,7 +423,7 @@ Adminstrador
   
   ***Content:*** { error: "No_registry"}
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   "$.ajax({
                 url: 'http://' + urlattime + '/user/delete_pending',
@@ -474,7 +474,7 @@ Adminstrador
   
   ***Content:*** { message: ‘erro bd’ }
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   "$.ajax({
             url: 'http://' + urlattime + '/loja/verificar_lojas/id=' + ident,
@@ -534,7 +534,7 @@ Adminstrador
   
   ***Content:*** { message: ‘erro bd’ }
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   "
         $.ajax({
@@ -622,7 +622,7 @@ Adminstrador
   
   ***Content:*** { message: ‘erro bd’ }
   
-  ### Sample Cell
+  ### Sample Call
   ```js
   " $.ajax({
                 url: 'http://' + urlattime + '/loja/inserir_lojas',
