@@ -1,0 +1,55 @@
+<html >
+    <head>
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+        <meta charset="UTF-8">
+        <title>EDLY</title>
+        <link rel="stylesheet" href="index.css">
+        
+    
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    </head>
+    
+<script>
+    
+const urlattime = document.location.origin;
+const urlParams = new URLSearchParams(window.location.search);
+
+const id=urlParams.get('id');
+var token = document.cookie;
+var tokenrl = token.replace("token=", "");
+apagar(id,tokenrl);
+function apagar(id,tokenrl){
+
+$.ajax({
+        url: urlattime+'/produtos/delete_product?idprod='+id,
+        type: 'DELETE',
+        cache: false,
+        headers: { "token": tokenrl },
+        success: function (data) {
+          console.log("sucesso");
+          window.location.href = "index.html";
+        }
+        , error: function (jqXHR, textStatus, err) {
+            window.alert(jqXHR.responseText);
+            window.alert(err);
+        }
+    })
+     
+     
+    
+    
+ 
+}
+
+</script>
+</html>
