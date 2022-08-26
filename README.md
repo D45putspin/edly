@@ -1,7 +1,6 @@
 # edly
-Projeto 
+Project developed in school
 
-Ola
-teste
+
 
 
